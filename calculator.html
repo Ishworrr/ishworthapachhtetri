@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+<style>
+    *{
+        box-sizing:border-box;
+        margin: 0;
+        padding: 0;
+
+    }
+    .main{
+        background-color: lightgray;
+        padding:20px;
+        max-width: 480px;
+        margin: 0 auto;
+        border:solid 1px #ccc;
+        filter:drop-shadow(0 2px 5px rgba(0,0,0,.3));
+        border-radius: 5px;
+        margin-top: 40px ;
+
+    }
+    #display{
+        width:100%;
+        padding:20px;
+        font-size: 24px;
+        border:none;
+        box-shadow:0 2px 5px rgba(0,0,0,.3) inset;
+        border-radius: 5px;
+        
+        
+
+    }
+    .buttons{
+        display:grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px;
+        margin-top: 20px;
+        border:none;
+         background-color: #bab8b8;
+    
+
+    }
+    button{
+        font-size: 24px;
+        border:none;
+        box-shadow:0 2px 5px rgba(0,0,0,.3);
+        border-radius: 5px;
+        padding:10px;
+        text-align: center;
+        cursor: pointer;
+    }
+    button:hover{
+    background-color: #ddd;
+}
+
+   .clear{
+        background-color: red;
+        color:aliceblue
+    }
+    .operator{
+        background-color: blueviolet;
+        color:aliceblue;
+    }
+    .number, .decimal{
+        background-color: whitesmoke;
+        color:rgb(48, 48, 48);
+    }
+    .equals{
+    background-color: #01ff70;
+    grid-row: span 3;
+    color: #fff;
+}
+    </style>
+</head>
+<body>
+    <div class="main" id="main">
+    <input type="text" name="display" id="display" />
+   <div class="buttons">
+    <button class="clear">C</button>
+    <button class="operator">/</button>
+    <button class="operator">*</button>
+    <button class="operator">-</button>
+    <button class="number">7</button>
+    <button class="number">8</button>
+    <button class="number">9</button>
+    <button class="operator">+</button>
+    <button class="number">4</button>
+    <button class="number">5</button>
+    <button class="number">6</button>
+    <button class="equals">=</button>
+    <button class="number">1</button>
+    <button class="number">2</button>
+    <button class="number">3</button>
+    <button class="number">0</button>
+    <button class="decimal">.</button>
+    
+</div>
+    </div>
+
+    
+
+    <script>
+        const inputEl= document.getElementById( 'display' );
+       // const buttonsEl =document.querySelector(".buttons");
+        const buttonEl = document.querySelectorAll("button");
+
+        console.log(buttonEl);
+     for (let index = 0; index < buttonEl.length; index++) {   
+        buttonEl[index].addEventListener( "click", () =>{
+            console.log(buttonEl[index].textContent);
+            if(buttonValue==='C'){
+                clearResult();
+
+            }else if(buttonValue==='='){
+                calculateResult()
+            }else{
+                doit(buttonValue);
+            }
+        })}
+        function clearResult() {
+            inputEl.value='';
+            
+        }
+        function calculateResult() {
+            inputEl.value = eval(inputEl.value)
+        }
+        function doit(buttonValue) {
+            inputEl.value += buttonValue;
+            
+        }
+    </script>
+</body>
+</html>

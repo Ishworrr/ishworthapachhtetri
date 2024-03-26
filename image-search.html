@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Search</title>
+    <!-- CSS only -->
+    <style>
+        body{
+            margin:0;
+            line-height:10px;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+        }
+        h1{
+            /* font-size:clamp(20px, 8vw, 30px);  */
+            font-size: 40px;
+            padding:30px;
+            text-align: center;
+            background-image: url('https://kottke.org/plus/misc/images/etienne-jacob.gif');
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: transparent;
+            /* -webkit-background-clip-text: text;
+            clip-path: text; */
+            background-clip:text;
+            margin: 40px;
+            margin-bottom: 60px;
+        }
+        form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .input{
+            width:60%;
+            max-width:500px;
+            font-size:20px;
+            padding:10px 20px;
+            border: none;
+            box-shadow:0 0 5px rgba(0,0,0,.4);
+            border-radius: 5px;
+            color:darkgrey;
+
+        }
+        #btn{
+            padding:10px 20px;
+            border: none;
+            background-color:green;
+            font-size:20px;
+            color:whitesmoke;
+            box-shadow:0 0 3px rgba(0,0,0,.4);
+            border-radius: 5px;
+            margin-left:10px;
+            transition: background-color.3s  ease-in-out;
+        }
+        #btn:hover{
+            
+            background-color:rgb(1, 40, 1);
+            
+        }
+        .results{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin:0 auto;
+            padding:20px;
+        }
+        .result {
+            margin-bottom:30px;
+            width:30%;
+            border-radius: 5px;
+            box-shadow:0 0 5px rgba(0,0,0,.4);
+            overflow: hidden;
+          
+
+        }
+        .result:hover{
+          transform: scale(1.05);
+        }
+
+        .result img{
+            width:100%;
+            height:250px;
+            object-fit: cover;
+            transition: transform .3s ease-in-out;
+        }
+        .result a{
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            color:#333;
+            text-transform:capitalize;
+            transition: background-color .3s ease-in-out;
+            line-height:30px;
+            }
+            .result a:hover{
+                background-color: rgba(0,0,0,.2);
+            
+            }
+            #show{
+                background-color: blue;
+                color: white;
+                border:none;
+                padding: 10px 20px;
+                text-align: center;
+                display: block;
+                margin:0 auto;
+                text-align:center;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: background-color .5s ease-in-out;
+                display: none;
+                margin-bottom: 20px;
+                 
+            }
+            #show:hover{
+                background-color: aquamarine;
+                filter: brightness(.95);
+                color:black
+            }
+            @media screen and (max-width:769px) {
+                .result{
+                    width: 45%;
+                }
+
+                
+            }
+            @media screen and (max-width:468px) {
+                .result{
+                    width: 100%;
+                }
+                form{
+                    display: flex;
+                    flex-direction: column;
+                }
+                input {
+    margin-bottom: 20px;
+    width: 85%;
+  }
+
+
+                
+            }
+
+        </style>
+</head>
+<body>
+    <h1>Image Search</h1>
+    <form>
+   
+    <input class="input" type="text">
+    <button type="submit" id="btn">Search</button>
+    </form>
+    <div class="results">
+        <!-- <div class="result">
+            <img src="https://images.unsplash.com/photo-1707343845208-a20c56d2c8ba?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+            alt="image" >
+            <a href="https://unsplash.com/photos/an-orange-and-white-clown-fish-in-an-anemone-EQ7x8WJMR4Q"
+             target="_blank" rel="noopener noreferrer">Go to photo</a>
+        </div>
+        <div class="result">
+            <img src="https://images.unsplash.com/photo-1707343845208-a20c56d2c8ba?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+            alt="image" >
+            <a href="https://unsplash.com/photos/an-orange-and-white-clown-fish-in-an-anemone-EQ7x8WJMR4Q"
+             target="_blank" rel="noopener noreferrer">Go to photo</a>
+        </div>
+        <div class="result">
+            <img src="https://images.unsplash.com/photo-1707343845208-a20c56d2c8ba?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+            alt="image" >
+            <a href="https://unsplash.com/photos/an-orange-and-white-clown-fish-in-an-anemone-EQ7x8WJMR4Q"
+             target="_blank" rel="noopener noreferrer">Go to photo</a>
+        </div>
+        <div class="result">
+            <img src="https://images.unsplash.com/photo-1707343845208-a20c56d2c8ba?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+            alt="image" >
+            <a href="https://unsplash.com/photos/an-orange-and-white-clown-fish-in-an-anemone-EQ7x8WJMR4Q"
+             target="_blank" rel="noopener noreferrer">Go to photo</a>
+            
+        </div> -->
+    </div>
+    <button id="show">Show More</button>
+    <!-- <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">Please Verify your email with the button below or click <a href="` + config.InvitationUrl + `" target="_blank">
+        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="` + config.InvitationUrl + `">HERE.</v:roundrect></a></p>
+        <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px"><br></p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">Please Verify your email with the button below or click <a href="` + config.InvitationUrl + `" target="_blank">
+            <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="` + config.InvitationUrl + `">HERE.</v:roundrect></a></p> -->
+
+            <script>
+                const accessKey = "314q-4NqUwcysXyQbU5bQ2RHx36E31CYw8o_Nr3Fw8g";
+                const inputEl = document.querySelector('.input');
+                const btnEl = document.getElementById('show');
+                const fromEl = document.querySelector('form');
+                const resultsEl = document.querySelector('.results');
+
+
+                let inputData='';
+                let page = 1;
+
+              async function searchImage(){
+                inputData = inputEl.value;
+           const url=`https://api.unsplash.com/search/photos?page=${page}&query=${inputData}&client_id=${accessKey}`
+           console.log(url);
+           const response= await fetch(url);
+           const data = await response.json();
+           console.log(data);
+           if(page===1){
+            resultsEl.innerHTML='';
+           }
+           const results= data.results;
+           results.map((result)=>{
+            const images = document.createElement('div');
+           images.classList.add("result");
+           const image= document.createElement('img');
+           image.src= result.urls.small;
+           image.alt= result.alt_description;
+           const imageLink = document.createElement('a');
+           imageLink.href=result.links.html;
+           imageLink.target ="_blank";
+           imageLink.textContent = result.alt_description;
+            images.appendChild(image);
+            images.appendChild(imageLink);
+
+           resultsEl.appendChild(images);
+           })
+           
+             page++;
+           if(page>1){
+            btnEl.style.display='block';
+           }
+              }
+
+                fromEl.addEventListener('submit',(e)=>{
+                    e.preventDefault();
+                    page=1;
+                    console.log('submit');
+                    searchImage();
+
+                });
+                btnEl.addEventListener('click',()=>{
+                    searchImage();
+
+                })
+
+
+                </script>
+
+        </body>
+
+</html>

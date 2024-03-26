@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciepe booky</title>
+   
+    <!-- Bootstrap CSS -->
+    <style>
+        body{
+            margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif
+        }
+
+        header {
+  background: #0c2461;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 36px;
+}
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.recipe-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ .recipe-item{
+            margin: 0;
+  padding: 0;
+  display: flex;
+  align-items:center;
+  justify-content: space-between;
+
+  border:1px solid green;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+margin-bottom: 20px;
+border-radius: 20px;
+overflow: hidden;
+
+ }
+ .recipe-item img{
+   width: 150px;
+  height: 150px;
+  border-radius: 20px;
+align-items: center;
+    object-fit: cover;
+  
+}
+
+
+
+.recipe-item h2{
+    margin: 0;
+    font-size: 20px;
+  padding: 10px;
+  min-width: 200px;
+}
+
+.recipe-item p{
+    margin: 0;
+
+    padding: 10px;
+  color: #777;
+}
+.recipe-item a{
+
+   background-color: blueviolet;
+   color:beige;
+   text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  min-width: 150px;
+  padding: 10px;
+}
+.recipe-item a:hover {
+  background: rgb(175, 107, 239);
+
+}
+@media screen and (max-width:769px){
+    .container {
+    max-width: 90%;
+  }
+  .recipe-item {
+    flex-direction: column;
+  }
+  .recipe-item img {
+   width:100% !important;
+   height: auto;
+    margin-bottom: 10px;
+   
+  }
+
+  .recipe-item p {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .recipe-item h2 {
+    font-size: 20px;
+    text-align: center;
+    padding: 0;
+    margin-bottom: 10px;
+  }
+  .recipe-item a {
+    width: 100%;
+    text-align: center;
+  }
+
+}
+
+        </style>
+</head>
+<body>
+    <header>
+        <h1>Recipe Book App</h1>
+      </header>
+    <div class="container">
+        <ul id="recipe-list" class="recipe-list">
+    <!-- <li class="recipe-item">
+        <img src="https://spoonacular.com/recipeImages/12345-312x231.jpg" alt="Recipe 1"/>
+        <h2>Recipe 1</h2>
+        <p><strong>Ingredients:</strong> Ingredient 1, Ingredient 2, Ingredient 3</p>
+        <a href="#">View Recipe</a>
+      </li>
+      <li class="recipe-item">
+        <img src="https://spoonacular.com/recipeImages/12545-312x231.jpg" alt="Recipe 2"/>
+        <h2>Recipe 2</h2>
+        <p><strong>Ingredients:</strong> Ingredient 1, Ingredient 2, Ingredient 3</p>
+        <a href="#">View Recipe</a>
+      </li>
+      <li class="recipe-item">
+        <img src="https://spoonacular.com/recipeImages/12445-312x231.jpg" alt="Recipe 3"/>
+        <h2>Recipe 3</h2>
+        <p><strong>Ingredients:</strong> Ingredient 1, Ingredient 2, Ingredient 3</p>
+        <a href="#">View Recipe</a>
+      </li>
+      <li class="recipe-item">
+        <img src="https://spoonacular.com/recipeImages/12345-312x231.jpg" alt="Recipe 4"/>
+        <h2>Recipe 4</h2>
+        <p><strong>Ingredients:</strong> Ingredient 1, Ingredient 2, Ingredient 3</p>
+        <a href="#">View Recipe</a>
+      </li> -->
+      </ul>
+      </div>
+
+      <script>
+        const API_KEY = "275d58779ccf4e22af03e792e8819fff";
+const recipeListEl = document.getElementById("recipe-list");
+
+function displayRecipes(recipes) {
+  recipeListEl.innerHTML = "";
+  recipes.forEach((recipe) => {
+    const recipeItemEl = document.createElement("li");
+    recipeItemEl.classList.add("recipe-item");
+
+    recipeImageEl = document.createElement("img");
+    recipeImageEl.src = recipe.image;
+    recipeImageEl.alt = "recipe image";
+
+    recipeTitleEl = document.createElement("h2");
+    recipeTitleEl.innerText = recipe.title;
+
+    recipeIngredientsEl = document.createElement("p");
+    recipeIngredientsEl.innerHTML = `
+        <strong>Ingredients:</strong> ${recipe.extendedIngredients
+          .map((ingredient) => ingredient.original)
+          .join(", ")}
+    `;
+
+    recipeLinkEl = document.createElement("a");
+    recipeLinkEl.href = recipe.sourceUrl;
+    recipeLinkEl.innerText = "View Recipe";
+
+    recipeItemEl.appendChild(recipeImageEl);
+    recipeItemEl.appendChild(recipeTitleEl);
+    recipeItemEl.appendChild(recipeIngredientsEl);
+    recipeItemEl.appendChild(recipeLinkEl);
+    recipeListEl.appendChild(recipeItemEl);
+  });
+}
+
+async function getRecipes() {
+  const response = await fetch(
+    `https://api.spoonacular.com/recipes/random?number=20&apiKey=${API_KEY}`
+  );
+
+  const data = await response.json();
+
+  return data.recipes;
+}
+
+async function init() {
+  const recipes = await getRecipes();
+  displayRecipes(recipes);
+}
+
+init();
+
+      </script>
+</body>
+</html>

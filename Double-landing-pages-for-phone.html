@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samding Apple</title>
+    <style>
+        body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  text-align: center;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+h1{
+    font-size: 100px;
+    color:azure;
+    letter-spacing: 4px;
+    backdrop-filter: brightness(.5);
+
+}
+.btn{
+    padding: 20px 40px;
+    font-size: 25px;
+    background-color:black;
+    color: white;
+    border:px solid whitesmoke;
+    transition: background-color 1s;
+    white-space: nowrap;
+}
+.btn:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+.split{
+    width:50%;
+    height:100%;
+    top:0;
+    overflow: hidden;
+}
+
+.left{
+    position: absolute;
+    left:0;
+    background-color: bisque;
+    background: url('https://www.jbhifi.com.au/cdn/shop/products/639221-Product-0-I-638301471008047013.jpg?v=1698811958');
+
+background-size: cover;
+}
+.right{
+    position: absolute;
+    right:0;
+    background: url('https://www.jbhifi.com.au/cdn/shop/products/672260-Product-0-I-638414680802669524_498a842c-c2e5-4ce9-8adf-ec8fea4662f0.jpg?v=1707282501');
+    background-size: cover;
+
+}
+
+.a .left{
+    width:75%;
+}
+.a .right{
+    width:25%;
+}
+
+.b .left{
+    width:25%;
+}
+.b .right{
+    width:75%;
+}
+.left,.right{
+    transition: width 3s ease-in-out;
+}
+
+
+
+
+        </style>
+</head>
+<body>
+    <div class="main">
+        <div class="split left">
+            <h1>Apple</h1>
+            <button class="btn">Buy Now!</button>
+        </div>
+        <div class="split right" >
+            <h1>Samsung</h1>
+            <button class="btn">Buy Now!</button>
+        </div >
+
+        </div>
+
+    
+    <script>
+        const mainEl = document.querySelector('.main');
+        const btnEl = document.querySelector('.btn');
+        const leftEl = document.querySelector('.left');
+        const rightEl = document.querySelector('.right');
+
+
+   leftEl.addEventListener('mouseenter',()=>{
+    mainEl.classList.add('a');
+   })
+   leftEl.addEventListener('mouseleave',()=>{
+    mainEl.classList.remove('a');
+   })
+   rightEl.addEventListener('mouseenter',()=>{
+    mainEl.classList.add('b');
+   })
+   rightEl.addEventListener('mouseleave',()=>{
+    mainEl.classList.remove('b');
+   })
+        </script>
+</body>
+</html>

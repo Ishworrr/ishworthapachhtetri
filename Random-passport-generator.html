@@ -1,0 +1,170 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Rand Passport GEnerator</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <style>
+            body{
+                margin:0;
+                background-color: lightcoral;
+                display: flex;
+                justify-self: start ;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+            }
+            .password{
+                width:500px;
+                padding: 20px;
+                background-color: aliceblue;
+                align-items: center;
+                text-align: center;
+                border-radius:20px;
+                box-shadow: 2px 8px 8px rgba(0,0,0,.9) ;
+                margin: 10px;
+
+            }
+
+            .copy{
+                border: 2px solid black;
+                padding:20px;
+                border-radius: 10px;
+                display:flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .input{
+                background-color: transparent;
+                border: none;
+              letter-spacing: 5px;
+              outline: none;
+                font-size: 25px;
+                width:300px;
+            }
+            .input::placeholder{
+          letter-spacing: 0px;;
+            }
+
+            .fa-copy{
+                cursor: pointer;
+                opacity: .3;
+
+            }
+            .fa-copy:hover{
+                opacity: .8;
+                
+            }
+
+            .btn{
+                border:none;
+                padding: 10px 20px;
+                margin:10px 0;
+                font-size: 20px;
+                border-radius: 30px;
+            }
+            .btn:hover{
+                background-color: black;
+                color: white;
+            }
+            .btn:active{
+                transform: scale(1.1);
+            }
+            .alert{
+                width:300px;
+                height:60px;
+                background-color: blanchedalmond;
+                position: fixed;
+                border-radius: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                bottom: 70px;
+                right:30px;
+               font-size: 20px;
+                box-shadow: 2px 8px 8px rgba(0,0,0,.9) ;
+                transition: .4s;
+
+            }
+            .alert.active{
+         
+                right:-500px;
+
+            }
+
+
+
+
+            </style>
+    </head>
+    <body>
+        <div class="password">
+<h2>Generate Random Password</h2>
+
+<div class="copy">
+
+<input id="input" class="input" type="text"
+ placeholder="Get password" />
+
+ <i class="fa-regular fa-copy fa-2x"></i>
+</div>
+<button class="btn" id="btn">Generate</button>
+</div>
+
+<div class="alert active">Password Copied</div>
+
+        <script>
+        const inputEl =document.querySelector(".input");
+        const btnEl=document.querySelector(".btn")
+        const alertEl= document.querySelector(".alert");
+        const copyIcon=document.querySelector('.fa-regular');
+
+        btnEl.addEventListener('click',()=>{
+            createPassword();
+
+        });
+        createPassword();
+
+        copyIcon.addEventListener('click',()=>{
+           copy();
+           if(inputEl.value){
+            alertEl.classList.remove("active");
+           setTimeout(() => {
+            alertEl.classList.add("active");
+           }, 2000);
+           }
+          
+        });
+
+       function createPassword(){
+        const chars ='0123456789abcdefghijklmnopqrstuvwxtz!@#$%^&*()_+?:{}[]ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+         const passLength=14;
+        let password='';
+            for (let i=0; i<passLength;i++){
+                const randomNum=Math.floor(Math.random()*chars.length);
+                    password += chars.substring(randomNum,randomNum+1);
+                
+
+            }
+        inputEl.value=password;
+        alertEl.innerText = password +' copied ';
+  
+       }
+function copy(){
+    inputEl.select();
+    inputEl.setSelectionRange(0, 9999);
+    navigator.clipboard.writeText(inputEl.value);
+
+          
+}
+
+
+
+
+            </script>
+    </body>
+</html>

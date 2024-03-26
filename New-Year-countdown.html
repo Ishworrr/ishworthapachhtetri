@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+
+        }
+        h1{
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+        .year{
+            font-size: 70px;
+            font-weight: bold;
+            text-align: center;
+            color:blanchedalmond;
+
+        }
+        .rest{
+            text-align: center;
+            margin:10px;
+            gap:20px;
+            width:100%;
+            height:100px;
+            background-color: antiquewhite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+   
+         
+        }
+
+        .rest div{
+            margin:0 15px;
+            font-size: 50px;
+            margin-bottom:20px;
+            position: relative;
+            text-align: center;
+            width:70px;
+        }
+        .rest div::before{
+            content: '';
+            font-size:15px;
+            position: absolute;
+            bottom:-20px;
+            line-height:25px;
+            left:0;
+            width:100%;
+            height:30px;
+            text-transform:capitalize;
+
+        }
+
+        .rest #day::before{
+            content:'Days';
+        }
+        .rest #hour::before{
+            content:'Hours';
+        }
+        .rest #minute::before{
+            content:'Minutes';
+        }
+
+        .rest #second::before{
+            content:'Seconds';
+        }
+        .rest #msecond::before{
+            content:'MilliSeconds';
+        }
+      
+
+        </style>
+</head>
+<body>
+    <div class="first">
+        <h1>Countdown to NewYear</h1>
+   
+            <div class="year">
+             2024
+            </div>
+                    <div class="rest">
+                        <div id="day">00</div>
+                        <div id="hour">00</div>
+
+                        <div id="minute">00</div>
+                        <div id="second">00</div>
+                        <div id="msecond">00</div>
+
+                 
+                    </div>
+     </div>
+
+     <script>
+        const restEl = document.querySelector('.rest');
+        const dayEl = document.getElementById('day');
+        const hourEl = document.getElementById('hour');
+
+        const minuteEl = document.getElementById('minute');
+        const secondEl = document.getElementById('second');
+        const msecondEl = document.getElementById('msecond');
+
+        const newDate = new Date("Jan 1, 2025, 00:00:00").getTime();
+        updateCountDown();
+        function  updateCountDown(){
+            const now = new Date().getTime();
+            console.log(now);
+            const gap= newDate - now;
+            const msecond = 1;
+            const second=msecond*1000;
+            const minute = second*60;
+            const hour = minute*60;
+            const day = hour*24;
+
+            const d = Math.floor(gap/day);
+            const h =Math.floor((gap%day)/hour);
+            const m =Math.floor((gap%hour)/minute);
+            const s =Math.floor((gap%minute)/second);
+            const ms =Math.floor((gap%second)/msecond);
+
+
+            dayEl.innerText=d;
+            hourEl.innerText=h;
+            minuteEl.innerText=m;
+            secondEl.innerText=s;
+            msecondEl.innerText=ms;
+
+            setTimeout(updateCountDown, 1);
+
+          
+
+        }
+
+        </Script>
+</body>
+</html>

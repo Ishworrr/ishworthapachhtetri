@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Search bar</title>
+    <style>
+        body{
+            margin:0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+.main{
+    display: flex;
+    padding:5px;
+    box-shadow: 6px 6px 10px rgba(0,0,0,.2),
+    -6px -6px 10px rgba(255,255,255,.8);
+    width: 300px;
+    border-radius: 50px;
+    height:50px;
+    align-items: center;
+    position: relative;
+    transition: width 2s;
+    
+
+}
+        .magnifier{
+            width:20px;
+       position: absolute;
+            cursor: pointer;
+            left:20px;
+
+        }
+        .mic{
+            width:20px;
+            position: absolute;
+            right: 10px;
+            transition: width .5s;
+            transition-delay: .7s;
+        }
+
+        .input{
+            background-color: transparent;
+            outline: none;
+            border: none;
+            width:100%;
+            margin: 10px 50px;
+            color: rgb(100,100,100);
+            transition: width 1s;
+            transition-delay: .6s;
+        }
+        .a.main{
+            width: 50px;
+
+        }
+        .a .input{
+            width: 0;
+
+        }
+        .a .mic{
+            width: 0;
+        }
+
+        </style>
+</head>
+<body>
+    <div class="main">
+<img class="magnifier" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-search-strong-1024.png">
+
+<input type="text" class="input" id="input" placeholder="Search...."></input>
+
+
+<img class="mic" src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-25-1024.png">
+
+
+<script>
+    const mainEl = document.querySelector('.main');
+    const magEl = document.querySelector('.magnifier');
+    const inputEl = document.getElementById('input');
+    const micl = document.querySelector('.mic');
+
+    magEl.addEventListener('click',()=>{
+mainEl.classList.toggle('a');
+        
+    })
+
+</script>
+    </div>
+    
+</body>
+</html>

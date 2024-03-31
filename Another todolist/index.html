@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Grocery List</title>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Grocery List</h1>
+      <form id="grocery-form">
+        <input type="text" id="grocery" placeholder="e.g., Eggs" autocomplete="off">
+        <button type="submit" class="btn submit-btn">Submit</button>
+      </form>
+    </header>
+    <div class="alert"></div>
+    <div class="grocery-list" id="grocery-list"></div>
+    <button class="btn clear-btn">Clear All</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

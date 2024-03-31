@@ -62,7 +62,7 @@ function addItem(e) {
     addToLocalStorage(id, value);
     // set back to default
     setBackToDefault();
-    
+
   } else if (value !== "" && editFlag) {
     editElement.innerHTML = value;
     displayAlert("value changed", "success");

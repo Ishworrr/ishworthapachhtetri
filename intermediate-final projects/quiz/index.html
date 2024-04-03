@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            background-color: #7ee8fa;
+background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
+min-height:100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: 'Courier New', Courier, monospace;
+margin: 0;
+
+        }
+
+        .quiz{
+            background-color: #fff;
+            box-shadow: 0px 4px 10px rgba(0,0,0,.2);
+            width:600px;
+            border-radius: 10px;
+            max-width: 100%;
+
+        }
+
+        .header{
+            padding: 2rem;
+        }
+
+        ul{
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li{
+            font-size: 1.1.rem;
+            margin:1rem 0;
+        }
+        ul li label{
+           cursor: pointer;
+        }
+        h2{
+            margin:0;
+        }
+        button{
+            background-color: #8e44ad;
+            color: white;
+            width: 100%;
+            padding:20px;
+            display: block;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+        }
+
+        button:hover{
+            background-color: #591b73;
+
+        }
+        button:focus{
+            background-color: red;
+            outline: none;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz">
+       <div class="header">
+        <h2 id="quest"> Question</h2>
+        <ul>
+            <li><input type="radio" id="a" name="answer" class="answer" ><label id="li-a" for="a">aa</label></li>
+            <li><input type="radio" id="b" name="answer" class="answer"><label id="li-b" for="b"></label></li>
+            <li><input type="radio" id="c" name="answer" class="answer"><label id="li-c" for="c"></label></li>
+            <li><input type="radio" id="d" name="answer" class="answer"><label id="li-d" for="d"></label></li>
+        </ul>
+        </div>
+        <button class="btn">Submit</button>
+    </div>
+    
+
+    <script>
+
+        const quizData = [
+            {
+            question: 'How old is he?',
+            a:'10',         
+            b:'20',            
+            c:'30',               
+            d:'40',      
+            correct: 'a',
+        },
+        {
+            question: 'How old is b?',
+            a:'10',         
+            b:'20',            
+            c:'30',               
+            d:'40',      
+            correct: 'b',
+        },
+        {
+            question: 'How old is c?',
+            a:'10',         
+            b:'20',            
+            c:'30',               
+            d:'40',      
+            correct: 'c',
+        },
+        {
+            question: 'How old is d?',
+            a:'10',         
+            b:'20',            
+            c:'30',               
+            d:'40',      
+            correct: 'd',
+        },
+
+        ];
+
+        const quiz = document.querySelector('.quiz')
+        const questionEl = document.getElementById('quest');
+        const lia = document.getElementById('li-a');
+        const lib = document.getElementById('li-b');
+        const lic = document.getElementById('li-c');
+        const lid = document.getElementById('li-d');
+        const btnEl = document.querySelector('.btn');
+        const answersEl = document.querySelectorAll('.answer')
+
+let currentQuiz = 0;
+let score=0;
+
+load();
+getSelected();
+
+
+function getSelected(){
+    let answer = undefined;
+
+    answersEl.forEach((answerEl) => {  
+ if(answerEl.checked){
+          answer = answerEl.id;
+        }
+      //  console.log(answerEl.value);    
+    });
+
+    return answer;
+
+};
+function load(){
+    deselectAnswers();
+    const currentElement = quizData[currentQuiz];
+    questionEl.innerText = currentElement.question;
+    lia.innerText=currentElement.a;
+    lib.innerText=currentElement.b;
+    lic.innerText=currentElement.c;
+    lid.innerText=currentElement.d;
+ 
+}
+
+//disselectes the next load
+function deselectAnswers(){
+    answersEl.forEach((answerEl)=>{
+        answerEl.checked=false;
+});
+}
+btnEl.addEventListener('click',()=>{
+     // check to see the answer
+   const answer =getSelected();
+
+    if(answer){
+        if (answer === quizData[currentQuiz].correct) {
+            score++;
+        }
+            currentQuiz++;
+            if(currentQuiz<quizData.length){
+                load();
+            }else{
+                quiz.innerHTML = `
+                <h2 style="text-align:center" style="margin:20px"> Answer : ${score}/${quizData.length}</h2>
+                <button onclick="location.reload()">Reload</button>
+                `
+            }
+   }
+});
+load();
+
+</script>
+</body>
+</html>

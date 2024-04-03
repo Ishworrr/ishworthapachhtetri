@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        
+        *{
+            box-sizing: border-box;
+        }
+        body {
+
+
+            background:url('aa.jpg');
+            background-size:cover ;
+            background-position: center center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: poppins;
+            margin:0;
+        }
+
+        h1{
+            font-weight: normal;
+            font-size: 4rem;
+            margin-top: -10rem;;
+
+        }
+
+        .container{
+           display: flex;
+           color:azure;
+           justify-content: space-between;
+           align-items: center;
+           gap:40px;
+
+        }
+        .big-text{
+            font-size: 4rem;
+            line-height: 1;
+            margin:0 2rem;
+
+
+        }
+
+        .cc{
+            text-align: center;
+
+        }
+        .cc span{
+            font-size: 1.5 rem;
+            font-weight: normal;
+        }
+        </style>
+</head>
+<body>
+    <h1>New years eve </h1>
+    <div class="container">
+        <div class="cc days-c">
+            <p class="big-text" id="days">0</p>
+            <span>days</span>
+        </div>
+        <div class="cc hours-c">
+            <p class="big-text" id="hours">0</p>
+            <span>hours</span>
+        </div>
+        <div class="cc mins-c">
+            <p class="big-text" id="mins">0</p>
+            <span>mins</span>
+        </div>
+        <div class="cc seconds-c">
+            <p class="big-text" id="seconds">0</p>
+            <span>seconds</span>
+        </div>
+    </div>
+
+    <script>
+        const cc = document.querySelectorAll('.cc');
+        const bigs = document.querySelectorAll('.big-text');
+        const daysEl = document.querySelector('.days-c');
+        const hoursEl = document.querySelector('.hours-c');
+        const minsEl = document.querySelector('.mins-c');
+        const secondsEl = document.querySelector('.seconds-c');
+        const day = document.getElementById('days');
+        const hour = document.getElementById('hours');
+        const min = document.getElementById('mins');
+        const second = document.getElementById('seconds');
+
+
+        const newYears = '1 Jan 2025'
+        function Countdown() {
+            const futuredate = new Date(newYears);
+            const currentDate = new Date();
+
+            console.log(futuredate-currentDate);
+            const remainingTime = futuredate - currentDate;
+
+            const oneDay = 24 * 60 * 60 * 1000;
+    const oneHour = 60 * 60 * 1000;
+    const oneMinute = 60 * 1000;
+            
+    let days = remainingTime / oneDay;
+    days = Math.floor(days);
+    let hours = Math.floor((remainingTime % oneDay) / oneHour);
+    let minutes = Math.floor((remainingTime % oneHour) / oneMinute);
+    let seconds = Math.floor((remainingTime % oneMinute) / 1000);
+  
+
+            console.log(minutes);
+            day.textContent = formnatTime(days) //ß`${days}`;
+        hour.innerHTML = formnatTime(hours)//`${hours}`;
+        min.innerHTML = formnatTime(minutes)//`${minutes}`;
+        second.innerHTML = formnatTime(seconds)//`${seconds}`;
+
+        // bigs.forEach((big)=>{
+        //     if(big.textContent < 10){
+        //         big.innerHTML = `0${big.textContent}`;
+        //     }
+        //     return big;
+
+        // })
+
+        setTimeout(Countdown,500);
+            
+        }
+       
+        function formnatTime(big){
+            return big<10? `0${big}`:big;
+        }
+        
+       
+
+        Countdown();
+        </script>
+    
+</body>
+</html>

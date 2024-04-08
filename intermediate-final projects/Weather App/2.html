@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Weather App</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(100deg, #ced1d6, #053535);
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    min-height: 100vh;
+}
+
+input {
+    background-color: #fff;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 1rem;
+    min-width: 300px;
+
+}
+
+input:focus {
+    outline: none;
+}
+
+.weather {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.weather h2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+}
+.weather img{
+    transform: scale(2);
+}
+
+
+            </style>
+        
+    </head>
+    <body>
+
+        <form id="form">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search by location"
+                autocomplete="off"
+            />
+        </form>
+
+        <main id="main"></main>
+
+        <script>
+            const main = document.getElementById("main");
+            const form = document.getElementById("form");
+            const search = document.getElementById("search");
+
+            const apikey = '2c2e4bed17bf6cdf6a732f31601bb788';
+            const APIURL = 'https://api.weatherbit.io/v2.0/current'
+            const url = (city) =>
+        `https://api.weatherbit.io/v2.0/current?lat=35.7796&lon=-78.6382&key=${apikey}`;
+
+
+            async function getWeatherByLocation(city) {
+        const resp = await fetch(url(city), { origin: "cors" });
+        const respData = await resp.json();
+
+        console.log(respData);
+       // console.log(respData, KtoC(respData[0].main.temp));
+
+        addWeatherToPage(respData);
+    }
+      getWeatherByLocation('Sydney');
+
+      function addWeatherToPage(data) {
+       // const temp = KtoC(data.main.temp);
+        const temp = KtoC(data.temp);
+        const weather = document.getElementById('div');
+        weather.classList.add('weather');
+        weather.innerHTML=`
+        <h2>
+            <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" />
+             ${temp}°C 
+             <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" />
+             </h2>
+        <small>${data.weather[0].main}</small>
+        <p>${search.value}</p>
+        
+        `;
+        
+      }
+
+         function KtoC(K) {
+         //   return K-((32*5)/9).toFixed(2);
+         return K-(273.15).toFixed(2);
+            
+         }
+
+         form.addEventListener('click',(e)=>{
+            e.preventDefault();
+            const city = search.value;
+            if  (city){
+                getWeatherByLocation(city);
+            }
+
+         })
+            
+            </script>
+    </body>
+
+</html>

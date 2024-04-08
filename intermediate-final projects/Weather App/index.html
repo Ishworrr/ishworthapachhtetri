@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Weather App</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(300deg, #ced1d6, #bfc0c0);
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    min-height: 100vh;
+}
+
+input {
+    background-color: #fff;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 1rem;
+    min-width: 300px;
+}
+
+input:focus {
+    outline: none;
+}
+
+.weather {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.weather h2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+}
+            </style>
+        
+    </head>
+    <body>
+
+        <form id="form">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search by location"
+                autocomplete="off"
+            />
+        </form>
+
+        <main id="main"></main>
+
+        <script>
+            
+            const apikey = "3265874a2c77ae4a04bb96236a642d2f";
+
+    const main = document.getElementById("main");
+    const form = document.getElementById("form");
+    const search = document.getElementById("search");
+
+    const url = (city) =>
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}`;
+
+    async function getWeatherByLocation(city) {
+        const resp = await fetch(url(city), { origin: "cors" });
+        const respData = await resp.json();
+
+        console.log(respData);
+
+        addWeatherToPage(respData);
+    }
+
+    function addWeatherToPage(data) {
+        const temp = KtoC(data.main.temp);
+
+        const weather = document.createElement("div");
+        weather.classList.add("weather");
+
+        weather.innerHTML = `
+            <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${temp}°C <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /></h2>
+            <small>${data.weather[0].main}</small>
+        `;
+
+        // cleanup
+        main.innerHTML = "";
+
+        main.appendChild(weather);
+    }
+
+    function KtoC(K) {
+        return Math.floor(K - 273.15);
+    }
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const city = search.value;
+
+        if (city) {
+            getWeatherByLocation(city);
+        }
+    });
+        </script>
+    </body>
+
+</html>

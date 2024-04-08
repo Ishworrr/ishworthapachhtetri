@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #22254b;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+}
+header{
+    background-color: #373b69;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+
+}
+#search {
+    background-color: transparent;
+    border: 2px solid #22254b;
+    border-radius: 50px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
+#search::placeholder {
+    color: #7378c5;
+}
+
+#search:focus {
+    background-color: #22254b;
+    outline: none;
+}
+.movie {
+    background-color: #373b69;
+    border-radius: 3px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+    margin: 1rem;
+    width: 300px;
+}
+main{
+    display: flex;
+    flex-wrap: wrap;
+    margin:1rem;
+}
+.movie img {
+
+    width: 100%;
+}
+.movie-info {
+    padding: 0.5rem 1rem 1rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    letter-spacing: 1px;
+    justify-content: space-between;
+}
+.movie-info h3 {
+   margin: 0;
+}
+.movie-info span {
+    border-radius: 3px;
+ background-color: #21254a;
+ align-items: center;
+ font-weight: bold;
+ padding: 0.25rem 0.5rem;
+
+}
+.movie-info span.green {
+   color:chartreuse;
+}
+.movie-info span.orange {
+   color:orange;
+}
+
+.movie-info span.red {
+   color:red;
+}
+
+.overview{
+    position: absolute;
+    background-color: whitesmoke;
+    padding: 2rem;
+    overflow: hidden;
+    max-width: 100%;
+    top:auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateY(101%);
+    transition: transform .3s ease-in;
+    padding-inline: .5rem;
+ 
+
+}
+.overview h3{
+    margin-top: 0;
+}
+.movie:hover .overview{
+    transform: translateY(0);
+}
+
+
+ 
+        </style>
+</head>
+<body>
+    <header>
+      <form id="form">
+        <input type="text" id="search" placeholder="Search">
+      </form>
+        </header>
+    <main id="main">
+        
+    </main>
+        
+    
+    <script>
+        const ApiKey= '04c35731a5ee918f014970082a0088b1';
+       const APIURL =
+    "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1";
+const IMGPATH = "https://image.tmdb.org/t/p/w1280";
+const SEARCHAPI =
+    "https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=";
+
+    const main = document.getElementById("main");
+const form = document.getElementById("form");
+const search = document.getElementById("search");
+
+ // initially get fav movies
+ getMovies(APIURL);
+
+    async function getMovies(SEARCHAPI) {
+        const resp = await fetch(SEARCHAPI);
+        const respData = await resp.json();
+        console.log(respData);
+        showMovies(respData.results);
+
+        // respData.results.forEach(movie =>{
+        //     const img = document.createElement('img');
+        //     img.src= IMGPATH + movie.backdrop_path 
+        //     document.body.appendChild(img);
+        // })
+
+function showMovies(movies) {
+    //clear main
+    main.innerHTML='';
+    //respData.results.forEach(movie =>{
+        movies.forEach(movie =>{
+            
+            const {poster_path,title,vote_average,original_title,overview} = movie;
+            const movieEl = document.createElement('div');
+            movieEl.classList.add('movie');
+            movieEl.innerHTML=`
+           
+            <div class="${original_title}">
+            <img src="${IMGPATH + poster_path}" alt="${title} " srcset=""/>
+            <div class="movie-info">
+                <h3>${title}</h3>
+                <span class="${getClassByRate(vote_average)}">${vote_average}</span>
+
+            </div>
+        </div>
+        <div class="overview">
+                <h3>Overview:</h3>
+                ${overview}
+            </div>
+      
+            `;
+           // document.body.appendChild(movieEl);
+           main.appendChild(movieEl);
+          
+        })
+
+        return respData;
+}
+        
+    }
+   
+
+   function getClassByRate(vote){
+
+    if(vote>=8){
+        return 'green'
+    }else if(vote>=5){
+        return 'orange'
+    }else{
+        return 'red'
+    }
+   }
+
+   form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const searchTerm = search.value;
+
+    if (searchTerm) {
+        getMovies(SEARCHAPI + searchTerm);
+
+        search.value = "";
+    }
+    
+});
+ </script>
+</body>
+
+</html>

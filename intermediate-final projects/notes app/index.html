@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.1/marked.min.js"></script>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            background-color: aqua;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin: 0;
+            flex-wrap: wrap;
+            display: flex;
+        }
+        .add{
+            background-color: chartreuse;
+            color: #fff;
+            border: 0;
+            border: 20%;
+            cursor: pointer;
+            /* margin: 2rem auto; */
+            padding: 0.5rem 1rem;
+            position: fixed;
+            top:1rem;
+            right:2rem;
+
+        }
+
+        .note{
+            width:400px;
+            height:400px;
+            background-color: aliceblue;
+            margin: 20px;
+            box-shadow: 0 0 2px 10px rgba(0,0,0,.3);
+        }
+
+        .note .tools{
+            background-color:chartreuse;
+            display: flex;
+            justify-content: flex-end;
+            padding:0.5rem;
+        }
+        .note .tools button{
+            background-color:transparent;
+            color: white;
+            border: none;
+            font-size: 0.9rem;
+            margin-left: .5rem;
+            cursor: pointer;
+        }
+
+        .note .main{
+            background-color: #eee;
+            height:400px;
+            /* display: none; */
+            width:100%;
+            overflow: hidden;
+        }
+
+        .note textarea{
+            outline:none;
+            height:400px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            width:100%;
+            border: none;
+            font-size:1.2rem;
+            /* overflow: hidden; */
+           
+        }
+        .note .hidden {
+    display: none;
+}
+
+
+
+
+    </style>
+
+</head>
+<body>
+    
+    <button class="add" id="add">
+        <i class="fas fa-plus"></i> Add note
+    </button>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.1/marked.min.js" integrity="sha512-KCyhJjC9VsBYne93226gCA0Lb+VlrngllQqeCmX+HxBBHTC4HX2FYgEc6jT0oXYrLgvfglK49ktTTc0KVC1+gQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  -->
+       <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.1/marked.min.js"></script>      -->
+       <script src="script.js" defer></script>
+</body>
+</html>

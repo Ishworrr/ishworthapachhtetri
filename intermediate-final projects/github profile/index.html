@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github</title>
+</head>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #2a2a72;
+    background-image: linear-gradient(315deg, #2a2a72 0%, #2e2a68 74%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+input {
+    background-color: #4c2885;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+        0 15px 40px rgba(0, 0, 0, 0.1);
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+input::placeholder {
+    color: #bbb;
+}
+
+input:focus {
+    outline: none;
+}
+
+.card {
+    background-color: #4c2885;
+    background-image: linear-gradient(315deg, #4c2885 0%, #4c11ac 100%);
+    border-radius: 20px;
+    box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+        0 15px 40px rgba(0, 0, 0, 0.1);
+    display: flex;
+    padding: 3rem;
+    max-width: 800px;
+}
+
+.avatar {
+    border: 10px solid #2a2a72;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+}
+
+.user-info {
+    color: #eee;
+    margin-left: 2rem;
+}
+
+.user-info h2 {
+    margin-top: 0;
+}
+
+.user-info ul {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+    max-width: 300px;
+}
+
+.user-info ul li {
+    display: flex;
+    align-items: center;
+}
+
+.user-info ul li strong {
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+.repo {
+    background-color: #2a2a72;
+    border-radius: 5px;
+    display: inline-block;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+}
+    </style>
+<body>
+    <form id="form">
+        <input type="text" id="search" placeholder="Search a Github User" />
+    </form>
+    <main id="main"></main>
+    <script>
+        const APIURL = "https://api.github.com/users/";
+
+const main = document.getElementById("main");
+const form = document.getElementById("form");
+const search = document.getElementById("search");
+
+getUser("florinpop17");
+
+async function getUser(username) {
+    const resp = await fetch(APIURL + username);
+    const respData = await resp.json();
+
+    createUserCard(respData);
+
+    getRepos(username);
+}
+
+async function getRepos(username) {
+    const resp = await fetch(APIURL + username + "/repos");
+    const respData = await resp.json();
+
+    addReposToCard(respData);
+}
+
+function createUserCard(user) {
+    const cardHTML = `
+        <div class="card">
+            <div>
+                <img class="avatar" src="${user.avatar_url}" alt="${user.name}" />
+            </div>
+            <div class="user-info">
+                <h2>${user.name}</h2>
+                <p>${user.bio}</p>
+
+                <ul class="info">
+                    <li>${user.followers}<strong>Followers</strong></li>
+                    <li>${user.following}<strong>Following</strong></li>
+                    <li>${user.public_repos}<strong>Repos</strong></li>
+                </ul>
+
+                <div id="repos"></div>
+            </div>
+        </div>
+    `;
+
+    main.innerHTML = cardHTML;
+}
+
+function addReposToCard(repos) {
+    const reposEl = document.getElementById("repos");
+
+    repos
+        .sort((a, b) => b.stargazers_count - a.stargazers_count)
+        .slice(0, 10)
+        .forEach((repo) => {
+            const repoEl = document.createElement("a");
+            repoEl.classList.add("repo");
+
+            repoEl.href = repo.html_url;
+            repoEl.target = "_blank";
+            repoEl.innerText = repo.name;
+
+            reposEl.appendChild(repoEl);
+        });
+}
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const user = search.value;
+
+    if (user) {
+        getUser(user);
+
+        search.value = "";
+    }
+});
+        </script>
+</body>
+</html>

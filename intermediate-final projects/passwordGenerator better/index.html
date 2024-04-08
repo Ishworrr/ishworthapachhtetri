@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAssword App</title>
+</head>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rebeccapurple;
+    color: white;
+  display: flex;
+  /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+.pw-container{
+    width:300px;
+    min-width:400px;
+    background-color: blueviolet;
+    box-shadow: rgb(204, 214, 225) 0px 20px 30px -10px;
+}
+.pw-header{
+    padding:1rem;
+
+}
+.pw{
+    padding-inline: .5rem;
+    background-color: rebeccapurple;
+    width:100%;
+    height:70px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;  
+    position: relative;
+    overflow: auto;
+}
+.pw button{
+    background-color: white;
+    font-family:inherit ;
+    font-weight: bold;
+    color: rgb(29, 2, 56);
+    border: none;
+    border-radius:5px ;
+    cursor: pointer;
+    position: absolute;
+
+    padding: 0.25rem;
+   
+    top:0;
+    right:0;
+    transform: translate(0,20%);
+    opacity: 0;
+    transition:opacity 2s ease, transform 3s ease-in-out;
+}
+.pw:hover button{
+    opacity: 1;
+    transform: translate(0,0%);
+
+
+}
+.pw-body {
+    padding: 0 1rem 1rem;
+}
+.form-control {
+    color: #eee;
+    display: flex;
+    justify-content: space-between;
+    margin: 0.75rem 0;
+}
+.generate {
+    display: block;
+    background-color: #ecb602;
+    border: none;
+    color: rebeccapurple;
+    cursor: pointer;
+ 
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+
+    </style>
+<body>
+    <div class="pw-container">
+        <div class="pw-header">
+            <div class="pw">
+                <span id="pw">l823Zs78#Css09@</span>
+                <button id="copy">Copy</button>
+
+            </div>
+        </div>
+
+    
+    <div class="pw-body">
+        <div class="form-control">
+            <label for="len">Password Length</label>
+            <input type="number" id="len" min="2" max="20"
+            value="15">
+        </div>
+        <div class="form-control">
+            <label for="upper">Add UpperCase Letters</label>
+            <input id="upper" type="checkbox">
+        </div>
+        <div class="form-control">
+            <label for="lower">Add LowerCase Letters</label>
+            <input id="lower" type="checkbox">
+        </div>
+        <div class="form-control">
+            <label for="number">Contain Numbers</label>
+            <input id="number" type="checkbox">
+        </div>
+        <div class="form-control">
+            <label for="symbol">Contain Symbols</label>
+            <input id="symbol" type="checkbox">
+        </div>
+        <button class="generate" id="generate">Generate Password</button>
+
+    </div>
+    
+</div>
+    
+    
+
+    <script>
+        const pwEl = document.getElementById('pw');
+        const copyEl = document.getElementById('copy');
+        const lenEl = document.getElementById('len');
+        const upperEl = document.getElementById('upper');
+        const lowerEl = document.getElementById('lower');
+        const numberEl = document.getElementById('number');
+        const symbolEl = document.getElementById('symbol');
+        const generateEl = document.getElementById('generate');
+
+        const upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const lowerLetters = "abcdefghijklmnopqrstuvwxyz";
+        const numbers = "0123456789";
+        const symbols = "!@#$%^&*()_+=";
+
+        function getLowercase() {
+            return lowerLetters[Math.floor(Math.random() * lowerLetters.length)];
+        }
+
+        function getUppercase() {
+            return upperLetters[Math.floor(Math.random() * upperLetters.length)];
+        }
+
+        function getNumber() {
+            return numbers[Math.floor(Math.random() * numbers.length)];
+        }
+
+        function getSymbol() {
+            return symbols[Math.floor(Math.random() * symbols.length)];
+        }
+
+        function generatePassword() {
+            // this works
+            // const len = lenEl.value;
+            // let password = '';
+            // for (let index = 0; index < len; index++) {
+            //     const x= generateX();
+            //   password += x;
+                
+            // }
+
+            // pwEl.innerHTML=password;
+
+
+            //adding to make sure if selcted it will be added
+            const len = lenEl.length;
+            let password='';
+            if(upperEl.checked){
+                password+=getUppercase();
+            }
+            if(lowerEl.checked){
+                password+=getLowercase();
+            }
+            if(numberEl.checked){
+                password+=getNumber();
+            }
+            if(symbolEl.checked){
+                password+=getSymbol();
+            }
+
+            for(let i=password.length; i<len;i++){
+                const x= generateX();
+                password+=x;
+
+            }
+            pwEl.innerText = password;
+
+        }
+
+        function generateX(){
+            const xs=[];
+            if(upperEl.checked){
+                xs.push(getUppercase())
+            }
+            if (lowerEl.checked) {
+                xs.push(getLowercase());
+            }
+
+            if (numberEl.checked) {
+                xs.push(getNumber());
+            }
+
+            if (symbolEl.checked) {
+                xs.push(getSymbol());
+            }
+            if (xs.length === 0) return "Bitch Ass NIgga";
+
+            return xs[Math.floor(Math.random()*xs.length)];
+
+        }
+
+        generateEl.addEventListener("click", generatePassword);
+
+        copyEl.addEventListener('click',()=>{
+            const textArea = document.createElement('textarea');
+            const password = pwEl.innerText;
+            if(!password){
+                return
+            };
+            textArea.value = password;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy') ;
+            textArea.remove();
+            alert("Password copied to clipboard");
+
+    
+
+        });
+
+               </script>
+</body>
+</html>

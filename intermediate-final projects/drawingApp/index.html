@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing App</title>
+</head>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+canvas {
+    border: 2px solid rebeccapurple;
+    /* width:600px;
+    height: 600px; */
+}
+.toolbox {
+    background-color: rebeccapurple;
+    border: 1px solid rebeccapurple;
+    display: flex;
+    padding: 1rem;
+    width: 804px;
+}
+/* Everythung inside toolbox  should be this*/
+.toolbox >* {
+    background-color: #f5f5f5;
+    border: none;
+    font-size: 2rem;
+    padding: .25rem;
+    width:50px;
+    margin: 2px;
+    align-items: center;
+    text-align: center;
+    height: 50px;
+    display: inline-flex;
+    justify-content: center;
+
+}
+.toolbox>*:last-child{
+    margin:auto;
+}
+    </style>
+<body>
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <div class="toolbox">
+        <button id="increase">+</button>
+        <span id="size">30</span>
+        <button id="decrease">-</button>
+        <input type="color" name="color" id="color">
+        <button id="clear">💩</button>
+    </div>
+    
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx= canvas.getContext('2d');
+        const increaseBtn = document.getElementById("increase");
+        const sizeEl = document.getElementById("size");
+        const colorEl = document.getElementById("color");
+const decreaseBtn = document.getElementById("decrease");
+const clearEl = document.getElementById("clear");
+
+        let size =30;
+        // let x=50; //before smooth line
+        // let y=50;
+        let color = 'black';
+        let isPressed=false; //so that  mousemove will not draw when mouse button is not pressed
+
+         //for smooth line ,other works good too
+         let x = undefined;
+         let y = undefined;
+
+        canvas.addEventListener('mousedown',(e)=>{
+          isPressed=true;
+
+           //for smooth line ,other works good too
+           //for mclicking smooth line
+           x = e.offsetX;
+           y = e.offsetY;
+
+        })
+
+        canvas.addEventListener('mouseup',(e)=>{
+            isPressed=false;
+            //when mouse up smooth line gone
+            x=undefined;
+            y=undefined;
+
+        })
+
+
+        canvas.addEventListener('mousemove',(e)=>{
+            console.log(e)
+            if(isPressed){
+            // const x= e.offsetX;
+            // const y= e.offsetY;
+          //before---  drawCircle(x,y);
+
+          const x2= e.offsetX;
+            const y2= e.offsetY;
+         // drawCircle(x2, y2);
+          drawLine(x,y, x2, y2);
+          x = x2;
+          y = y2;
+        }
+
+
+        })
+
+        function drawCircle(x,y) {
+            ctx.beginPath();
+            ctx.arc(x,y,size,0*Math.PI,Math.PI*2);
+            // ctx.stroke();
+            ctx.fill();
+            ctx.fillStyle=color;
+        }
+
+        //for smooth line ,other works good too
+        function drawLine(x1,y1,x2,y2) {
+        
+            ctx.beginPath();
+          ctx.moveTo(x1,y1);
+          ctx.lineTo(x2,y2);
+            //for circlr--- ctx.fill();
+            //for circlr---  ctx.fillStyle=color;
+
+            //for line---
+          ctx.lineWidth = size * 2;//circle if changed because drawCircle(x2, y2); if drawCircle(x2, y2); 
+          //is is comment then brush
+            ctx.strokeStyle = color;
+            ctx.stroke();
+
+        }
+
+        increaseBtn.addEventListener('click',()=>{
+            size+=5;
+            if(size>50){
+                size=50;
+            }
+            updateSizeOnScreen();
+
+        })
+        decreaseBtn.addEventListener('click',()=>{
+            size-=5;
+            if(size<1){
+                size=1;
+            }
+            updateSizeOnScreen();
+        })
+
+        function updateSizeOnScreen() {
+    sizeEl.innerText = size;
+}
+colorEl.addEventListener("change", (e) => {
+    color = e.target.value;
+});
+clearEl.addEventListener("click", () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+});
+
+
+        // function draw() {
+        //     ctx.clearRect(0,0,canvas.width,canvas.height);
+        //     drawCircle(x++,y);
+        //    requestAnimationFrame(draw)
+
+        // }
+        // draw();
+        </script>
+</body>
+</html>

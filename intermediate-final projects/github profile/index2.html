@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github</title>
+</head>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #a4508b;
+background-image: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+input{
+    background-color: #4c2885;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+        0 15px 40px rgba(0, 0, 0, 0.1);
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+
+}
+input::placeholder {
+    color: #bbb;
+}
+
+input:focus {
+    outline: none;
+}
+.card{
+    background-color: #53103f;
+background-image: linear-gradient(326deg, #dbc3d4 0%, #823215 74%);
+display: flex;
+padding: 3rem;
+box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+        0 15px 40px rgba(166, 173, 201, 0.1);
+
+        border-radius: 20px;
+        max-width: 1000px;
+        margin-top: 10px;
+
+}
+.avatar {
+    border: 10px solid #2a2a72;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+}
+.user-info{
+    color: #CCC;
+    margin-left: 2rem;
+}
+
+.user-info h2{
+  
+    margin-top: 0;
+}
+.user-info ul{
+  
+ /* display: flex;
+ justify-content: space-between;
+ list-style-type: none;
+ gap: 1rem;
+ padding: 0;
+ width: 300px; */
+
+ display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+    max-width: 300px;
+}
+
+.user-info ul li {
+    display: flex;
+    align-items: center;
+    gap:5px;
+    margin: 0;
+}
+
+.user-info ul li svg{
+  height:20px;
+  /* font-size: 0.9rem; */
+    margin-left: 0.5rem;
+ }
+ 
+ .repo {
+    background-color: #2a2a72;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    color: white;
+
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+}
+/* .containre{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+    </style>
+<body>
+    <form id="form">
+        <input type="text" id="search" placeholder="Search a Github User" />
+    </form>
+    <main id="main"></main>
+    
+
+
+    <script>
+        const form = document.getElementById('form');
+        const main = document.getElementById('main');
+        const search = document.getElementById('search');
+        const APIURL = 'https://api.github.com/users/';
+
+        getUser('ishworrr');
+//usera = username
+        async function getUser(usera) {
+            const resp = await fetch(APIURL + usera);
+            const respData = await resp.json();
+             
+            MakeUserCard(respData);
+            getRepos(usera);
+            
+        }
+
+        async function getRepos(usera) {
+    const resp = await fetch(APIURL + usera + "/repos");
+    const respData = await resp.json();
+
+    addReposToCard(respData);
+}
+
+        function MakeUserCard(usera) {
+            
+            // const card = document.createElement('div');
+            // card.classList.add( 'card' );
+            // card.innerHTML=
+            const cardHTML=`
+            <div class="card">
+            <div class="container">
+                <img class="avatar" src="${usera.avatar_url}" alt="${usera.name}" />
+                </div>
+                <div class="user-info">
+                    <h2>${usera.name}</h2>
+                    <p>${usera.bio}</p>
+                    <ul class="info">
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+</svg>
+${usera.followers}
+<strong>Followers</strong>
+</li>
+                        <li>${usera.following}<strong> Following</strong></li>
+                        <li>${usera.public_repos}<strong>Repos</strong></li>
+                        </ul>
+
+                        <ul id="repos" class="repos"></ul>
+                    </div>
+                    </div>
+            `;
+            main.innerHTML = cardHTML;
+
+        }
+
+
+        function addReposToCard(repos) {
+            const reposEl= document.getElementById('repos');
+            repos
+            .sort((a,b)=>b.stargazers_count - a.stargazers_count) //repositories with star
+            .slice(0,10)
+            .forEach(repo => {
+                const repoEl = document.createElement('a');
+                repoEl.classList.add('repo');
+                repoEl.href = repo.html_url;
+                repoEl.target='_blank';
+                 repoEl.innerText = repo.name;
+                  reposEl.appendChild(repoEl);
+            });
+            
+        }
+
+
+
+
+        form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const usera = search.value;
+
+    if (usera) {
+        getUser(usera);
+
+        search.value = "";
+    }
+});
+
+        </script>
+</body>
+</html>

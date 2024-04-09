@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Heart</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <style>
+      /* Write your CSS code here */
+.background {
+    background-image: linear-gradient(to right, rgba(3,105,161, 0.7), rgba(0, 0, 0, 0.3));
+}
+
+.ff-poppins {
+    font-family: "Poppins", sans-serif;
+}
+
+.box-shadow {
+    box-shadow: 0px -10px 30px -20px rgba(191,219,254,1);
+}
+
+.elipse {
+   border-radius: 100%/90%;
+}
+
+.bg-transparent {
+    background-color: rgba(51, 65, 85, 0.7);
+}
+
+.aspect-video {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+.aspect-video::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, and Opera */
+}
+
+.slide {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+        </style>
+            <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+            <script src="https://kit.fontawesome.com/a7e8a78a4f.js" crossorigin="anonymous"></script>
+
+          <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 flex justify-center items-center min-h-screen ff-poppins px-4">
+    <!-- Pop up -->
+    <div class="relative max-w-xs w-full text-sm text-slate-300 drop-shadow-2xl">
+        <div id="result"  class="hidden absolute w-full h-full flex bg-transparent z-10 items-center justify-center">
+            <div class="relative w-[95%] bg-white rounded-sm">
+                <button id="resultCloseBtn" class="absolute right-2 top-1 text-2xl hover:text-slate-900"><i class="fa-solid fa-xmark"></i></button>
+                <h3 class="p-2 text-slate-800 text-base pb-2 border-b-[1px]">Reservation completed <span class="inline-block ml-2 text-green-500"><i class="fa-solid fa-check"></i></span></h3>
+                <div class="p-2">
+                    <div class="text-slate-500 flex rounded-md border-[1px] border-orange-400">
+                        <span class="w-1/6 bg-orange-400 text-white flex items-center justify-center text-xl"><i class="fa-solid fa-circle-exclamation"></i></span>
+                        <p class="flex-1 px-4 py-2">Please be there on time, tickets are <strong>non-refundable</strong>.</p>
+                    </div>
+                    <p class="text-green-500 text-base text-center py-4">Total: <span id="resultTotal" class="text-2xl font-bold text-slate-600"></span></p>
+                </div>
+            </div>
+        </div>
+        <!-- Header -->
+        <header class="header relative pb-2 background rounded-tl-md rounded-tr-md overflow-hidden">
+        <div class="slider absolute -z-10 mx-auto aspect-video h-full flex">
+            <img id="slide-1" src="https://cdn.wionews.com/sites/default/files/2023/05/04/349391-guardians-of-the-galaxy-1200.JPG" alt="Sliding movie poster" class="slide">
+            <img id="slide-2" src="https://d2eehagpk5cl65.cloudfront.net/img/q60/uploads/2023/05/GOTG3-large-top.jpeg" alt="Sliding movie poster" class="slide">
+            <img id="slide-3" src="https://sojo.net/sites/default/files/styles/large_rectangle_crop/public/blog/pasted_image_at_2017_05_08_04_02_pm_1.png?itok=h2ijsQbU" alt="Sliding movie poster" class="slide">
+        </div>
+        <div class="navigation flex absolute top-6 left-1/2 -translate-x-1/2 gap-2">
+            <a href="#slide-1" class="w-3 h-3 rounded-full border-2 border-slate-300"></a>
+            <a href="#slide-2" class="w-3 h-3 rounded-full border-2 border-slate-300"></a>
+            <a href="#slide-3" class="w-3 h-3 rounded-full border-2 border-slate-300"></a>
+        </div>
+            <div class="p-4 pb-2 h-48 flex flex-col">
+                <button class="inline-flex w-fit text-slate-200 text-2xl hover:text-white">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <div class="mt-auto">
+                    <h1 class="text-lg text-white">Guardians of the Galaxy Vol. 2</h1>
+                    <p class="flex items-center gap-1"><span class="inline-block"><i class="fa-solid fa-location-dot"></i></span>Cineplex Entertainment, Toronto ON</p>
+                </div>
+            </div>
+        </header>
+        <!-- Main -->
+        <main class="relative py-4 px-8 bg-white overflow-hidden">
+            <ul class="flex text-xs items-center justify-center flex-wrap gap-4 mb-6">
+                <div class="flex items-center gap-2 text-slate-600">
+                    <i class="fa-solid fa-couch"></i>
+                    <p>Available</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-couch"></i>
+                    <p class="text-slate-600">Booked</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-couch text-pink-500"></i>
+                    <p class="text-slate-600">Selected</p>
+                </div>
+            </ul>
+            <ul id="seats" class="flex flex-col gap-3 text-base mb-4"></ul>
+            <div class="relative mt-8 border-b-2 border-slate-400 text-slate-500 elipse h-8 shadow-xl shadow-blue-200">
+                <span class="absolute top-0 left-1/2 -translate-x-1/2 text-xs text-slate-400">Screen</span>
+            </div>
+        </main>
+        <!-- Footer -->
+        <footer class="flex item-center">
+            <div class="py-2 px-4 bg-pink-700 text-white flex flex-col gap-2">
+                <p>Date</p>
+                <p>Tickets</p>
+                <p class="uppercase">Total</p>
+            </div>
+            <div class="flex-1 flex items-center py-2 px-4 bg-pink-600">
+                <div class="text-white flex flex-col gap-2">
+                    <p>Jul 11, 19:15</p>
+                    <p id="tickets">0</p>
+                    <p id="total" class="text-base">$0</p>
+                </div>
+                <button id="btnNext" class="relative ml-auto flex-grow-0 align-self-center w-fit h-fit py-2 px-4 text-slate-900 bg-white rounded-lg text-lg hover:bg-pink-100">
+                    <span class="inline-block mr-1">Next</span>
+                   <i class="fa-solid fa-chevron-right"></i>
+                   <p id="error" class="hidden absolute -top-2 border-[1px] border-white text-sm whitespace-nowrap right-0 text-white bg-red-600 px-1 rounded-md">Select seats first.</p>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+</body>
+<script>
+   // Write your JavaScript code here
+const seats = [
+    {
+        order: 'g',
+        seats: [{ isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }]
+    },
+    {
+        order: 'f',
+        seats: [{ isAvailable: true }, { isAvailable: false }, { isAvailable: false }, { isAvailable: false }, { isAvailable: true }, { isAvailable: true }, { isAvailable: false }, { isAvailable: false }]
+    },
+    {
+        order: 'e',
+        seats: [{ isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: false }, { isAvailable: false }, { isAvailable: true }]
+    },
+    {
+        order: 'd',
+        seats: [{ isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: false }, { isAvailable: false }, { isAvailable: true }]
+    },
+    {
+        order: 'c',
+        seats: [{ isAvailable: true }, { isAvailable: false }, { isAvailable: false }, { isAvailable: true }, { isAvailable: false }, { isAvailable: false }, { isAvailable: true }, { isAvailable: true }]
+    },
+    {
+        order: 'b',
+        seats: [{ isAvailable: false }, { isAvailable: true }, { isAvailable: false }, { isAvailable: false }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }]
+    },
+    {
+        order: 'a',
+        seats: [{ isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }, { isAvailable: true }]
+    },
+];
+
+let tickets = 0;
+let currentSlide = 0;
+let total = 0;
+let errorTimeout;
+
+init();
+
+document.getElementById("seats").addEventListener("click", reserveSeat);
+document.getElementById('btnNext').addEventListener("click", showOrder);
+document.getElementById('resultCloseBtn').addEventListener("click", closeOrder);
+
+function init() {
+    tickets = 0;
+    total = 0;
+    document.getElementById("btnNext").classList.remove("animate-bounce");
+    document.getElementById('tickets').textContent = tickets;
+    document.getElementById("total").textContent = `$${total}`;
+    document.getElementById("seats").innerHTML = "";
+    renderSeats();
+}
+
+loadSlideNav();
+showSlideshow();
+
+function loadSlideNav() {
+    const navigationLinks = document.querySelectorAll('.navigation a');
+
+    navigationLinks.forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const targetSlideId = e.target.getAttribute('href');
+            const targetSlide = document.querySelector(targetSlideId);
+            const currentSlideIndex = targetSlideId.split('-')[1];
+            currentSlide = currentSlideIndex;
+
+            targetSlide.scrollIntoView({ behavior: 'smooth' });
+            navigationLinks.forEach(navLink => navLink.classList.remove('bg-slate-200'));
+            e.target.classList.add('bg-slate-200');
+        });
+    });
+}
+
+function showSlideshow() {
+    const slides = document.querySelectorAll('.slide');
+    const navLinks = document.querySelectorAll('.navigation a')
+    let slideInterval = setInterval(moveSlide, 5000);
+
+    moveSlide();
+
+    function moveSlide() {
+        if (currentSlide > 2) currentSlide = 0;
+        const nextSlide = slides[currentSlide];
+        nextSlide.scrollIntoView({ behavior: "smooth" });
+        navLinks.forEach(link => link.classList.remove("bg-slate-200"))
+        navLinks[currentSlide].classList.add("bg-slate-200")
+        currentSlide++
+    }
+
+
+    function stopSlideInterval() {
+        clearInterval(slideInterval);
+    }
+
+    document.querySelector('header').addEventListener("mouseenter", stopSlideInterval);
+    document.querySelector("header").addEventListener("touchstart", stopSlideInterval);
+
+    document.querySelector("header").addEventListener("mouseleave", () => {
+        slideInterval = setInterval(moveSlide, 3000);
+    })
+
+}
+
+function renderSeats() {
+    seats.forEach(row => {
+        const rowEl = document.createElement("div"); 
+        const rowOrder = document.createElement("span");
+
+        rowEl.className = "relative flex items-center justify-between";
+        rowOrder.className = "w-2 text-xs absolute -left-5 text-slate-400 uppercase";
+        rowOrder.textContent = row.order;
+        rowEl.appendChild(rowOrder);
+
+        const rowArr = splitArray(row.seats);
+
+        for (const arr of rowArr) {
+            const wrapper = document.createElement("div");
+            wrapper.className = "flex items-center gap-2";
+
+            arr.forEach(seat => {
+                const btn = document.createElement("button");
+                const icon = document.createElement("i");
+                btn.className = "flex items-center";
+                icon.className = "fa-solid fa-couch";
+                btn.appendChild(icon);
+                if (seat.isAvailable) {
+                    btn.classList.add("text-slate-600")
+                    btn.classList.add("hover:text-pink-500");
+                } else {
+                    btn.disabled = true;
+                }
+                wrapper.appendChild(btn);
+            })
+
+            rowEl.appendChild(wrapper); 
+        }
+
+        document.getElementById("seats").appendChild(rowEl);
+    });
+}
+
+function reserveSeat(e) {
+    const target = e.target;
+
+    if (target.nodeName !== "I") return;
+
+    if (e.target.classList.contains("text-pink-500")) {
+        e.target.classList.remove("text-pink-500");
+        tickets--;
+    } else {
+        e.target.classList.add("text-pink-500");
+        document.getElementById("btnNext").classList.add("animate-bounce");
+        tickets++;
+    }
+
+    document.getElementById('tickets').textContent = tickets;
+    total = tickets * 17.5;
+    document.getElementById("total").textContent = `$${total}`;
+}
+
+function showOrder() {
+    window.clearTimeout(errorTimeout);
+
+    if (!tickets) {
+        document.getElementById("error").classList.remove("hidden");
+        errorTimeout = setTimeout(() => {
+            document.getElementById("error").classList.add("hidden");
+        }, 2000);
+        return;
+    }
+
+    document.getElementById("btnNext").classList.remove("animate-bounce");
+    document.getElementById("resultTotal").textContent = `$${total.toFixed(2)}`;
+    const result = document.getElementById("result");
+    result.classList.remove("hidden");
+}
+
+function closeOrder() {
+    document.getElementById("result").classList.add("hidden")
+    init();
+}
+
+function splitArray(arr) {
+    const midIndex = Math.ceil(arr.length / 2);
+    return [arr.slice(0, midIndex), arr.slice(midIndex)]
+}
+    </script>
+</body>
+
+</html>

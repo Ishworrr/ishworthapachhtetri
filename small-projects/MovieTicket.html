@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Heart</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        *{
+            box-sizing: border-box;
+        }
+
+        .header-bg{
+            background: url('https://live.staticflickr.com/5593/14693264267_239c5d1ef9_c.jpg');
+       
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            position: relative;
+            isolation:isolate;
+        }
+
+        /* .header-bg *{
+            position: relative;
+            z-index:1
+
+        } */
+        .header-bg::after{
+            content: '';
+            background: rgba(0,0,0,.5);
+            position: absolute;
+            inset: 0;
+            height: 100%;
+            width: 100%;
+            isolation: isolate;
+            /* z-index: -10; */
+        }
+        .screen{
+            /* background-color: aqua; */
+           
+            border-color: transparent;
+            margin: auto;
+            height: 1rem;
+            width:80%;
+            box-shadow: 0 3px 3px rgba(8,145,178,0.4);
+            border-radius: 50%;
+            border-bottom:2px solid rgb(8, 145, 178);
+        }
+        #seats:nth-child(4) {
+    gap: 19px;
+}
+        </style>
+          <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#181028] flex justify-center items-center min-h-screen">
+    <section class="bg-white text-[#181028] p-8 space-y-4 shadow-lg rounded-xl w-full max-w-md overflow-hidden">
+<header class="header-bg text-white flex flex-col h-60 p-4">
+    <h1 class="font-bold text-xl mt-auto">Guardians of</h1>
+        <p class="flex gap-1">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-map-pin"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" /></svg>
+
+           Cineplex Entertainment
+        </p>
+        </header>
+        <div class="px-4 py-6 after:bg-gradient-to-t after:from-cyan-100 after:via-white after:to-white relative isolate after:h-32 after:w-full after:bottom-0 after:left-0 after:absolute after:-z-10" >
+            <div class="flex gap-4 item-center justify-center">
+                <p class="flex gap-1 item-center text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="text-cyan-500 icon icon-tabler icons-tabler-outline icon-tabler-sofa"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 11a2 2 0 0 1 2 2v1h12v-1a2 2 0 1 1 4 0v5a1 1 0 0 1 -1 1h-18a1 1 0 0 1 -1 -1v-5a2 2 0 0 1 2 -2z" /><path d="M4 11v-3a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v3" /><path d="M12 5v9" /></svg>
+                    Available
+                </p>
+                <p class="flex gap-1 item-center text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="text-slate-300 icon icon-tabler icons-tabler-outline icon-tabler-sofa"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 11a2 2 0 0 1 2 2v1h12v-1a2 2 0 1 1 4 0v5a1 1 0 0 1 -1 1h-18a1 1 0 0 1 -1 -1v-5a2 2 0 0 1 2 -2z" /><path d="M4 11v-3a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v3" /><path d="M12 5v9" /></svg>
+                    Booked
+                    </p>
+                <p class="flex gap-1 item-center text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="text-pink-500 icon icon-tabler icons-tabler-outline icon-tabler-sofa"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 11a2 2 0 0 1 2 2v1h12v-1a2 2 0 1 1 4 0v5a1 1 0 0 1 -1 1h-18a1 1 0 0 1 -1 -1v-5a2 2 0 0 1 2 -2z" /><path d="M4 11v-3a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v3" /><path d="M12 5v9" /></svg>
+                    Selected
+                </p>
+            </div>
+            <div id="seats" class="grid grid-cols-8 place-items-center my-6 gap-1 max-w-sm mx-auto relative">
+
+                <p class="text-slate-600 -left-4 top-0 absolute grid grid-cols-1 gap-1">
+                    <span>G</span>
+                    <span>F</span>
+                    <span>E</span>
+                    <span>D</span>
+                    <span>C</span>
+                    <span>B</span>
+                    <span>A</span>
+                </p>
+            </div>
+            <div>
+                <p class="text-slate-300 text-center">Screen</p>
+                <div class="screen"></div>
+            </div>
+
+        </div>
+        <footer class="flex bg-pink-700 text-white leading-7">
+            <div class="p-4">
+
+            <p>Date</p>
+            <p>Ticket</p>
+            <p class="uppercase">Total</p>
+
+           </div>
+            <div class="bg-pink-400 p-4 grow">
+                <p>Apr 2, 19:00</p>
+                <p id="tickets">3</p>
+                <p class="upperCase" id="total"><strong>$0</strong></p>
+            </div>
+
+        </footer>
+    </section>
+</body>
+<script>
+    const seatsWrapper= document.getElementById('seats');
+    const totalTicketsEl= document.getElementById('tickets');
+    const totalPriceEl= document.getElementById('total');
+    
+    const SeatsCount = 56;
+    const PricePerTicket = 20;
+    const seats =[];
+    let totalTickets = 0
+    //let totalPrice = 0 instead totalTickets*priceperticket
+    for (let i = 0; i < SeatsCount; i++) {
+        const seat = {
+            status:getRandomStatus()
+        }
+        seats.push(seat);
+        
+    }
+
+    function getRandomStatus() {
+
+        return Math.random()<0.25 ?'booked' :'available';
+        
+    }
+
+    function getColorStatus(status) {
+        switch(status){
+            case 'available':{
+                return 'text-cyan-500'
+            }
+            case 'booked':{
+                return 'text-slate-300'
+            }
+            case 'selected':{
+                return 'text-pink-500'
+            }
+           
+        }
+       // return 'text-red-400'
+        
+    }
+
+    function updateTotalStatus() {
+        totalPriceEl.innerText = `$${totalTickets * PricePerTicket}`;
+        totalTicketsEl.innerText=totalTickets;
+        
+    }
+     //Add seats to DOM
+    seats.forEach((seat) => {
+        const seatEl = document.createElement('button');
+
+        seatEl.className= getColorStatus(seat.status);
+
+        if(seat.status ==='booked'){
+          seatEl.disabled = true;
+           seatEl.classList.add('cursor-not-allowed')
+        }else{
+            seatEl.addEventListener('click',()=>{
+                if(seat.status==='available'){
+                    seat.status='selected';
+                    seatEl.className= getColorStatus(seat.status);
+                    totalTickets++;
+           
+                }else{
+                seat.status = 'available';
+                seatEl.className= getColorStatus(seat.status);
+                alert("This ticket has been booked");
+                totalTickets--;
+                        }
+
+                        updateTotalStatus();
+            })
+        }
+
+        seatEl.innerHTML=`
+        <svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 11a2 2 0 0 1 2 2v1h12v-1a2 2 0 1 1 4 0v5a1 1 0 0 1 -1 1h-18a1 1 0 0 1 -1 -1v-5a2 2 0 0 1 2 -2z" /><path d="M4 11v-3a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v3" /><path d="M12 5v9" /></svg>
+
+        `;
+
+        seatsWrapper.appendChild(seatEl);
+    });
+
+    //Add seats to DOM
+
+
+    //
+    </script>
+</body>
+
+</html>

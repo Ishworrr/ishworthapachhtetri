@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Heart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        *{
+            box-sizing: border-box;
+        }
+
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            height: 100vh;
+            background-color: rgb(228, 218, 238);
+            
+        }
+       button{
+        background-color: rgb(157, 139, 174);
+        padding:1rem;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: rgba(202, 201, 201, 0.5) 0px 60px 40px -7px;
+        border: none;
+        border-radius: 5px;
+        transition: transform 0.1s linear;
+         
+
+       }
+
+       button:focus{
+        outline: none;
+       }
+
+       button:active{
+        background-color: blanchedalmond;
+        box-shadow: 0;
+        transform: translate(2px,2px);
+       }
+
+        </style>
+</head>
+<button id="btn">Chnage Me</button>
+
+<body>
+   
+    <script>
+const btn = document.getElementById('btn');
+btn.addEventListener('click',()=>{
+    document.body.style.background=randomBg();
+    console.log(randomBg);
+
+})
+
+function randomBg() {
+//     return `rgb(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random() *  256)},${Math.floor(Math.random() *  256)})`;
+//    // const colors = ["rgb(255, 105, 189)", "rgb(255,  193, 107)"];  dont need trhis
+//     //return colors[Math.floor(Math.random() * colors.length)]; dont need trhis
+//     console.log(colors);
+
+    return `hsl(${Math.floor(Math.random()*360)},100%,50%)`;
+
+
+}
+ 
+
+
+     
+        </script>
+</body>
+</html>

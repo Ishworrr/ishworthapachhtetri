@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Heart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        *{
+            box-sizing: border-box;
+        }
+
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            height: 100vh;
+            background-color: rgb(228, 218, 238);
+           
+          
+        }
+
+        .btn{
+            background-color: rebeccapurple;
+            padding: 1rem ;
+            color: white;
+            font-size: 1rem;
+            font-family: poppins;
+            margin: 1rem;
+            border-radius: 20%;
+            display: flex;
+            flex-wrap: nowrap;
+
+
+        }
+        </style>
+</head>
+
+<body>
+    <div class="audio">
+        <audio src="./sounds/applause.mp3" id="applause"></audio>
+        <audio src="./sounds/boo.mp3" id="boo"></audio>
+
+        <audio src="./sounds/gasp.mp3" id="gasp"></audio>
+         <audio src="./sounds/tada.mp3" id="tada"></audio>
+         <audio src="./sounds/victory.mp3" id="victory"></audio>
+         <audio src="./sounds/wrong.mp3" id="wrong"></audio>
+
+       
+    </div>
+    <script>
+       const sounds = [
+        'applause',
+        'boo',
+        'gasp',
+        'tada',
+        'victory',
+        'wrong'
+       ]    
+
+       sounds.forEach((sound)=>{
+      const btn = document.createElement('button');
+      btn.classList.add('btn');
+      document.body.appendChild(btn);
+      btn.innerText = sound;
+      btn.addEventListener('click', () => {
+        document.getElementById(sound).play();
+ 
+      })
+       })
+
+       function stopSongs() {
+        sounds.forEach((sound)=>{
+            const song = document.getElementById(sound);
+            song.pause();
+            song.currentTime = 0;
+        })
+        
+       }
+        </script>
+</body>
+</html>

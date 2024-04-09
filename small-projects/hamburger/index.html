@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburger</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        *{
+            box-sizing: border-box;
+        }
+
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            height:  100vh;
+        }
+        button{
+            position: fixed;
+            top:20px;
+            right: 20px;
+            background-color: rebeccapurple;
+            color: white;
+            border: none;
+            padding:.5rem;
+            transition: transform 1s ease-in-out;
+        }
+        button.active{
+            transform: translateX(-80px);
+        }
+        nav{
+            position: fixed;
+            top:0;
+            right: 0;
+            height:100vh;
+            background-color: blue;
+            transform: translateX(100%);
+            transition: tranform 1s ease-in-out;
+        }
+        nav.active{
+            transform: translateX(0);
+
+        }
+        nav ul{
+            padding: 0;
+            list-style-type: none;
+        }
+        nav ul li{
+            padding: 1rem ;
+          
+        }
+        nav a{
+            color: aliceblue;
+            text-decoration: none;
+        }
+
+        </style>
+</head>
+
+<body>
+    
+    <button id="btn"><i class="fa-solid fa-bars"></i></button>
+    <nav id="nav">
+        <ul>
+        <li><a href="#">Google</a></li>
+        <li><a href="#">Youtube</a></li>
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">Insta</a></li>
+    </ul>
+    </nav>
+    
+    <script>
+        const btn = document.getElementById('btn') 
+        const nav = document.getElementById('nav')
+
+        btn.addEventListener('click',()=>{
+            nav.classList.toggle('active');
+            btn.classList.toggle('active');
+        })
+        </script>
+</body>
+</html>

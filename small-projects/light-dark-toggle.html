@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>light-dark-toggle</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            margin: 0;
+            height:100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+           background-color: whbrown;
+
+            font-family: cursive;
+    
+        }
+        .label{
+            position: absolute;
+            width:80px;
+            height:40px;
+            background-color: rgb(166, 169, 171);
+            border-radius: 20px;
+            cursor: pointer;
+            /* transform: translate(-50%,-50%); */
+
+        }
+        .con input{
+            visibility: hidden;
+        }
+        .con input:checked +.label {
+           background-color: white;
+        }
+        .con input:checked +.label .circle {
+        animation: on .4s linear forwards;
+        }
+        .circle{
+            height:34px;
+            width: 34px;
+            background-color: black;
+            border-radius: 50%;
+            top:2px;
+            position: absolute;
+            animation: off .5s linear;
+        }
+
+        @keyframes on {
+            0%{
+                transform: translateX(0);
+            }
+            100%{
+                transform: translateX(40px);
+            }
+        }
+        @keyframes off {
+            0%{
+                transform: translateX(40px);
+            }
+            100%{
+                transform: translateX(0px);
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="con">
+        <input type="checkbox" name="check" id="check">
+        <label for="check" class="label">
+            <div class="circle"></div>
+        </label>
+    </div>
+    
+    <script>
+        const input = document.getElementById('check');
+        const label = document.querySelector('.label');
+         const body = document.querySelector('body');
+
+        //     input.addEventListener('input',()=>{
+        //         if(input.checked){
+        //     body.style.background= 'black';
+        // }else{
+        //     body.style.background='white';
+        // }
+        //     })
+
+
+            input.checked = JSON.parse(localStorage.getItem('mode'));
+            a();
+            function a(){
+                if(input.checked){
+            body.style.background= 'black';
+        }else{
+            body.style.background='white';
+        }
+            }
+
+            input.addEventListener('input',()=>{
+              a();
+              localStoragea();
+            });
+
+            function localStoragea(){
+                localStorage.setItem('mode',JSON.stringify(input.checked))
+            }
+
+    </script>
+</body>
+</html>

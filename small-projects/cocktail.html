@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        *{
+            box-sizing: border-box;
+            padding:0;
+            margin:0;
+            font-family: 'poppins',sans-serif;
+        }
+        body{
+            height:100vh;
+            background: linear-gradient(260deg, white, red 50%, blue 70% );
+        }
+        .container{
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top:50%;
+            left:50%;
+            max-width:37.5em;
+            width: 90vw;
+            padding: 1.8em;
+            border-radius: 0.6em;
+            background-color: white;
+            box-shadow: 0 1.2em 3em rgba(2,9,38,.25);
+
+        }
+        .srch-container{
+            display: grid;
+            grid-template-columns: 9fr 3fr;
+            gap:1em;
+            margin-bottom:1.2em
+
+        }
+        .srch-container input{ 
+            font-size: 1em;
+            padding: 0.6em 0.3em;
+            border: none;
+            outline: none;
+            color: #1f194c;
+            border-bottom: 1.5px solid #1f194c;
+            }
+            .srch-container input:focus {
+            border-color: red;
+            }
+
+            .srch-container button {
+               border:none;
+               background-color: rgb(81, 81, 242);
+               border-radius: 2em;
+               font-size: 1em;
+               outline: none ;
+               color: white;
+               padding: 0.6em 0.3em;
+               cursor: pointer;
+
+                }
+
+                #result img{
+                    display: block;
+                    max-width:12.5em;
+                    margin: auto;
+
+                }
+                #result{
+                    color:green;
+                    line-height: 2em;
+                }
+                #result h2 {
+                    font-size: 1.25em;
+                    margin: 0.8em 0 1.6em 0;
+                    text-align: center;
+                    text-transform: uppercase;
+                    font-weight: 600;
+                    letter-spacing: 0.05em;
+                    color: #1f194c;
+                    position: relative;
+                    }
+
+                    #result h2:before {
+                    content: "";
+                    position: absolute;
+                    width: 15%;
+                    height: 3px;
+                    background-color: #5372f0;
+                    left: 42.5%;
+                    bottom: -0.3em;
+                    }
+                    
+                    #result h3 {
+                    font-size: 1.1em;
+                    font-weight: 600;
+                    margin-bottom: 0.2em;
+                    color: #1f194c;
+                    }
+                    #result ul {
+                    margin-bottom: 1em;
+                    margin-left: 1.8em;
+                    display: grid;
+                    grid-template-columns: auto auto;
+                    }
+                    #result li {
+                    margin-bottom: 0.3em;
+                    }
+                    #result p {
+                    text-align: justify;
+                    font-weight: 400;
+                    font-size: 0.95em;
+                    }
+                    .msg {
+                    text-align: center;
+                    }
+                    @media screen and (max-width: 600px) {
+                    .container {
+                        font-size: 14px;
+                    }
+                    }
+                            </style>
+</head>
+<body>
+    <div class="container">
+        <div class="srch-container">
+        <input type="text" placeholder="Type a cocktail..." id="user-inp" value="acid"/>
+   
+    <button id="search-btn"> Search </button>
+    </div>
+    <div id="result"></div>
+</div>
+<script>
+    const btn = document.getElementById('search-btn');
+    const search = document.getElementById('srch-container')
+    const result = document.getElementById('result');
+
+    let url = 'https://thecocktaildb.com/api/json/v1/1/search.php?s=';
+   
+ let getInfo=()=>{
+    let userimp = document.getElementById('user-inp').value;
+    if(userimp.length === 0){
+        result.innerHTML = `
+         <h3 class='msg'>The input field cannot be empty</h3>
+        `
+    }else{
+        fetch(url+userimp).then(res => res.json()).then(data => {
+            console.log(data);
+      
+        
+            console.log(data.drinks[0]);
+            let myDrinks = data.drinks[0];
+            console.log(myDrinks.strDrink);
+            console.log(myDrinks.strDrinkThumb);
+            console.log(myDrinks.strInstructions);
+            let count = 1;
+            let ingredients = [];
+            for (let i in myDrinks) {
+                let ingredient = '';
+                let measure = '';
+      
+                if(i.startsWith('strIngredient')&& myDrinks[i]){
+                    ingredient = myDrinks[i];
+
+                if(myDrinks[`strMeasure`+count]){ 
+                    //  measure = myDrinks[`strMeasure${count}`];
+                    measure = myDrinks[`strMeasure` + count];
+                }else{
+                    measure='';
+
+                }
+                    count += 1;
+                    ingredients.push(`${measure} ${ingredient}`);
+                }
+
+                }
+                console.log(ingredients);
+            result.innerHTML=
+            `
+            <img src=${myDrinks.strDrinkThumb}>
+            <h2>${myDrinks.strDrink}</h2>
+            <h3>Ingredients:</h3>
+            <ul class="ingredients"></ul>
+            <h3>Instructions:</h3>
+            <p>${myDrinks.strInstructions}</p>
+
+            `;
+            let ingredientsEl = document.querySelector('.ingredients');
+            ingredients.forEach(item => {
+                let li = document.createElement('li');
+                li.innerHTML = item;
+                ingredientsEl.appendChild(li);
+            });
+            }).catch(()=>{
+                result.innerHTML =`  <h3 class='msg'>Enter valis input bictcj</h3>`
+            })
+
+
+    }
+ }
+
+ window.addEventListener('load',getInfo);
+ btn.addEventListener('click',getInfo);
+</script>
+</body>
+</html>

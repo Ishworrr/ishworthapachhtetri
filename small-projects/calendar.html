@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <style>
+        body{
+            margin: 0;
+            height:100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rebeccapurple;
+            font-family: cursive;
+            color:rgb(160, 78, 78);
+        }
+        .container{
+            background-color: rgb(246, 244, 241);
+            /* display: flex; */
+            /* flex-direction: column;
+            align-items: center; */
+            width:300px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+
+        }
+        .month{
+            margin:0;
+            background-color: orangered;
+            font-weight: bold;
+            font-size: 30px;
+            padding: 20px;
+        }
+        .date{
+            font-weight: bold;
+            font-size: 80px;
+   
+        }
+        .year{
+            font-weight: 300;
+            color:darkgray;
+            font-size:20px;
+            margin:20px 0;
+
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <p class="month" id="month">Month</p>
+        <p class="day" id="day">Day</p>
+        <p class="date" id="date">20</p>
+        <p class="year" id="year">Year</p>
+    </div>
+    <script>
+        const container = document.querySelector('.container');
+        const month= document.getElementById('month');
+        const day= document.getElementById('day');
+        const date= document.getElementById('date');
+        const year= document.getElementById('year');
+
+        const dateEl= new Date();
+        // console.log(dateEl);
+        // console.log(dateEl.getMonth());//from 0-jan
+        // console.log(dateEl.getDay())
+
+        month.innerHTML=dateEl.toLocaleString('en',{month:'long'});
+        day.innerHTML = dateEl.toLocaleString('en',{weekday:'long'})
+      // date.innerHTML = dateEl.toLocaleString('en',{dateEl:'long'})
+      year.innerHTML = dateEl.getFullYear();
+      date.innerHTML = dateEl.getDate();
+
+     
+       
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 100vh;
+            margin:0;
+            background-color: black;
+            
+        }
+        span{
+            background:url('https://cdn0.iconfinder.com/data/icons/3d-front-gradient/512/heart-front-gradient.png');
+            width: 100px;
+            height: 100px;
+        background-size: cover;
+        position: absolute;
+        left:50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+        animation: heart 6s linear;
+        }
+        /* span:nth-child(2){
+            animation: heart 0.5s linear;
+        }
+        span:nth-child(1){
+            animation: heart 0.5s linear;
+        }
+        span:hover{
+            animation: heart 0.5s linear;
+
+        } */
+        @keyframes heart{
+            /* 0%{
+                transform: scale(0.5);
+                opacity: 0.5;
+                }
+            50%{
+                transform: scale(1.5);
+                opacity: 1;
+            }
+
+            100%{
+                transform: scale(1);
+                opacity: 1;
+            } */
+
+            0%{
+                transform: translate(-50%,-50%);
+                opacity: 1;
+                filter: hue-rotate(0);
+                /* filter: brightness(1); */
+            }
+            100%{
+                transform: translate(-50%,-5000%);
+                opacity: .3;
+                filter: hue-rotate(1080deg);
+                /* filter: brightness(2); */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <span></span>
+    
+    <script>
+        const span = document.querySelector('span');
+        const bodyEl = document.querySelector('body');
+
+        // const heart = document.createElement('span');
+
+        // bodyEl.appendChild(heart);
+
+        bodyEl.addEventListener('mousemove',(e)=>{
+            
+     
+            const x = e.offsetX;
+         
+            const y = e.offsetY;
+            
+             const heart = document.createElement('span');
+            heart.style.left=x +'px';
+            heart.style.top=y +'px';
+            heart.style.right=y +'px';
+           // heart.style.animationDuration = Math.random()*2 + 's';
+           const size = Math.random() *100;
+           heart.style.width = size+'px';
+           heart.style.height = size+'px';
+
+
+             bodyEl.appendChild(heart);
+            // console.log(x);
+            // console.log(e.offsetY)
+            setTimeout(()=>{
+                heart.remove();
+            },1000)
+        })
+
+      
+
+
+
+    </script>
+</body>
+</html>

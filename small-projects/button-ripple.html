@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button-Ripple</title>
+    <style>
+        body{
+            margin: 0;
+            height:100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rebeccapurple;
+            font-family: cursive;
+            color:rgb(115, 93, 135);
+        }
+        button{
+            background-color: rgb(233, 184, 184);
+            padding:10px;
+            font-size: 20px;
+            border: none;
+            outline: none;
+          color: rgb(45, 33, 17);
+          position: relative;
+          overflow: hidden;
+        }
+        .btn::before{
+            content: '';
+            position: absolute;
+            background-color: aqua;
+            /* width: 20px;
+            height: 20px; no need after hover::before*/
+            top: var(--yPos);
+            width: 0;
+            height: 0;
+            left: var(--xPos);
+            transform: translate(-50%,-50%);
+            border-radius: 50%;
+            transition: width 1s, height 1s;
+          
+        }
+
+        button:hover{
+            cursor: pointer;
+        }
+        button:hover::before{
+            width: 200px;
+            height: 200px;
+           
+        }
+        .btn span{
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button type="button" class="btn"><span>Button-Ripple</span></button>
+    </div>
+    
+    <script>
+        const btn = document.querySelector('.btn');
+        btn.addEventListener('mouseover',function(e){
+            const x = (e.pageX-btn.offsetLeft);
+            const y =(e.pageX-btn.offsetTop);
+            // const buttonTop = e.target.offsetTop ;
+            // const buttonLeft = e.target.offsetLeft ;
+
+            // const buttonTop = btn.offsetTop ;
+            // const buttonLeft = btn.offsetLeft ;
+
+            // const xInside = (x - buttonLeft);
+            // const yInside =( y - buttonTop);
+
+            // const circle = document.createElement('span');
+            // circle.classList.add('circle');
+            // circle.style.top = yInside + 'px';
+            // circle.style.left = xInside + 'px';
+
+            // this.appendChild(circle);
+            // setTimeout(() => circle.remove(),500);
+            btn.style.setProperty('--xPos',x + 'px');
+            btn.style.setProperty('--yPos',y + 'px');
+
+        })
+
+    </script>
+</body>
+</html>

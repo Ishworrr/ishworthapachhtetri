@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonial Slider</title>
+    <style>
+         body{
+            height: 100vh;
+            margin:0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            font-family: cursive;
+            
+        }
+        .container{
+            width:500px;
+            height:100px;
+            background-color: slateblue;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,.7);
+            min-width:300px ;
+            /* padding: auto; */
+            padding: 40px 20px;
+            margin:5px;
+            position: relative;
+
+        }
+        img{
+            width:100px;
+            height:100px;
+            border-radius: 50%;
+         position: absolute;
+         transform: translate(-50%);
+         margin: 5px;
+         left:50%;
+         top:-50px
+             
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D" alt="">
+    <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, molestiae.
+    <h4 class="name">-- Name</h4>
+
+    </div>
+    <script>
+        const container = document.querySelector('.container');
+         const img = document.querySelector('img');
+         const name = document.querySelector('.name');
+         const text = document.querySelector('.text');
+
+         const testimonialEl = [
+            {
+                name : 'andrew t',
+                photoUrl:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D',
+                text:'I have been a loyal customer of Apple for many years now and I can confidently say that their products are simply amazing. From their sleek and modern designs to their user-friendly interfaces, Apple never fails to impress me. The quality of their products is top-notch and I have never encountered any major issues with any of my Apple devices. The customer service at Apple is also exceptional, always ready to assist and provide solutions. I highly recommend Apple to anyone looking for a reliable and innovative technology brand. Thank you, Apple, for consistently delivering excellence.'
+                
+
+            },
+            {
+                name : 'nondrew t',
+                photoUrl:'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnxlbnwwfHwwfHx8MA%3D%3D',
+                text:'Apple, for consistently delivering excellence.'
+
+            }
+
+         ];
+
+        let i = 0;
+        updated();
+        function updated() {
+
+            const {name, photoUrl,text}=testimonialEl[i];
+            img.src=photoUrl;
+            name.textContent=name;
+            text.textContent=text;
+            i++;
+
+          if(i===testimonialEl.length) { 
+            i=0;
+            
+}
+                setTimeout(() => {
+                updated();
+            }, 2000);
+
+        }
+
+
+    </script>
+    
+</body>
+</html>

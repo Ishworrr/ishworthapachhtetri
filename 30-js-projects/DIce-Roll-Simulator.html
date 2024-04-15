@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIce-Roll-Simulator</title>
+    <style>
+        body{
+            margin: 0;
+            background-color: aliceblue;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-color:lightsalmon;
+            font-family: 'Open Sans';
+        }
+
+        h1{
+            font-size: 3rem;
+            margin-top: 2rem;
+        }
+        .dice{
+            font-size: 7rem;
+            margin: 2rem;
+            /*  */
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+        .btn{
+            background-color: rgb(37, 164, 122);
+            color: white;
+            font-size: 1rem;
+            padding:10px 2rem;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: background-color .4s ease-in-out;
+            }
+        .btn:hover{
+            background-color: white;
+            color:rgb(37, 164, 122);
+           
+
+        }
+        ul{
+            list-style-type: none;
+         padding: 0;    /* after list syule always */
+            margin:2rem auto; /* in center */
+            min-width: 600px; /* width no max-width */
+        
+
+        }
+        li{
+            font-size: 1.5rem;
+            background-color: #f2f2f2;
+            margin:.5rem;
+            padding:.5rem;
+            border-radius:5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,.7);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* float: left; */
+            }
+        li span{
+            font-size: 3rem;
+            margin-right: 10px;
+        }
+
+        .dice.roll-animation {
+            animation: roll 1s ease-in-out;
+        }
+
+        @keyframes roll {
+            0% {
+                /* transform: rotate(0deg); */
+                transform: rotateY(0deg) rotateX(0deg);
+
+            }
+            100%{
+                transform: rotateY(0deg) rotateX(720deg);
+            }
+            
+        } 
+         
+
+    </style>
+</head>
+<body>
+
+    <h1>Dice Roll Simulator</h1>
+    <div class="dice" id="dice">&#9856;</div>
+    <button class="btn" id="btn">Roll-Dice</button>
+    <ul id="roll-history">
+    <!-- <li>Roll 1: <span>&#9857;</span></li>       comment or leave it
+    <li>Roll 2: <span>&#9858;   </span></li> -->
+</ul>
+
+    <script>
+        const btn = document.getElementById('btn');
+        const dice = document.getElementById('dice');
+
+        const rollHistory = document.getElementById('roll-history');
+        let historyList = [];
+
+        rollDice();
+
+        function rollDice() {
+            const rollResult = Math.floor(Math.random()*6) +1; //can use math.ceil and no 1
+            // +1 beacuse we want to start from 1 as math.floor rounds less while math.ceil rounds higher
+            console.log(rollResult);
+
+            const diceface = getDiceFace(rollResult)
+            console.log(diceface);
+            dice.innerHTML = diceface; //textcontent will give &#9857
+
+           historyList.push(rollResult)
+           updateHistory();
+            
+        }
+        function updateHistory() {
+            rollHistory.innerHTML='';
+            for(let i=0; i<historyList.length;i++){
+                const listItem = document.createElement('li');
+                rollHistory.appendChild(listItem);
+                listItem.innerHTML=`Roll ${i+1}: <span>${getDiceFace(historyList[i])}</span`;
+
+
+            }
+
+            
+        }
+
+        function getDiceFace(rollResult) {
+            switch(rollResult){
+                case 1:
+                return "&#9856;";
+                case 2:
+                return "&#9857;";
+                case 3:
+                return "&#9858;";
+                case 4:
+                return "&#9859;";
+                case 5:
+                return "&#9860;";
+                case 6:
+                return "&#9861;";
+                default:
+                return "";
+            }
+
+            
+        }
+       
+        btn.addEventListener('click',()=>{
+            console.log('clicked');
+            // const diceValue = Math.floor(Math.random()*6)+1;
+            // dice.innerHTML = `&#985${diceValue}`;
+            // dice.classList.add('roll-animation'); 
+
+            // setTimeout(()=>{
+            //     dice.classList.remove('roll-animation');
+            // },1000);
+            // const li = document.createElement('li');
+            // li.innerHTML = `Roll ${rollHistory.children.length+1}: <span>&#985${diceValue};</span>`;
+            // rollHistory.appendChild(li);
+
+            dice.classList.add('roll-animation')
+            setTimeout(()=>{
+                dice.classList.remove('roll-animation');
+                rollDice();
+            },1000);
+        })
+
+    </script>
+</body>
+</html>

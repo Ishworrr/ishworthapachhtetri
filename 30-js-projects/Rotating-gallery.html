@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotating-gallery.html</title>
+    <style>
+        body{
+            margin: 0;
+            display: flex;
+            flex-direction:column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            background-color: rgb(17, 16, 16);
+
+
+        }
+        .container{
+            position: relative;
+            width:200px;
+            height:200px;
+            transform-style: preserve-3d;
+             transform: perspective(1000px) rotateY(0deg);
+             transition:transform .7s ;
+
+        }
+        .container span{
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 100%;
+            transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+
+        }
+
+        .btn-container{
+            position: relative;
+            width: 80%;
+        }
+        .btn{
+            position: absolute;
+            bottom: -80px;
+            background-color: slateblue;
+            color: white;
+            border: none;
+            padding: 10px 2px;
+            cursor: pointer;
+
+        }
+         .btn:hover{
+             background-color: white;
+             color: slateblue;
+             border: 1px solid slateblue;
+         }
+
+         #prev{
+            left: 20%;
+         }
+         #next{
+            right: 20%;
+         }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span style="--i:1">
+        <img src="https://picsum.photos/id/237/200/300" alt=""></span>
+        <span style="--i:2">
+            <img src="https://picsum.photos/id/27/200/300" alt=""></span>
+            <span style="--i:3">
+                <img src="https://picsum.photos/id/37/200/300" alt=""></span>
+                <span style="--i:4">
+                    <img src="https://picsum.photos/id/23/200/300" alt=""></span>
+                    <span style="--i:5">
+                        <img src="https://picsum.photos/id/230/200/300" alt=""></span>
+    </div>
+    <div class="btn-container">
+        <button class="btn" id="prev">Prev</button>
+        <button class="btn" id="next">Next</button>
+
+    </div>
+    <script>
+        const container = document.querySelector(".container");
+        const prev = document.querySelector("#prev");
+        const next = document.querySelector("#next");
+        let counter = 0;
+        let timer ;
+
+        prev.addEventListener('click',()=>{
+            counter += 45;
+            updateCounter();
+            clearTimeout(timer);
+
+        })
+        next.addEventListener('click',()=>{
+            counter -= 45;
+            updateCounter();
+            clearTimeout(timer);
+        })
+        function updateCounter() {
+            container.style.transform = `perspective(1000px) rotateY(${counter}deg)`;
+
+           timer =  setTimeout(() => {
+                counter += 45;
+                updateCounter();
+            }, 3000);
+            
+        }
+        updateCounter();
+    </script>
+</body>
+</html>

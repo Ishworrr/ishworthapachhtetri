@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random-Color-Generator</title>
+    <style>
+
+        body{
+            margin:0;
+            font-family: cursive;
+            height: 100vh;
+
+        }
+        h1{
+            text-align: center;
+        }
+        .container{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            
+        }
+        .color-box{
+            /* background-color: orangered; */
+            width: 200px;
+            height: 200px;
+            color: white;
+            margin: 5px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow:0 4px 8px rgba(0,0,0,0.25);
+            border:2px solid black;
+            border-radius:10px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>Random Color Generator</h1>
+    <div class="container">
+       
+        <!-- <div class="color-box">#f124a2</div>
+        <div class="color-box">#f124a2</div>
+        <div class="color-box">#f124a2</div>
+        <div class="color-box">#f124a2</div> -->
+    </div>
+    
+    <script>
+        const container = document.querySelector('.container');
+       
+        
+
+        for (let index = 0; index < 30; index++) {
+            let elementA = document.createElement('div');
+            elementA.classList.add('color-box');
+            container.appendChild(elementA);   
+        }
+        //put colorBox exactly here can be called after its created
+        const colorBox = document.querySelectorAll('.color-box');
+
+        generateColor();
+        function generateColor() {
+            colorBox.forEach((elementA)=>{
+                const newOne = randomColor();
+                console.log(newOne);
+                elementA.style.backgroundColor = "#" + newOne;
+                elementA.innerText = "#" + newOne;
+
+            });
+            console.log(newOne);
+            
+            
+        }
+
+        function randomColor(){
+            const chars = '0123456789abcdef';
+            const colorLength = 6;
+            let color = '';
+            for (let index = 0; index < colorLength; index++) {
+                const randomEl= Math.floor(Math.random()* chars.length);
+                //console.log(randomEl);
+                color += chars.substring(randomEl,randomEl+1);
+               // console.log(color);
+
+            }
+            return color;
+          
+
+        }
+     
+    </script>
+</body>
+</html>

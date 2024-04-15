@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature-Converter</title>
+    <style>
+         body{
+    height: 100vh;
+    margin:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,.7);
+    box-sizing: border-box;
+    background:linear-gradient(to left bottom,lightgreen, lightblue);
+    color: darkcyan;
+    
+}
+.container{
+    max-width:900px;
+    min-width: 450px;
+    background-color: aliceblue;
+    background: rgba(255,255,255,.3);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,.7);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+h2{
+    font-size: 40px;
+    font-weight: lighter;
+}
+.temp{
+    width:100%;
+    padding: 15px;
+    font-weight: bold;
+
+}
+.input{
+    width: 220px;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    padding: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,.4);
+    border-color: rgba(255,255,255,.3);
+    float: right;
+    font-size: 17px;
+
+
+}
+.input::placeholder{
+    color: darkgray;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Temperature Converter</h2>
+        <div class="celsius temp">
+            <label for="cel">Celsius:</span>
+            <input onchange="computeTemp(event)" type="number" name="ceel" class="input" id="cel" placeholder="Enter Temperatue"/>
+        </div>
+        <div class="fahrenheit temp">
+            <label for="fahrenheit">Fahrenheit:</span>
+            <input onchange="computeTemp(event)" type="number" name="fahrenheit" class="input" id="fahrenheit" placeholder="Enter Temperatue"/>
+        </div>
+        <div class="Kelvin temp">
+            <label for="Kelvin">Kelvin:</span>
+            <input onchange="computeTemp(event)" type="number" name="Kelvin" class="input" id="Kelvin" placeholder="Enter Temperatue"/>
+        </div>
+    </div>
+
+    <script>
+        const cel = document.getElementById('cel');
+        const fahrenheit = document.getElementById('fahrenheit');
+        const Kelvin = document.getElementById('Kelvin');
+       
+         function computeTemp(event){ //only event not 'e' for html and js
+            console.log('change'); // the value of the input
+            console.log(event.target.name); 
+            console.log(event.target.value);
+            const currentValue = +event.target.value;//changes to number from string
+
+            switch(event.target.name){
+                case('ceel'):
+                Kelvin.value = (currentValue+273.32).toFixed(2);
+                fahrenheit.value = ((currentValue*1.8)+32).toFixed(2);
+                break;
+                case('fahrenheit'):
+                cel.value = ((currentValue-32)/1.8).toFixed(2);
+                Kelvin.value = ((currentValue-32)/1.8 + 273.32).toFixed(2);
+                break;
+                case('Kelvin'):
+                cel.value = (currentValue-273.32).toFixed(2);
+                fahrenheit.value = ((currentValue-273.32)*1.8 +32).toFixed(2);
+                break;
+                default:
+                break;
+            }
+
+         }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoTrailer-Popup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body{
+               height: 100vh;
+               margin:0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-direction: column;
+              background-color: black;
+              text-align: center;
+              font-family: cursive, "Helvetica Neue", Helvetica, sans-serif;
+               
+           }
+           .container{
+            max-width:600px;
+            color: white;
+    
+          
+            /* opacity: 1;
+            transition: opacity 1.7s ease-in-out; */
+
+           }
+           img{
+     margin-bottom: 15px;
+            max-width:70%;
+            background-size: contain;
+            border-radius: 20px;
+           }
+          
+           .container h2 {
+            color: white;
+            font-weight: 500;
+            }
+
+            .container p {
+            color: white;
+            margin: 15px 0;
+            word-spacing: 1px;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            }
+            .btn {
+            background-color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            }
+
+            .btn:hover {
+            background-color: orange;
+            }
+            .videoContainer{
+            position: fixed;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+            background-color: black;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+          transition:opacity 1s;
+            
+           }
+
+           .videoContainer video{
+            position: relative;
+            max-width: 900px;
+            width: 800%;
+            height: 70%;
+            outline: none;
+          /* transition: 2s ease-in-out; */
+           }
+           @media (max-width:99px){
+            videoContainer video{
+                max-width: 90%;
+            }
+           }
+           .fas{
+            position: absolute;
+            top:30px;
+            right:30px;
+            color: white;
+            cursor: pointer;
+            z-index: 1000;
+            
+            
+           }
+           .fas:hover{
+            transform: rotate(360deg);
+            transition: 0.9s;
+            color: red;
+           }
+           .videoContainer.active{
+           /* display: none; */
+           visibility: hidden;
+           opacity: 0;
+        
+           }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://images.pexels.com/photos/1391498/pexels-photo-1391498.jpeg?auto=compress&cs=tinysrgb&w=800">
+    </img>
+    <h2>Movie Title</h2>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, sunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, sunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, sunt.
+    </p>
+    <button class="btn">Check Now</button>
+
+    </div>
+    <div class="videoContainer active">
+        <!-- <video controls="true" autoplay src="https://videos.pexels.com/video-files/5120463/5120463-sd_540_960_25fps.mp4"></video> -->
+        <video controls="true" class="video" autoplay src="video..mp4"></video>
+
+        <i class="fas fa-times fa-2x"></i>
+    </div>
+    <script>
+
+        const videoContainer = document.querySelector('.videoContainer');
+        const btn = document.querySelector('.btn');
+        const fas = document.querySelector('.fas')
+        const video = document.querySelector('.video');
+        btn.addEventListener('click',()=>{
+           // videoContainer.classList.toggle('active')
+            videoContainer.classList.remove('active')
+        })
+        fas.addEventListener('click',()=>{
+            videoContainer.classList.toggle('active')
+           // videoContainer.classList.add('active')
+           video.pause(); // pauses the video when clicked fas.
+        //    video.currentTime = 0; makes the video start over
+        })
+
+    </script>
+</body>
+</html>

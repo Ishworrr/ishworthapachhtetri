@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+   <style>
+    body{
+    height: 100vh;
+    margin:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    
+}
+.container{
+    background-color: antiquewhite;
+    width:500px;
+    align-items: center;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,.6);
+    text-align: center;
+    margin: 20px;
+    
+}
+#textarea{
+    resize: none;
+    width: 100%;
+    height: 100px;
+    box-sizing: border-box;
+    border: solid 2px darkgoldenrod;
+    font: 20px cursive;
+
+}
+.counter-container{
+    display: flex;
+    justify-content: space-between;
+}
+.counter-container p{
+   color: darkorchid;
+   font-size: 15px;
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.total-counter{
+color: orchid;
+font-size: 17px;
+}
+
+
+   </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Real-time Character counter</h2>
+        <textarea name="textarea" maxlength="500" id="textarea" cols="30" rows="10" placeholder="write-text"></textarea>
+    <div class="counter-container">
+        <p>Total-Characters: <span class="total-counter"></span></p>
+        <p>Remainig-Characters: <span class="remaining-counter"></span></p>
+
+    </div>
+    </div>
+</body>
+<script>
+const textarea = document.getElementById('textarea');
+const totalCounter = document.querySelector('.total-counter');
+const remainingCounter = document.querySelector('.remaining-counter');
+// textarea.addEventListener('keyup', () => {
+//     updateCounter();
+// });
+
+// updateCounter();
+// function updateCounter(){
+//     totalCounter.innerText = textarea.value.length
+//     remainingCounter.innerText = textarea.getAttribute('maxLength') - textarea.value.length;
+     
+// }
+
+
+
+textarea.addEventListener('keyup',()=>{
+    updateCounterr();
+})
+updateCounterr();
+
+function updateCounterr() {
+  
+    totalCounter.innerHTML = textarea.value.length
+    remainingCounter.innerHTML = textarea.getAttribute('maxLength')-textarea.value.length;
+    remainingCounter.innerHTML = textarea.getAttribute('maxlength')-textarea.value.length;
+    
+}
+</script>
+</html>

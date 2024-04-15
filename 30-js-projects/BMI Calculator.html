@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Mass Index (BMI) Calculator</title>
+    <style>
+        body{
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to left bottom,lightblue,lightgreen);
+            height: 100vh;
+            font-family: 'Courier New', Courier, monospace;
+            box-sizing: border-box;
+        }
+        .container{
+            max-width: 100%;
+            min-width: 550px;
+            background: rgba(255,255,255,.4);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 10px rgba(0,0,0,.3);
+              display: flex;
+    flex-direction: column;
+            margin: 5px;
+
+        }
+
+        .cm{
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .heading{
+            margin-bottom: 25px;
+            font-size: 30px;
+            white-space: nowrap;
+            font-weight:1200;
+            color: rgb(41, 61, 78);
+        }
+       
+        .input{
+            padding: 10px 20px;
+            margin: 10px;
+           font-size: 18px;
+            border: none;
+            background: rgba(255,255,255, .4);
+            border-color: rgba(255,255,255, .5);
+            /* float: right; */
+            cursor:pointer;
+        }
+        .btn{
+            background-color: lightgreen;
+            padding: 10px 20px;
+            cursor:pointer;
+            border: none;
+            font-size: 20px;
+            color:rgb(56, 65, 73);
+             border-radius: 5px;
+           margin: 10px;
+        }
+        label{
+            margin:0 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #result{
+            width: 90%;
+
+        }
+        .btn:hover{
+            box-shadow: 0 0 8px rgba(0,0,0,.3);
+            transition: all 300ms ease;
+        }
+        .info{
+            font-size: 20px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+    <h2 class="heading">Body Mass Index (BMI) Calculator</h2>
+    <div class="height cm">
+        <label for="height1">Your Height (cm):</label>
+        <input type="number" class="input" id="height1" placeholder="Enter Height (cm)"/>
+    </div>
+    <div class="weight cm">
+        <label for="weight1">Your Weight (kg):</label>
+        <input type="number" class="input" id="weight1" placeholder="Enter Weight (kg)"/>
+    </div>
+    <button class="btn" id="btn">Calculate BMI</button>
+    <div class="height cm>">
+        <input disabled type="text" class="input" id="result" placeholder="Result"/>
+    </div>
+<h4 class="info">Weight-Condition: <span id="weight-condition"></span></h4>
+
+</div>
+
+<!--
+    <div class="container">
+        <h1 class="heading">Body Mass Index (BMI) Calculator</h1>
+        Your Height (cm):
+        <input type="number" class="input" id="height" value="180" placeholder="Enter your height in cm">
+        Your Weight (kg):
+        <input type="number" class="input" id="weight" value="80" placeholder="Enter your weight in kg">
+        <button class="btn" id="btn">Compute BMI</button>
+        <input disabled type="text" class="input" id="bmi-result">
+        <h4 class="info-text">Weight Condition: <span id="weight-condition"></span></h4>
+    </div>
+  -->
+
+    <script>
+const btn = document.getElementById('btn');
+const height = document.getElementById('height1');
+const weight = document.getElementById('weight1');
+const result = document.getElementById('result');
+const weightCondition = document.getElementById('weight-condition');
+calculte()
+function calculte(){
+    const heightValue = height.value/100;
+    const weightValue = weight.value;
+    console.log(heightValue, weightValue);
+    // const bmi = weightValue / ((heightValue / 100) ** 2);
+    const bmi = weightValue / (heightValue * heightValue);
+    console.log(bmi)
+    result.value = bmi.toFixed(2);//no innerHTML and used value becoz input 
+    //result.value = bmi
+   // result.innerHTML = bmi     its wrong- wont work
+    if(bmi<18.5){
+         weightCondition.innerHTML = "Underweight";
+    } else if(bmi>=18.5 && bmi<=24.9){
+        weightCondition.innerHTML = "Normal";
+    } else if(bmi>=25 && bmi<=29.9) {
+        weightCondition.innerHTML = "Overweight";
+    } else if(bmi>=30){
+        weightCondition.innerHTML = "Obese";
+    }
+}
+calculte()
+
+btn.addEventListener('click',calculte)
+    </script>
+</body>
+</html>

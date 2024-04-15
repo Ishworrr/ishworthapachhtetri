@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+               height: 100vh;
+               margin:0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+               
+           }
+           .container{
+               background-color: blanchedalmond;
+               width:600px;
+               padding:20px;
+               height:400px;
+               text-align: center;
+               align-items: center;
+               display: flex;
+   
+               margin: 0 auto;
+               box-shadow: 5px 6px 10px rgba(0,0,0,.8);
+               flex-direction: column;
+               justify-content: center;
+   
+           }
+           h1{
+               margin-bottom:90px;
+               font-size: 45px;
+               color:#007;
+           }
+   
+           p{
+               margin-top: 40px;
+               font-weight: bold;
+               font-size: 40px;
+           }
+           label{
+               font-weight: bold;
+               font-size: 35px;
+               color: rgb(130, 100, 56);
+           }
+           input{
+               padding: 10px;
+               border:solid 1px #ccc;
+               width: 100%;
+               max-width: 350px;
+               border-radius: 5px;
+               margin-bottom: 30px;
+           }
+           button{
+               padding: 10px 20px;
+               border:solid 1px #ccc;
+               width: 100%;
+               max-width: 250px;
+               border-radius: 5px;
+               background-color: #007;
+               color: white;
+               cursor: pointer;
+               transition: background-color .4s ease-in-out;
+               font-size: 25px;
+   
+           }
+   
+   </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <div class="age">
+            <label for="birthday">Enter your date of birth</label>
+            <input type="date" id="birthday" name="birthday">
+            <button id="btn">Calculate Age</button>
+            <p id="result">You are - years old.</p>
+        </div>
+    </div>
+
+    <script>
+        const btn = document.getElementById('btn');
+        const result = document.getElementById('result');
+        const input = document.getElementById('birthday');
+
+       
+        const calculateAge = () => {
+            console.log('clicked');
+           const birthdayValue = input.value;
+           //console.log(birthdayValue);
+
+           if(birthdayValue===''){
+            alert('Please enter a Value')
+           }else{
+            const age = getAge(birthdayValue);
+            console.log(age)
+            result.innerHTML=`You are ${age} ${age>1?'years':'year'} old`
+           }
+           getAge();
+
+        }
+     
+
+        function getAge(birthdayValue) {
+            const today = new Date();
+           // console.log(today);
+            // const birthdayDate = new Date(input.value);
+            const birthdayDate = new Date(birthdayValue);
+          // console.log(birthdayDate);
+           let age = today.getFullYear() - birthdayDate.getFullYear();
+           console.log(age);
+           const month  = today.getMonth() - birthdayDate.getMonth();
+           console.log(month);
+
+           if(month<0||(month===0 && today.getDate() < birthdayDate.getDate())){
+           //if birth month is lessthan 0 or 0 than todays, and todays date is less than birthday date then age will be decremented
+            age = age-1 ;
+            
+           }
+           return age;
+            
+        }
+ 
+     
+        btn.addEventListener('click',calculateAge)
+    </script>
+</body>
+</html>

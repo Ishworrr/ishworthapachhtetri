@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown</title>
+    <style>
+            body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: 'Courier New', Courier, monospace;
+            box-sizing: border-box;
+            overflow: hidden;
+            /* background-color: rebeccapurple; */
+            /* color: white; */
+        }
+       
+        h2{
+            color: rgb(35, 101, 159);
+            font: 1.8em sans-serif;
+            font-weight: 700;
+            text-align: center;
+        }
+        .year{
+            color: darksalmon;
+            font: 3em sans-serif;
+            font-weight: 800;
+
+        }
+        .clock{
+            margin:30px;
+            background-color: rgba(0,0,0,.3);
+            color: aliceblue;
+            font-size: 30px;
+            display: flex;
+            width: 100%;
+            height:120px;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter:hue-rotate(180deg);
+
+        }
+        .clock span{
+            margin: 0 35px;
+            font-size: .9em;
+            font-weight: 900;
+            margin-top:-25px ;
+            position: relative;
+        }
+        .clock span::before{
+           content: '';
+           position: absolute;     
+           left: 0px;
+           bottom: -99px;
+           font-size: .5em;
+           width: 100%;
+           color: rgb(235, 245, 241);
+           height: 100px;
+           line-height: 35px;
+
+        }
+        .clock span.day::before{
+           content: 'Days';
+           left: 5px;
+        }
+        .clock .hour::before{
+           content: 'Hours';
+           left: -10px;
+        }
+        
+        .clock .minute::before{
+           content: 'Minutes';
+           left: -7px;
+        }
+        
+        .clock .second::before{
+           content: 'Seconds';
+           left: -7px;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <h2>Countdown to New Year</h2>
+    <div>
+        <span class="year" id="year">00</span>
+    </div>
+    <div class="clock">
+       
+        <div>
+        <span class="day" id="day">00</span>
+    </div>
+    <div>
+        <span class="hour" id="hour">00</span>
+    </div>
+    
+    <div>
+        <span class="minute" id="minute">00</span>
+    </div>
+    
+    <div>
+        <span class="second" id="second">00</span>
+    </div>
+    
+    </div>
+    
+    <script>
+        const day = document.getElementById('day');
+        const hour = document.getElementById('hour');
+        const minute = document.getElementById('minute');
+        const second = document.getElementById('second');
+        const year = document.getElementById('year');
+      //   
+        const currentYear = new Date().getFullYear();
+        year.innerHTML = currentYear + 1;
+        const newDate = new Date('Jan 1,2025 00:00:00');
+//
+
+        const newDateEl = newDate.getTime();
+       
+   
+        updateCount(); 
+        function updateCount(){
+            const now = new Date().getTime();
+            const gap = newDateEl - now;
+            console.log(gap);
+
+            const secondEl = 1000;
+            const minuteEl = secondEl * 60;
+            const hourEl = minuteEl * 60;
+            const dayEl = hourEl*24;
+
+            const d = Math.floor(gap / (dayEl));
+            console.log(d);
+            const h = Math.floor((gap%dayEl)/hourEl);
+            console.log(h);
+            const m = Math.floor((gap%hourEl)/minuteEl);
+             console.log(m);
+            const s = Math.floor((gap%minuteEl)/secondEl);
+
+            day.innerHTML = d;
+            hour.innerHTML = h;
+
+            minute.innerHTML = m;
+            second.innerHTML = s;
+
+        }
+        updateCount();
+
+    </script>
+    
+</body>
+</html>

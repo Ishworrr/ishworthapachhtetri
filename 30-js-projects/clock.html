@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <style>
+         body{
+    height: 100vh;
+    margin:0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
+    
+}
+.clock{
+    display: flex;
+   
+    align-items: center;
+     justify-content: space-between;
+     color:orangered;
+
+}
+h2{
+    text-transform: capitalize;
+    letter-spacing: 4px;
+    font-size: 2rem;
+    text-align:center;
+    
+}
+.clock div{
+    margin:5px;
+    position: relative;
+}
+.clock div span{
+    font-size: 3rem;
+    width:100px;
+    height:80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: antiquewhite;
+    text-shadow: 0 4px 8px rgba(0,0,0,.6);
+    
+}
+.clock .text{
+    height:40px;
+    font-size: 15px;
+    text-transform: uppercase;
+    background-color: aquamarine;
+    opacity: .8;
+
+}
+.clock .ampm{
+    position: absolute;
+    bottom:-60px;
+    width: 60px;
+    height: 30px;
+    background-color: beige;
+    font-size: 20px;
+
+
+}
+
+    </style>
+</head>
+
+<body>
+    <h2>CLOCK</h2>
+    <div class="clock">
+        <div>
+        <span class="day">1</span>
+        <span class="text">Day</span>
+    </div>
+    <div>
+        <span class="hour">1</span>
+        <span class="text">Hour</span>
+    </div>
+    <div>
+        <span class="minute">1</span>
+        <span class="text">Minute</span>
+    </div>
+    <div>
+        <span class="seond">1</span>
+        <span class="text">Second</span>
+    </div>
+    <div>
+        <span class="milliseond">1</span>
+        <span class="text">millisecond</span>
+    </div>
+    <div>
+        <span class="ampm">AM</span>
+     
+    </div>
+    </div>
+    
+    <script> 
+
+        const clock = document.querySelector('.clock');
+        const day = document.querySelector('.day');
+        const hour = document.querySelector('.hour');
+        const minute = document.querySelector('.minute');
+        const second = document.querySelector('.seond');
+        const msecond = document.querySelector('.milliseond');
+        const ampm = document.querySelector('.ampm');
+
+       function clockA(){ const date = new Date();
+        let d = date.getDate();
+        let h = date.getHours();
+        let m = date.getMinutes();
+        let s = date.getSeconds();
+        let ms = date.getMilliseconds();
+        let ap = 'AM';
+
+        if(h>12){
+            h = h-12
+            ap = 'PM'
+        
+        }
+
+        h=h<10?'0'+h :h;
+        m=m<10?'0'+m :m;
+        s=s<10?'0'+s :s;
+
+        // 
+        // clock.innerHTML = h + ':' + m + ':' + s;
+
+        day.innerHTML = d;
+        hour.innerHTML = h;
+        minute.innerHTML = m;
+         second.innerHTML = s;
+         ampm.innerHTML = ap;
+         msecond.innerHTML = ms;
+
+         setTimeout(() => {
+            clockA()
+         }, 100);
+        };
+
+
+         clockA();
+
+
+
+        
+    </script>
+</body>
+</html>

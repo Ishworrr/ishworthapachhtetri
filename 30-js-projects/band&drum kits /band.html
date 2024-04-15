@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Band Instrument</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+         body{
+               height: 100vh;
+               margin:0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-direction: column;
+              background-color: palevioletred;
+              text-align: center;
+               
+           }
+           h1{
+            font-size: 58px;
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif, 'Times New Roman', Times, serif cursive, "Helvetica Neue", Helvetica, sans-serif;
+            letter-spacing: 4px;
+            color: aliceblue;
+            text-shadow: 2px 4px 8px rgba(0,0,0,.7);
+            white-space: nowrap;
+
+           }
+           .container{
+            text-align: center;
+           }
+            .btn{
+                padding:10px 20px;
+                border: none;
+                background-color: aqua;
+                color: #fff;
+                border-radius: 20px;
+                font-size:30px;
+                margin:20px;
+                min-width: 200px;
+                box-shadow: 2px 4px 8px rgba(0,0,0,.7);
+                background-image: url('images/crash.png');
+                text-shadow: 2px 4px 8px rgba(0,0,0,.7);
+                background-size: cover;
+                /* color: aliceblue; */
+               
+                backdrop-filter: brightness(.5)
+
+                }
+            .btn:hover{
+                cursor: pointer;
+                transform: scale(1.1);
+                color: pink;
+
+            }
+            .btn:active{
+               background-size: 105%;
+                /* transform: scale(1.05); */
+
+            }
+    </style>
+</head>
+<body>
+   
+        <h1>Band Instrument <i class="fas fa-drum"></i></h1>
+        <div class="container">
+            <!-- <button class="btn">Snare</button>
+            <button class="btn">Kick</button>
+            <button class="btn">Crash</button>
+            <button class="btn">Drum</button> -->
+    </div>
+<script>
+    const container = document.querySelector('.container')
+    const kits = ['crash','kick','snare','tom']
+
+    kits.forEach((kit)=>{
+        // const btn = document.createElement('button')
+        // btn.classList.add('btn')
+        // btn.innerText = kit;
+        // btn.style.backgroundImage = `url(images/${kit}.png)`
+        // container.appendChild(btn);
+        
+        // btn.addEventListener('click',()=>{
+        //     let sound = new Audio(`sounds/${kit}.mp3`)
+        //     sound.play()
+        // })
+
+//video
+        const btn = document.createElement('button')
+        btn.classList.add('btn')
+        btn.innerText = kit;
+      //  btn.style.backgroundImage = `url(images/${kit}.png)`
+      btn.style.backgroundImage = "url(images/"+kit+".png)"
+        container.appendChild(btn);
+
+        const audio = document.createElement('audio');
+        container.appendChild(audio)
+        audio.src='./sounds/'+kit+'.mp3'
+        
+        btn.addEventListener('click',()=>{
+           
+            audio.play();
+        });
+
+            window.addEventListener('keydown',(e)=>{
+                console.log(e.key);
+                if(e.key===kit.slice(0,1)){
+                    audio.play();
+                    btn.style.transform='scale(0.8)';
+
+                    setTimeout(() => {
+                        btn.style.transform='scale(1)';
+                    }, 100);
+
+                }            
+            });
+        
+
+    })
+</script>
+
+    
+</body>
+</html>

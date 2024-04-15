@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loan-calculator</title>
+    <style>
+        /* your styles go here */
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: 'Courier New', Courier, monospace;
+            box-sizing: border-box;
+            /* background-color: rebeccapurple; */
+            /* color: white; */
+        }
+        .container{
+            background-color: rgb(98, 182, 154);
+            /* width:400px;
+            height:400px; */
+            width:400px;
+            height:400px;
+            /* text-align: center; */
+            color: aliceblue;
+            padding: 20px;
+            margin: 0;
+            border-radius: 20px;
+           
+        }
+        .container h2{
+            margin-top: 20px;
+            font-size: 30px;
+        }
+        .input{
+            margin: 10px 0 30px 0;
+            width: 100%;
+            height: 30px;
+        }
+        .payment{
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+
+
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h2>Loan Claculator</h2>
+        <div class="amount">
+            <label for="loan-amount">Loan Amount $ </label>
+            <input  onchange="calculateLoan()" class="input" type="number" id="loan-amount" min="1" max="500000" value="10000">
+
+        </div>
+        <div class="rate">
+            <label for="interest-rate">Interest Rate %</label>
+            <input onchange="calculateLoan()"  class="input" type="number" id="interest-rate" min="1" max="100" value="10" step=".1">
+
+
+        </div>
+        <div class="months">
+            <label for="months-pay">Months to pay</label>
+            <input onchange="calculateLoan()" class="input" type="number" id="months-pay" min="6" max="48" value="12">
+
+        </div>
+        <label class="payment" id="payment">Monthly Payment:</label>
+
+        
+    </div>
+
+   <script>
+        const loanAmount = document.getElementById('loan-amount');
+        const interestRate = document.getElementById('interest-rate');
+        const monthsPay = document.getElementById('months-pay');
+        const payment = document.getElementById('payment');
+        calculateLoan();
+
+        function calculateLoan(){
+           console.log('change');
+           const loanValue = loanAmount.value;
+           const interestValue = interestRate.value;
+           const monthsValue = monthsPay.value;
+        // --   const MonthlyPayment = (loanValue * (interestValue/100)) / monthsValue;
+        const interest = (loanValue * (interestValue * 0.01)) / monthsValue;
+        //-- const monthlyPaymentValue = MonthlyPayment.toFixed(2);
+        //-- monthlyPayment.innerHTML = `$${monthlyPaymentValue}`;
+        monthlyPayment = (loanValue / monthsValue + interest).toFixed(2);
+
+
+        payment.innerHTML = `Monthly Payment: ${monthlyPayment}`;
+        calculateLoan();
+        } 
+
+//         function calculateLoan() {
+//   loanAmountValue = document.getElementById("loan-amount").value;
+
+//   interestRateValue = document.getElementById("interest-rate").value;
+
+//   MonthsToPayValue = document.getElementById("months-pay").value;
+
+//   interest = (loanAmountValue * (interestRateValue * 0.01)) / MonthsToPayValue;
+
+//   monthlyPayment = (loanAmountValue / MonthsToPayValue + interest).toFixed(2);
+
+//   document.getElementById(
+//     "payment"
+//   ).innerHTML = `Monthly Payment: ${monthlyPayment}`;
+// }
+        
+
+
+    </script>
+    
+</body>
+</html>

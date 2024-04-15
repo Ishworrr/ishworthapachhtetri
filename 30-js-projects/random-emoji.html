@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random-emoji</title>
+    <style>
+         body{
+               height: 100vh;
+               margin:0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background-color: salmon;
+              font-family: 'Courier New', Courier, monospace;
+           }
+           h2{
+            font-size: 3rem;
+            color: aliceblue;
+           }
+
+           .section{
+            text-align: center;
+           }
+           .btn{
+            font-size: 5rem;
+            background: rgba(255,255,255,.2);
+            border: none;
+            letter-spacing: 1rem;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 15px;
+            filter: grayscale();
+            transition: filter .2s ease-in-out;
+            cursor: pointer;
+             }
+           .btn:hover{
+            filter: grayscale(10%);
+
+           }
+           p{
+            color: aquamarine;
+            font-weight: 600;
+             
+           }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Random Emoji</h2>
+        <div class="section">
+            <button class="btn">Click</button>
+            <p class="p">Emoji Name</p>
+        </div>
+    </div>
+    
+    <script>
+        const btn = document.querySelector('.btn');
+        const p = document.querySelector('.p');
+        const APIKey = '21a123a931185271a1084ddea4ae081ef872e25c';
+
+        const emoji = [];
+
+     
+       async function getEmoji() {
+           let response = await fetch(`https://emoji-api.com/emojis?access_key=${APIKey}`);
+           // let response = await fetch('https://emoji-api.com/emojis?access_key=21a123a931185271a1084ddea4ae081ef872e25c');
+            data = await response.json();
+      
+
+            console.log(data);
+
+            for (let index = 0; index < 1500; index++) {
+               emoji.push({
+                name:data[index].character,
+                code:data[index].unicodeName,
+
+               })
+                
+            }
+            
+        }
+        getEmoji();
+
+        btn.addEventListener('click',()=>{
+            getEmoji();
+            const random = Math.floor(Math.random() * emoji.length);
+            //const random =Math.random() //check in console
+            console.log(random);
+            btn.innerHTML = emoji[random].name;
+            p.innerHTML = emoji[random].code;
+          
+
+        })
+
+    </script>
+</body>
+</html>

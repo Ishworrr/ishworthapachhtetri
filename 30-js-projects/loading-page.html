@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loading-page</title>
+    <style>
+             body{
+               height: 100vh;
+               margin:0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              /* background-color: salmon; */
+              color: #f2f2f2;
+              background-color: black;
+              font-family: 'Courier New', Courier, monospace;
+             
+           }
+           .container{
+       font-size: 30px;
+            width: 300px;
+            text-align: center;
+            position: relative;
+
+           }
+           .counter{
+            font-size: 60px;
+           }
+           .back{
+            position: absolute;
+            background-color: lightgray;
+            height: 8px;
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+
+           }
+           .front{
+            position: absolute;
+            background-color: orangered;
+            height: 8px;
+           width: 20%;  /* change from 10 to 20 t0 30  */
+            border-radius: 5px;
+            border: none;
+
+           }
+
+    </style>
+</head>
+<body>
+   <div class="container">
+    <h2>Loading</h2>
+    <div class="counter">0%</div>
+    <hr class="loading-bar back">
+    <hr class="loading-bar front">
+   </div>
+    
+    <script>
+const counter = document.querySelector('.counter');
+const back = document.querySelector('.back');
+const front = document.querySelector('.front');
+
+let count = 0;
+
+updateNum();
+// function updateNum() {
+//     counter.innerHTML = count + '%';
+//     if(count < 100) {
+//         count++;
+//     }
+//     front.style.width = count + '%';
+//     back.style.width = (100 - count) + '%';
+//     setTimeout(updateNum, 100);
+    
+// }
+
+function updateNum() {
+    counter.innerHTML = count + '%';
+    front.style.width=count + '%';
+
+    if(count<100){  //0r 101
+        count++;
+        setTimeout(updateNum, 100);
+    }
+    // else{
+    //     window.location.href = 'index.php';
+
+    }
+
+    
+
+ 
+    </script>
+</body>
+</html>

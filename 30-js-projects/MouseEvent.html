@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MouseEvent</title>
+    <style>
+        body{
+            margin: 0;
+            background-color: aliceblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color:lightsalmon;
+            font-family: cursive;
+        }
+        .div{
+            border:solid 1px lavenderblush;
+            margin: 40px;
+            min-width:180px;
+            text-align: center;
+            position: relative;
+            min-height: 100px;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            font-size: 20px;
+        }
+        .div h4{
+          
+            position: absolute;
+            top:-40px;
+            left:50%;
+            transform: translate(-50%,-50%);
+            white-space: nowrap;
+             font-weight: 100;
+             color: rgb(33, 30, 29);
+
+        }
+
+        @media (max-width:500px) {
+            .div{
+                margin: 30px;
+                min-width:100;
+            }
+            body{
+                flex-direction: column;
+            }
+        }
+
+    </style>
+</head>
+<!-- commented because called in js, can be comment or not ,own choice-->
+<!-- <div class="mouseX div">
+    00
+    <h4>Mouse X Proposition (px)</h4>
+
+</div>
+<div class="mouseY div">
+    00
+    <h4>Mouse Y Proposition (px)</h4>
+</div> -->
+
+<!--original 
+
+     <div class="container">
+      <div class="mouse-event">
+        20
+        <h4>Mouse X Prosition(px)</h4>
+      </div>
+      <div class="mouse-event">
+        20
+        <h4>Mouse Y Prosition(px)</h4>
+      </div>
+    </div>
+ -->
+
+
+<body>
+    
+    <script>
+        //original
+        //const containerEl = document.querySelector(".container");
+         //original
+
+        const div = document.querySelectorAll('.div');
+      
+       const windowEl = document.querySelector('body');
+       
+  
+        
+        window.addEventListener('mousemove',(e)=>{
+        console.log(e)   //check
+        windowEl.innerHTML=`
+        <div class="mouseX div">
+            ${e.clientX}
+            <h4>Mouse X Proposition (px)</h4>
+
+        </div>
+        <div class="mouseY div">
+            ${e.clientY}
+            <h4>Mouse Y Proposition (px)</h4>
+        </div>
+        
+        `
+
+        })
+
+    </script>
+</body>
+</html>

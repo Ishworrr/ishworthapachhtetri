@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tip-Calculator</title>
+    <style>
+         body{
+               height: 100vh;
+               margin:0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              /* background-color: salmon; */
+              background-color: #f2f2f2;
+              font-family: 'Courier New', Courier, monospace;
+              white-space:nowrap;
+           }
+           .container{
+            background-color: white;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 20px;
+           
+            box-shadow: 0 2px 10px rgba(0,0,0,.7);
+            margin: 100px auto;
+
+           }
+           h1{
+            margin-top: 0;
+            text-align: center;
+           }
+           .input{
+            border: 1px solid lightcoral;
+            background-color: #f2f2f2;
+            padding: 10px;
+            width: 98%;
+            border-radius: 4px;
+            margin: 10px 0;
+            display: flex;
+            outline: none;
+           }
+           .input:focus{
+            background-color: #f2f2f2;
+            border: 1px solid green;
+             
+            }
+           /* .tip{
+            display: flex;
+            flex-direction: column;
+           } */
+           .btn{
+            color: #f2f2f2;
+            background-color: green;
+            padding: 10px;
+            width: 98%;
+            margin: 10px 0;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,.7);
+            cursor:progress;
+            font-size: 20px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            transition: .9s ease-in-out;
+            /* transition: background-color .9s ease; */
+           }
+           .btn:hover{
+            background-color: #59b459;
+        }
+        .p-end{
+            font-size: 28px;
+            font-weight: 300;
+
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tip Calculator</h1>
+        <p>Enter the bill amount and tip percentage to calculate the total bill.</p>
+        <div class="amount">
+            <label for="amount1">Bill amount</label>
+            <input type="number" class="input" id ="amount1"/>
+        </div>
+        <div class="tip">
+            <label for="tip1">Tip percentage</label>
+            <input type="number" class="input" id ="tip1"/>
+        </div>
+<button class="btn">Calculate</button>
+
+    <p class="p-end">Total bill: <span class="total"></span></p>
+    </div>
+
+    <!-- original
+
+     <div class="container">
+        <h1>Tip Calculator</h1>
+        <p>Enter the bill amount and tip percentage to calculate the total.</p>
+        <label for="bill">Bill amount:</label>
+        <input type="number" id="bill">
+        <br/>
+        <label for="tip">Tip percentage:</label>
+        <input type="number" id="tip">
+        <br/>
+        <button id="calculate">Calculate</button>
+        <br/>
+        <label for="total">Total:</label>
+        <span id="total"></span>
+
+    </div>
+    -->
+
+
+    
+    <script>
+        const btn = document.querySelector('.btn');
+        const amount = document.querySelector('#amount1');
+        const tip = document.querySelector('#tip1');
+        const total = document.querySelector('.total')
+
+        btn.addEventListener('click', function(){
+            const amountValue = amount.value;
+            console.log(amountValue);
+            const tipValue = tip.value;
+            console.log(tipValue);
+
+            const totalValue = (amountValue*(1+tipValue/100)).toFixed(2);
+        //    totalValue += amountValue
+            total.innerHTML = totalValue;
+           // total.innerHTML = totalValue.toFixed(2);
+        })
+
+        //original
+//         const btnEl = document.querySelector(".btn");
+// const billInput = document.getElementById("amount1");
+// const tipInput = document.querySelector("#tip1");
+// const totalSpan = document.querySelector(".total");
+
+// function calculateTotal() {
+//   const billValue = billInput.value;
+//   const tipValue = tipInput.value;
+//   const totalValue = billValue * (1 + tipValue / 100);
+//   totalSpan.innerText = totalValue.toFixed(2);
+// }
+
+// btnEl.addEventListener("click", calculateTotal);
+
+    </script>
+</body>
+</html>

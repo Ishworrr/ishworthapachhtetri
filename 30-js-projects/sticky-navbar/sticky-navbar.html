@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stikcy-Navabar</title>
+    <style>
+        body{
+            margin: 0;
+            /* display: flex;
+            flex-direction:column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center; */
+
+        }
+        .container{
+            height: 100vh;
+            display: flex;
+            flex-direction:column;
+            align-items: center;
+            background-size: cover;
+            justify-content: center;
+            text-align: center;
+            color: aliceblue;
+            background-image: url('https://plus.unsplash.com/premium_photo-1670282393309-70fd7f8eb1ef?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z2lybHxlbnwwfHwwfHx8MA%3D%3D');
+        }
+        h1{
+            font-size: 50px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            letter-spacing: 2px;
+            text-shadow: 5px 6px 10px rgba(0,0,0,.8);
+
+        }
+        .text{
+            margin: 50px 5%;
+            font-size: 18px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+        }
+        .navbar{
+            display: flex;
+            position: fixed;
+            width: 100%;
+            background-color: aliceblue;
+            height: 100px;
+
+          align-items: center;
+            background-size: cover;
+            justify-content: space-around;
+          
+
+        }
+        .navbar ul{
+            display: flex;
+            margin: 10px;
+            list-style-type: none;
+        }
+        .navbar ul li a{
+            text-decoration: none;
+            margin: 0 10px;
+            color: black;
+            font-family: cursive;
+            }
+        .navbar ul li a:hover{
+            color: red;
+
+        }
+        .navbar.active{
+            background-color: black;
+        }
+        .navbar.active ul li a{
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+       <a href="sticky-navbar.html"> <img src="download.svg" alt="" ></a>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Sevices</a></li>
+     
+        </ul>
+    </div>
+    <div class="container">
+        <h1>Welcome to the Site</h1>
+    </div>
+        <div class="anotner">
+            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad magnam rerum aliquam explicabo ipsum repudiandae iste minus porro, perferendis praesentium vero. Laborum quo officiis tempore architecto, voluptate repudiandae minima ipsa rerum molestiae. Quisquam inventore officia optio fuga deserunt explicabo quis tempora magni aperiam dolorum ullam officiis velit voluptates, earum maiores odio aut fugiat architecto nam, ratione expedita? Incidunt temporibus aut, quae, odio eligendi nobis nisi quibusdam tenetur esse quaerat necessitatibus. Animi doloribus praesentium velit, porro asperiores dolores aliquam possimus facere tempora ex amet nulla aperiam hic iure magnam perspiciatis molestias error culpa tenetur ducimus. Omnis similique vitae tempore dolor soluta?Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, explicabo?0</p>
+            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad magnam rerum aliquam explicabo ipsum repudiandae iste minus porro, perferendis praesentium vero. Laborum quo officiis tempore architecto, voluptate repudiandae minima ipsa rerum molestiae. Quisquam inventore officia optio fuga deserunt explicabo quis tempora magni aperiam dolorum ullam officiis velit voluptates, earum maiores odio aut fugiat architecto nam, ratione expedita? Incidunt temporibus aut, quae, odio eligendi nobis nisi quibusdam tenetur esse quaerat necessitatibus. Animi doloribus praesentium velit, porro asperiores dolores aliquam possimus facere tempora ex amet nulla aperiam hic iure magnam perspiciatis molestias error culpa tenetur ducimus. Omnis similique vitae tempore dolor soluta?Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, explicabo?0</p>
+            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad magnam rerum aliquam explicabo ipsum repudiandae iste minus porro, perferendis praesentium vero. Laborum quo officiis tempore architecto, voluptate repudiandae minima ipsa rerum molestiae. Quisquam inventore officia optio fuga deserunt explicabo quis tempora magni aperiam dolorum ullam officiis velit voluptates, earum maiores odio aut fugiat architecto nam, ratione expedita? Incidunt temporibus aut, quae, odio eligendi nobis nisi quibusdam tenetur esse quaerat necessitatibus. Animi doloribus praesentium velit, porro asperiores dolores aliquam possimus facere tempora ex amet nulla aperiam hic iure magnam perspiciatis molestias error culpa tenetur ducimus. Omnis similique vitae tempore dolor soluta?Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, explicabo?0</p>
+            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad magnam rerum aliquam explicabo ipsum repudiandae iste minus porro, perferendis praesentium vero. Laborum quo officiis tempore architecto, voluptate repudiandae minima ipsa rerum molestiae. Quisquam inventore officia optio fuga deserunt explicabo quis tempora magni aperiam dolorum ullam officiis velit voluptates, earum maiores odio aut fugiat architecto nam, ratione expedita? Incidunt temporibus aut, quae, odio eligendi nobis nisi quibusdam tenetur esse quaerat necessitatibus. Animi doloribus praesentium velit, porro asperiores dolores aliquam possimus facere tempora ex amet nulla aperiam hic iure magnam perspiciatis molestias error culpa tenetur ducimus. Omnis similique vitae tempore dolor soluta?Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, explicabo?0</p>
+            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad magnam rerum aliquam explicabo ipsum repudiandae iste minus porro, perferendis praesentium vero. Laborum quo officiis tempore architecto, voluptate repudiandae minima ipsa rerum molestiae. Quisquam inventore officia optio fuga deserunt explicabo quis tempora magni aperiam dolorum ullam officiis velit voluptates, earum maiores odio aut fugiat architecto nam, ratione expedita? Incidunt temporibus aut, quae, odio eligendi nobis nisi quibusdam tenetur esse quaerat necessitatibus. Animi doloribus praesentium velit, porro asperiores dolores aliquam possimus facere tempora ex amet nulla aperiam hic iure magnam perspiciatis molestias error culpa tenetur ducimus. Omnis similique vitae tempore dolor soluta?Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, explicabo?0</p>
+        </div>
+
+
+    <script>
+        const navbar = document.querySelector(".navbar");
+        const another= document.querySelector(".anotner");
+
+       
+        let top1 = navbar.offsetHeight; //100px
+        let top2 = another.offsetTop; //497px
+        console.log(top1);
+        console.log(top2);
+      
+        window.addEventListener("scroll", () => {
+            console.log('scrolled');
+           // console.log(window.scrollY);
+            if(window.scrollY>top2-50-top1){ //top1 is subtracted beacuse the navbar goes to black from top of navbar so -100px
+                navbar.classList.add("active");
+            }
+            else{
+                navbar.classList.remove("active");
+
+
+            }
+
+             
+        })
+
+    </script>
+</body>
+</html>

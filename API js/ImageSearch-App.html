@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageSearch-App</title>
+    <style>
+        body {
+        background-color: #f9f9f9;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        text-align: center;
+     
+        }
+        h1{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: 900;
+            font-size: 36px;
+            align-items: center;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 60px;
+        }
+        form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            
+            margin-bottom: 60px;
+        }
+        input{
+            font-size: 20px;
+            background-color:aliceblue;
+            border: none;
+            border-radius: 5px;
+            color: #333;
+            padding: 10px 20px;
+            margin: 10px;
+            box-shadow: 0 8px 10px rgba(0,0,0,.8);
+            width: 60%;
+            max-width: 600px;
+           
+        }
+
+        .btn{
+            font-size: 20px;
+            background-color: rgb(143, 206, 49);
+            border: none;
+            border-radius: 5px;
+            color: #f9f9f9;
+            padding: 10px 20px;
+            margin: 10px;
+            box-shadow: 0 8px 10px rgba(0,0,0,.8);
+            cursor: pointer;
+            transition:  background-color .5s ease;
+        } 
+        .btn:hover{
+            color: rgb(143, 206, 49);
+            background-color: #f9f9f9;
+
+        }
+        .result{
+            /* display: grid;
+     grid-template-columns: 1fr 1fr 1fr 1fr; */
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: space-around;
+     /* max-width: 1200px; */
+     margin: 0 auto;
+     padding: 20px;
+    
+        }
+
+/* or just flex-wrap:wrap */
+
+        /* @media (max-width:490px) {
+            .result{
+            display: grid;
+     grid-template-columns: 1fr 1fr;
+   
+        }
+        }
+
+        @media (min-width:490px) and (max-width:1000px) {
+            .result{
+            display: grid;
+     grid-template-columns: 1fr 1fr 1fr;
+   
+        }
+        } */
+
+    /*        */
+
+       .images{
+        /* width:300px; */
+        /* height:200px; */
+        width:30%;
+        box-shadow: 0 8px 10px rgba(0,0,0,.8);
+        overflow: hidden;
+       background-color: aliceblue;
+        margin-bottom: 60px;
+    
+        border-radius: 5px;
+        }
+       
+        .images img{  
+            width: 100%;
+            /* height: 70%;  */
+            height:200px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            transition: transform .5s ease-in-out;
+            /* height:200px */
+        
+        }
+
+        .images img:hover{  
+           transform:scale(1.05);
+        
+        }
+        .images a{
+            padding: 10px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            
+            transition: background-color 0.3s ease-in-out;
+            }
+
+            .images:hover a {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+    
+        #show{
+            font-size: 20px;
+            background-color: rgb(143, 206, 49);
+            border: none;
+            border-radius: 5px;
+            color: #f9f9f9;
+            padding: 10px 20px;
+            margin: 10px auto;
+            cursor: pointer;
+           
+            transition: background-color 0.3s ease-in-out;
+            
+            visibility:hidden;
+        }
+        #show:hover{
+            background-color: #0077b5;
+
+        }
+        @media screen and (max-width:768px) {
+            .images{
+                width:45%;
+            }
+            
+        }
+        @media screen and (max-width:480px) {
+            .images{
+                width:100%;
+            }
+            form{
+                flex-direction: column;
+            }
+            input{
+                margin:20px;
+                width: 80%;
+            } 
+            .btn{
+                margin: 20px;
+                width: 50%;
+            }
+            
+
+        }
+            
+
+
+    </style>
+</head>
+<body>
+    
+        <h1>Image Search App</h1>
+        <form class="form">
+            <input type="text" id="input" placeholder="Search for Images...">
+            <button class="btn" id="btn"> Search</button>
+        </form>
+       
+        <div class="result">
+            <!-- <div class="images">
+                <img src="https://plus.unsplash.com/premium_photo-1712935547781-f003c091720c?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOXx8fGVufDB8fHx8fA%3D%3D" alt="">
+                <a href="https://unsplash.com/photos/a-woman-in-a-bikini-swimming-in-the-ocean-YfwnzV4ZbLQ">Girl Swissssmming</a>
+            </div>
+            <div class="images">
+                <img src="https://plus.unsplash.com/premium_photo-1712935547781-f003c091720c?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOXx8fGVufDB8fHx8fA%3D%3D" alt="">
+                <a href="https://unsplash.com/photos/a-woman-in-a-bikini-swimming-in-the-ocean-YfwnzV4ZbLQ">Girl Swimming</a>
+            </div>
+            <div class="images">
+                <img src="https://plus.unsplash.com/premium_photo-1712935547781-f003c091720c?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOXx8fGVufDB8fHx8fA%3D%3D" alt="">
+                <a href="https://unsplash.com/photos/a-woman-in-a-bikini-swimming-in-the-ocean-YfwnzV4ZbLQ">Girl Swimming</a>
+            </div>
+            <div class="images">
+                <img src="https://plus.unsplash.com/premium_photo-1712935547781-f003c091720c?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOXx8fGVufDB8fHx8fA%3D%3D" alt="">
+                <a href="https://unsplash.com/photos/a-woman-in-a-bikini-swimming-in-the-ocean-YfwnzV4ZbLQ">Girl Swimming</a>
+            </div> -->
+
+        </div>
+
+            <button id="show">Load More</button>
+      
+       
+
+<script>
+    const APIkey='314q-4NqUwcysXyQbU5bQ2RHx36E31CYw8o_Nr3Fw8g';
+     const form = document.querySelector(".form");
+     const input = document.getElementById("input");
+     const resultEl = document.querySelector(".result");
+     const showEl = document.getElementById("show");
+     let InputValue = '';
+     let page = 1;
+
+
+    async function searchImages() {
+         InputValue = input.value;
+        // console.log(InputValue);
+        const url =`https://api.unsplash.com/search/photos?page=${page}&query=${InputValue}&client_id=${APIkey}`;
+        console.log(url);
+
+        const response = await fetch(url);
+        const data = await response.json();
+        //   console.log(data);
+        if (page === 1) {
+            resultEl.innerHTML = "";
+        }
+
+        const results = data.results;
+        // console.log(results);
+
+        results.map((result) => {
+          const imageWrapper = document.createElement("div");
+            imageWrapper.classList.add("images");
+            const image = document.createElement("img");
+            image.src = result.urls.small;
+            image.alt = result.alt_description;
+            const imageLink = document.createElement("a");
+            imageLink.href = result.links.html;
+            imageLink.target = "_blank";
+            imageLink.textContent = result.alt_description;
+
+            imageWrapper.appendChild(image);
+            imageWrapper.appendChild(imageLink);
+            resultEl.appendChild(imageWrapper);
+        });
+
+        page++;
+        console.log(page);
+
+        if(page > 1) {
+            // show.style.display = "block";
+            showEl.style.visibility='visible';
+        }
+};
+
+     form.addEventListener('submit',(event)=>{
+       // console.log('submitted'); //cant see if no preventDefault because page refresh
+        event.preventDefault();
+        // console.log('submitted');
+        page = 1;
+        searchImages();
+  });
+
+     showEl.addEventListener('click',()=>{
+        searchImages()
+
+     })
+
+// const APIkey='314q-4NqUwcysXyQbU5bQ2RHx36E31CYw8o_Nr3Fw8g';
+// const formEl = document.querySelector(".form");
+// const searchInputEl = document.getElementById("input");
+// const searchResultsEl = document.querySelector(".result");
+// const showMoreButtonEl = document.getElementById("show");
+
+// let inputData = "";
+// let page = 1;
+
+// async function searchImages() {
+//   inputData = searchInputEl.value;
+//   const url = `https://api.unsplash.com/search/photos?page=${page}&query=${inputData}&client_id=${APIkey}`;
+
+//   const response = await fetch(url);
+//   const data = await response.json();
+//   if (page === 1) {
+//     searchResultsEl.innerHTML = "";
+//   }
+
+//   const results = data.results;
+
+//   results.map((result) => {
+//     const imageWrapper = document.createElement("div");
+//     imageWrapper.classList.add("images");
+//     const image = document.createElement("img");
+//     image.src = result.urls.small;
+//     image.alt = result.alt_description;
+//     const imageLink = document.createElement("a");
+//     imageLink.href = result.links.html;
+//     imageLink.target = "_blank";
+//     imageLink.textContent = result.alt_description;
+
+//     imageWrapper.appendChild(image);
+//     imageWrapper.appendChild(imageLink);
+//     searchResultsEl.appendChild(imageWrapper);
+//   });
+
+//   page++;
+
+//   if (page > 1) {
+//     showMoreButtonEl.style.display = "block";
+//   }
+// }
+
+// formEl.addEventListener("submit", (event) => {
+//   event.preventDefault();
+//   page = 1;
+//   searchImages();
+// });
+
+// showMoreButtonEl.addEventListener("click", () => {
+//   searchImages();
+// });
+</script>
+</body>
+</html>

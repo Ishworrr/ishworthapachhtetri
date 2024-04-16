@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+        }
+        .container{
+           
+        background-color: #f5ebeb;
+        width:400px;
+        margin:0 auto;
+        padding:20px;
+        font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0 2px 5px rgba(0,0,0,.8);
+        text-align: center;
+        border-radius: 20px;
+        margin-top: 80px;
+        /* display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column; */
+     
+        }
+        input{
+            width: 100%;
+            padding:10px;
+            font-size: 24px;
+            border:none;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,.8);
+            border-radius: 10px;
+        
+            }
+        input:focus{
+            outline: none;
+
+        }
+        .keys{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+            grid-gap:10px;
+            margin-top: 20px;
+
+        }
+
+        button{
+            padding: 10px;
+            font-size: 24px;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,.3);
+            cursor: pointer;
+            transition: .5s ease;
+        }
+
+        button:hover{
+            background-color: #ddd;
+        }
+        .clear{
+            background-color: orangered;
+            color: #fff;
+        }
+       .number, .decimal{
+                background-color: #fff;
+                color: #333;
+
+            }
+
+            .operator{
+                background-color: #0074d9;
+                color: #fff;
+            }
+
+            .equals{
+                background-color: #01ff70;
+                color: #fff;
+                grid-row: span 3;
+            }
+    </style>
+
+    <div class="container">
+    <input type="text" readonly id="input"> 
+
+    <div class="keys">
+        <button class="clear">C</button>
+        <button class="operator">/</button>
+        <button class="operator">*</button>
+        <button class="operator">-</button>
+        
+        <button class="number">7</button>
+        <button class="number">8</button>
+        <button class="number">9</button>
+        <button class="operator">+</button>
+
+        <button class="number">4</button>
+        <button class="number">5</button>
+        <button class="number">6</button>
+        <button class="equals">=</button>
+      
+        <button class="number">1</button>
+        <button class="number">2</button>
+        <button class="number">3</button>
+        <button class="number">0</button>
+        <button class="decimal">.</button>
+    </div>
+
+
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll('button');
+        const input = document.getElementById('input');
+
+        for (let i = 0; i < buttons.length; i++) {
+            // const element = buttons[i].addEventListener('click',()=>{
+              buttons[i].addEventListener('click',()=>{
+                console.log(buttons[i]);
+                const buttonValue = buttons[i].textContent;
+                console.log(buttonValue);
+                if (buttonValue === "C") {
+                    clearResult();
+                    } else if (buttonValue === "=") {
+                    calculateResult();
+                    } else {
+                    appendValue(buttonValue);
+                    }
+                });
+            
+        }
+
+        function clearResult(){
+             input.value = '';
+            
+        }
+
+        function calculateResult() {
+  input.value = eval(input.value);
+}
+
+        function appendValue(buttonValue){
+           input.value = input.value+buttonValue;
+        // input.value += buttonValue;
+         // makes it 1 and if clicked 2 after --12, otherwise 1 changes to 2
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

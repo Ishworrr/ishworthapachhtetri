@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StopWatch</title>
+    <style>
+        body{
+            background-color: #f9f9f9;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        overflow: hidden;
+        }
+
+        h1{
+            font-family:'Courier New', Courier, monospace;
+            font-weight: 900;
+            font-size: 36px;
+            color: rgb(220, 38, 99);
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 60px;
+        }
+        .timer{
+            font-size: 7rem;
+            color:#f92672;
+            text-shadow: 2px 2px #f8a5c2;
+            width: 600px;
+            text-align: center;
+            font-weight: 500;
+            margin: 40px auto;
+
+        }
+        .buttons{
+            display: flex;
+           justify-content: center;
+
+        }
+
+        button{
+            background-color: #f92672;
+  color: white;
+  border: none;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1.5rem 4rem;
+  margin: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s;
+}
+
+button:hover {
+  background-color: #f44583;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+button[disabled]{
+    opacity: 50%;
+    cursor:not-allowed;
+}
+        @media screen and (max-width:789px) {
+            .timer{
+                font-size: 4rem;
+            color:#f81669;
+            width: 300px;
+            }
+            button{
+                font-size: 1.5rem;
+                padding: 1rem 2rem;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stop Watch</h1>
+        <div class="timer">00:00:00</div>
+        <div class="buttons">
+            <button id="start">Start</button>
+            <button id="stop">Stop</button>
+            <button id="reset">Reset</button>
+        </div>
+    </div>
+    
+    <script>
+        const timerEl = document.querySelector('.timer');
+        const startEl = document.getElementById('start');
+        const stopEl = document.getElementById('stop');
+        const resetEl = document.getElementById('reset');
+ 
+        let startTime = 0;
+        let elapsedTime = 0;
+        let timerInterval;
+        startTimer();
+
+        function startTimer() {
+            console.log('start');
+           startTime = Date.now() - elapsedTime;
+           console.log(Date.now())
+
+         timeInterval = setInterval(() => {
+            elapsedTime = Date.now() - startTime;
+            //console.log(elapsedTime)
+            timerEl.textContent = formatTime(elapsedTime);
+ 
+           }, 10);
+           startEl.disabled = true;
+           stopEl.disabled = false;
+
+        }
+        function formatTime(elapsedTime) {
+            const millisecond = Math.floor((elapsedTime % 1000)/10);
+            const seconds = Math.floor((elapsedTime % (1000*60))/1000);
+            const minutes = Math.floor((elapsedTime % (1000*60*60))/(1000*60));
+            const hours = Math.floor(elapsedTime/(1000*60*60*60));
+            return (
+                (hours?(hours>9?hours:'0'+hours):'00')+
+                ':'+
+                (minutes?(minutes>9?minutes:'0'+minutes):'00')+
+                ':'+
+                (seconds?(seconds>9?seconds:'0'+seconds):'00')+
+                '.'+     
+            (millisecond > 9 ? millisecond:'0'+millisecond)
+        )
+        }
+
+        function stopTimer() {
+            console.log('stop');
+            clearInterval(timeInterval);
+            startEl.disabled = false;
+            stopEl.disabled = true;
+            }
+
+            function resetTimer() {
+                clearInterval(timerInterval)
+                elapsedTime=0;
+                timerEl.innerHTML='00:00:00'
+                startEl.disabled = false;
+                stopEl.disabled = true;
+    
+            console.log('reset');
+           
+        }
+        startEl.addEventListener('click',startTimer);
+            stopEl.addEventListener('click',stopTimer);
+            resetEl.addEventListener('click',resetTimer);
+
+              
+
+
+
+    </script>
+</body>
+</html>

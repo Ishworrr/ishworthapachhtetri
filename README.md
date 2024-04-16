@@ -9,4 +9,10 @@ A Full-Stack Developer from Sydney
 Linkedin:--www.linkedin.com/in/ishwor-thapa-chhetri-itc
 
 Languages and Tools:
-bootstrap css3 git html5 javascript mysql nodejs webpack
+[bootstrap](https://getbootstrap.com/)
+https://www.w3schools.com/css/
+https://git-scm.com/
+https://www.w3.org/html/
+https://developer.mozilla.org/en-US/docs/Web/JavaScript
+https://www.mysql.com/
+https://nodejs.org/en

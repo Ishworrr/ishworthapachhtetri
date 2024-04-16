@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather-app</title>
+    <style>
+        body{
+            margin: 0;
+             /* display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center; */
+            height: 100vh; 
+            background-color:aliceblue;
+            font-family:'montserrat';
+        }
+        .container{
+            background-color: white;
+            /* width: 60%;
+            height: 40%; */
+          max-width:600px;    /*only works if no display:flex in body */
+            padding: 20px;
+            text-align: center;
+            border-radius: 20px; 
+            margin: 0 auto;
+            margin-top: 50px;
+            box-shadow: 0 2px 20px rgba(0,0,0,.7);
+
+                 
+        }
+
+        form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        form input[type='text']{
+            
+            padding: 10px;
+            border: none;
+            outline: none;
+            font-size: 18px;
+            width: 60%;
+        }
+        form input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s ease;
+                }
+
+            form input[type="submit"]:hover {
+            background-color: #0062cc;
+                }
+                
+/* 
+                .btn{
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s ease;
+                }
+
+          .btn:hover{
+            background-color: #0062cc;
+                } */
+                
+                .icon img{
+                    width: 100px;
+                    height: 100px;
+                    background-position:bottom bottom;
+                    background-size: contain;
+                    background-attachment: fixed;
+
+                    
+                }
+                .temperature {
+                    font-size: 48px;
+                    font-weight: bold;
+                    margin: 20px 0;
+                    }
+
+                .description{
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .details{
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+
+            .details>div{
+                padding:20px;
+                background-color: #f1f1f1;
+                margin: 10px;
+                flex: 1;
+                border-radius: 5px;
+                text-align: center;
+                min-height: 45px;
+
+                
+            }
+
+            @media (max-width:768px) {
+                form{
+                   flex-direction: column;
+                   
+                }
+                form input[type='text']{
+                    border: 1px solid rgb(127, 172, 172);
+                    border-radius: 10px;
+                    margin-bottom: 10px;
+                    width: 100%;
+                }
+                form input[type='submit']:hover{
+                   background-color: rgb(221, 231, 239);
+                   color:black
+                }
+                
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>WeatherApp</h2>
+
+        <form>
+        <input type="text" class="input" id="input" placeholder="Enter City"/>
+        <!-- <button class="btn">Get Weather</button>  -->
+        <input type="submit" value="Get Weather"/>
+    </form>
+
+        <div class="weather-data" id="weather-data">
+        <div class="icon">
+            <!-- <img src="http://openweathermap.org/img/wn/01d.png" alt=""> -->
+        </div>
+            
+        <div class="temperature"> 22°C</div>
+
+        <div class="description"><p>Sunday</p></div>   <!-- originla no <p> -->
+
+
+        <div class="details">
+        <!-- <div>Feels like 22°C</div>
+        <div>Hunidity : 40%</div>
+        <div>Wind Speed: 10km/h</div> -->
+        </div> 
+
+        
+    </div>
+
+</div>
+    
+    <script>
+      const APIkey = '83cac7c4c43583f5b66fb230d5ceeb70';
+        const inputEl = document.getElementById('input');
+        const weatherDataEl = document.getElementById('weather-data');
+                const formEl = document.querySelector('form');
+        //const btn = document.querySelector('.btn');
+
+        formEl.addEventListener('submit', (event) => {
+            event.preventDefault();
+             const city = inputEl.value;
+             console.log(city);
+             getWeatherData(city);
+          
+        }); 
+
+  
+       async function getWeatherData(city) {
+            try {
+            //const response = await fetch(`http://api.openweathermap.org/data/2.5/forecast?id={524901}&appid=${APIkey}`)
+
+           const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}&units=metric`);
+            if(!response.ok){
+                throw new Error('Network response was not good');
+            }
+                
+            const data = await response.json();
+            console.log(data);
+
+            const temperature = Math.round(data.main.temp);
+            console.log(temperature)
+
+            const description = data.weather[0].description;
+            console.log(description)
+
+            const alt = data.weather[0].main;//description
+
+            const icon = data.weather[0].icon;
+
+            // const feelsLike = data.main.feels_like;
+            const details = [
+                `Feels like: ${Math.round(data.main.feels_like)}`,
+                `Humidity: ${data.main.humidity}%`,
+                `Wind Speed :${data.wind.speed} km/hr`,//or MAth.round
+
+            ];
+         
+            weatherDataEl.querySelector(".icon").innerHTML = `<img src="http://openweathermap.org/img/wn/${icon}.png" alt="Weather Icon">`;
+            weatherDataEl.querySelector(".temperature").textContent =  `${temperature}°C`; //textContent
+  //          weatherData.querySelector('.description').innerHTML=`${weather}`;
+          weatherDataEl.querySelector(".description").textContent = description;
+            weatherDataEl.querySelector(".details").innerHTML = details.map((detail) => `<div>${detail}</div>`).join("");
+
+            } catch (error) {
+                weatherDataEl.querySelector('.icon').innerHTML='';
+                weatherDataEl.querySelector('.temperature').innerHTML=''; //textContent
+                weatherDataEl.querySelector('.description').textContent='An error happened. Try again';
+                weatherDataEl.querySelector('.details').innerHTML ='';
+            }
+        }
+    </script>
+</body>
+</html>

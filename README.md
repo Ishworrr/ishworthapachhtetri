@@ -5,7 +5,8 @@ A Full-Stack Developer from Sydney
 💬 Ask me about HTML, CSS, JavaScript, React, and Golang
 
 📫 How to reach me ishwo5678@gmail.com
-Linkedin:--in/ishwor-thapa-chhetri-itc
+
+Linkedin:--www.linkedin.com/in/ishwor-thapa-chhetri-itc
 
 Languages and Tools:
 bootstrap css3 git html5 javascript mysql nodejs webpack

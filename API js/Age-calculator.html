@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age-calculator</title>
+    <style>
+        body{
+            margin: 0;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container{
+            width:600px;
+            background-color: aliceblue;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 25px;
+            padding:10px;
+            margin:10px 0;
+        }
+        h1{
+            font-size: 2.5rem;
+            margin-top: 20px;
+            font-weight: 900;
+
+        }
+        input{
+            width:400px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid chocolate;
+
+
+        }
+        p{
+            font-size: 1.4rem;
+            flex: start;
+            font-weight: 600;
+        }
+        .btn{
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            margin-top: 20px;
+            background-color: rgb(27, 179, 44);
+            font-size: 1rem;
+            color: #fff;
+            cursor: pointer;
+            margin-bottom: 35px;
+            transition: background-color .6s ease-in-out;
+
+        }
+        .btn:hover{
+            color: rgb(27, 179, 44);
+            font-size: 1.2rem;
+            font-family: cursive;
+            background-color: #fff;
+        }
+        #result{
+            font-size: 1.6rem;
+            flex: start;
+            font-weight: 500;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <p>Enter our date of birth:</p>
+        <input type="date" name="dob" id="dob">
+        <button class="btn">Calculate Age</button>
+        <p id="result">You are 21 years old</p>
+    </div>
+
+    <!-- <div class="container">
+        <h1>Age Calculator</h1>
+        <div class="form">
+            <label for="birthday">Enter you date of birth</label>
+            <input type="date" id="birthday" name="birthday">
+            <button id="btn">Calculate Age</button>
+            <p id="result">Your age is 21 years old</p>
+        </div>
+    </div> -->
+
+    <script>
+        const btn = document.querySelector('.btn');
+       const input =  document.querySelector('#dob')
+        const result = document.querySelector('#result');
+
+        // btn.addEventListener('click',()=>{
+        //     const dob = document.querySelector('#dob').value;
+        //     const date = new Date(dob);
+        //     const month_diff = Date.now() - date.getTime();
+        //      const age_dt = new Date(month_diff);
+        //      const year = age_dt.getUTCFullYear();
+        //      const age = Math.abs(year - 1970);
+
+        //      result.innerHTML = `You are ${age} years old`;
+
+        // })
+        calculateAge();
+        function calculateAge() {
+            const dob = input.value;
+            if(dob === ''){
+                alert('Add your Birthday')
+            }else{
+                const age = getage(dob);
+                result.innerHTML=`You are ${age} ${age>1?'years':'year'} old`;
+            }
+
+         
+            function getage(dob) {
+                const currentDate = new Date();
+                const birthDate = new Date(dob);
+              // console.log(currentDate)
+
+               let ageinYear =  currentDate.getFullYear() - birthDate.getFullYear();
+             // console.log(age)
+              const ageinMonths =  currentDate.getMonth() - birthDate.getMonth();
+            if(ageinMonths<0||(ageinMonths==0)&& currentDate.getDate()<birthDate.getDate()){
+                //rightnow my age is 25 if calculated, 
+                //will be 25 in aug now is april still 24 so if month is less than 0,0r equal, or birthdate(month and day)is less then age is --(-1)
+               // age is 24.5 then it will be 24
+                ageinYear--
+            }
+            
+            return ageinYear;
+            }
+
+            
+        }
+        btn.addEventListener('click',calculateAge)
+
+
+    </script>
+</body>
+
+</html>

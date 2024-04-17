@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pomodoro</title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0 auto;
+            
+        }
+        .container{
+            background-color: aliceblue;
+            /* width:70%; */
+            width: 500px;
+            text-align: center;
+            height:60%;
+            border-radius: 10px;
+            padding: 30px;
+            font-size: clamp(0.9rem, 1vw + 1rem, 2.2rem);
+            margin: 0 auto;
+        }
+        h1{
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #6a8cad;
+
+        }
+        .button-wrapper{
+            display: flex;
+            justify-content: space-around;
+            margin-top: 60px;
+        }
+        .timer{
+            font-size: 100px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 40px;
+        }
+        button{
+        border: none;
+        padding: 20px 30px;
+        margin: 10px auto;
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: 550;
+        cursor: pointer;
+        color: white;
+        text-transform: uppercase;
+        transition: opacity 0.3s ease-in-out;
+            }
+
+            button:hover {
+            opacity: 0.7;
+            }
+        .start{
+            background-color:#27ae60 ;
+        }
+        .stop{
+            background-color:#c0392b ;
+        }
+
+        .reset{
+            background-color:#7f8c8d ;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Pomodoro App</h1>
+    <!-- <span class="timer" id="timer">25:00</span> -->
+    <span class="timer" id="timer"></span>
+    <div class="button-wrapper">
+        <button class="start" id="start">Start</button>
+        <button class="stop" id="stop">Stop</button>
+        <button class="reset" id="reset">Reset</button>
+
+    </div>
+</div>
+    <script>
+        const timer = document.getElementById('timer');
+        const start = document.getElementById('start');
+        const stopEl = document.getElementById('stop');
+        const reset = document.getElementById('reset');
+        // let countDown=1500;
+        // start.addEventListener('click',function(){
+        //     countDown=1500; 
+        //     const interval = setInterval(function(){
+        //         const minutes = Math.floor(countDown/60);
+        //         const seconds = countDown%60;
+        //         timer.innerHTML = `${minutes}:${seconds}`;
+        //         countDown--;
+        //         if(countDown<0){
+        //             clearInterval(interval);
+        //         }
+
+        //         },1000);
+        // });
+        // stop.addEventListener('click',function(){
+        //     clearInterval(interval);
+        // });
+        // reset.addEventListener('click',function(){
+        //     countDown=1500;
+             
+        // })
+
+        let interval;
+let timeLeft = 10;
+
+function updateTimer() {
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+    let fomattedTime = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+
+    timer.innerHTML=fomattedTime;
+
+    
+}
+
+function startTimer(){
+   // console.log('start');
+    interval = setInterval(() => {
+    // console.log('timer')
+            timeLeft--;
+            updateTimer();
+            if(timeLeft === 0){
+                alert("Time's Up")
+                resetTimer();
+                timeLeft = 1800;
+                //stopTimer();
+            }
+        
+    }, 1000);
+}
+function stopTimer(){
+    clearInterval(interval);
+}
+
+function resetTimer(){
+    clearInterval(interval);
+  timeLeft = 1500;
+  updateTimer();
+
+}
+
+
+
+       
+start.addEventListener("click", startTimer);
+stopEl.addEventListener("click", stopTimer);
+reset.addEventListener("click", resetTimer);
+
+
+
+
+
+    </script>
+</body>
+</html>

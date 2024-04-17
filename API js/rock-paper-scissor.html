@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rock-paper-scissor</title>
+    <style>
+        body {
+        background-color: #f1f1f1;
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        }
+
+        h1 {
+        font-size: 2rem;
+        text-align: center;
+        padding-top: 100px;
+        }
+
+        p {
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 0.5rem;
+        }
+        .buttons{
+            display: flex;
+            justify-content: center;
+
+        }
+        button{
+            border: none;
+            font-size: 3rem;
+            margin: 0 1rem;
+            padding:.5rem;
+            background-color:blueviolet ;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        button:hover {
+            opacity: 0.7;
+            }
+            #rock {
+            background-color: #ff0000;
+            }
+
+            #paper {
+            background-color: #2196f3;
+            }
+
+            #scissors {
+            background-color: #4caf50;
+            }
+
+            #player-score {
+            color: #2196f3;
+            }
+
+            #computer-score {
+            color: #ff0000;
+            }
+
+        
+
+    </style>
+
+</head>
+<body>
+
+    <h1>rock-paper-scissor</h1>
+    <p>Choose your move</p>
+    <div class="buttons">
+        <button id="rock">&#x1F44A;</button>
+        <button id="paper">&#x1f590;</button>
+        <button id="scissors">&#x270c;</button>
+    </div>
+
+    <!-- <p id="result">You Won</p>  chganged after js -->
+    <p id="result"></p>
+    <p id="scores">
+        Your score: <span id="player-score">0</span>
+        Computer score: <span id="computer-score">0</span>
+    </p>
+
+    <script>
+const buttons = document.querySelectorAll('button');
+const rock = document.getElementById('rock');
+const paper = document.getElementById('paper');
+const scissors = document.getElementById('scissors');
+const playerScoreEl =  document.getElementById('player-score');
+const computerScoreEl =  document.getElementById('computer-score');
+const resultEl = document.getElementById('result');
+ 
+let playerScore=0;
+let computerScore=0;
+
+buttons.forEach((button)=>{
+button.addEventListener('click',()=>{
+    //console.log('cliked',button.id, 'computerchoice', computerPlay());
+    const result = playGame(button.id,computerPlay());
+    console.log(result);
+    resultEl.textContent = result;
+})
+})
+computerPlay();
+function computerPlay(){
+    const choices = ['rock','paper','scissor'];
+    console.log(choices.length); //3
+    const randomChoices = Math.floor(Math.random()*choices.length);
+    console.log(randomChoices);//random between upto 3
+    return choices[randomChoices];
+
+}
+//console.log(playGame(playerSelection,computerSelection));
+
+function playGame(playerSelection,computerSelection){
+    console.log(playerSelection);
+    console.log(computerSelection);
+    if(playerSelection===computerSelection){
+        return'Its a Tie'
+    }else if(
+        (playerSelection==='rock' && computerSelection==='paper')||
+        (playerSelection==='paper' && computerSelection==='scissor')||
+
+        (playerSelection==='scissor' && computerSelection==='rock')
+    ){
+        computerScore++;
+        computerScoreEl.textContent=computerScore;
+        return 'You Lose ' + computerSelection + ' beats ' + playerSelection;
+    }else{
+        playerScore++;
+        playerScoreEl.textContent=playerScore;   
+        return 'You win ' + playerSelection + ' beats ' + computerSelection;
+    }
+    
+}
+    </script>
+</body>
+</html>

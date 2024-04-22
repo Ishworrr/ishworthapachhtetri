@@ -1,11 +1,30 @@
-export let cart=[{
-    productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-    quantity: 2,
-},{
-    productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-    quantity: 1,
-}
+export let cart=
+//get cart after set 
+JSON.parse(localStorage.getItem('cartt'));
+if(!cart){ //if no cart in local storage or empty we give default value
+    cart=[
+        {
+        productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+        quantity: 2,
+    },{
+        productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+        quantity: 1,
+    }
 ];
+}
+
+
+
+function saveToStorage() {
+    localStorage.setItem("cartt", JSON.stringify(cart));
+    
+}
+// export function loadFromStorage() {
+//     const cartt = localStorage.getItem("cartt");
+//     if (cartt) {
+//         cart = JSON.parse(cartt);
+//     }
+// }
 //moved from amazon.js (it was in AddTOCart.foreach())
 export function addingToCart(productId){
     let matchingItem;
@@ -28,7 +47,7 @@ export function addingToCart(productId){
                 quantity: quantityy,  //  quantity: 1
             });
     }
-
+saveToStorage();
 //before
 //   if(matchingItem){
 //     matchingItem.quantity++;
@@ -53,4 +72,6 @@ export function removeFromCart(deleteID) {
     });
     
     cart = newCart; //updating after delete from above(scrol abpve)
+
+    saveToStorage();
 }

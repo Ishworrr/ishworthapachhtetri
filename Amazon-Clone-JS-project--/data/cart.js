@@ -1,4 +1,4 @@
-export const cart=[{
+export let cart=[{
     productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     quantity: 2,
 },{
@@ -43,3 +43,14 @@ export function addingToCart(productId){
 }
 
 
+
+export function removeFromCart(deleteID) {
+    const newCart = [];
+    cart.forEach((cartItem) => {
+        if (cartItem.productId !== deleteID) {  //cartItem is from cart.js's productid and quantity, if not equal to delteID which we have given ${macthingPRoduct.id}
+            newCart.push(cartItem);
+        }
+    });
+    
+    cart = newCart; //updating after delete from above(scrol abpve)
+}

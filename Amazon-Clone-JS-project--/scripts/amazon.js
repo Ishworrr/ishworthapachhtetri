@@ -30,6 +30,7 @@
 // ];
 
 import {cart} from '../data/cart.js'
+import {products} from '../data/products.js'
 
 let productsHTML = ''; //done after const html because we wnat to add all product
 

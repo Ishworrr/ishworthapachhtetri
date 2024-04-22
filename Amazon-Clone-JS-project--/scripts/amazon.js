@@ -90,6 +90,7 @@ products.forEach((product)=>{
 });
 
 const productsGrid = document.querySelector(".products-grid");
+const cartQuantityDiv = document.querySelector(".cart-quantity");
 
 productsGrid.innerHTML = productsHTML;
 
@@ -121,6 +122,16 @@ AddToCart.forEach((button)=>{
           
         }
 
+        let cartQuantity=''
+
+        cart.forEach((item)=>{
+            cartQuantity +=item.quantity;
+        })
+        
+        cartQuantityDiv.innerHTML = cartQuantity;
+
+
+        console.log(cartQuantity);
       console.log(cart)
       
 

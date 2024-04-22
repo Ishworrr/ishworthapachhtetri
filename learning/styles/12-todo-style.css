@@ -1,0 +1,41 @@
+tyle>
+        body {
+  font-family: Arial;
+}
+
+.todoList, .container{
+  display: grid;
+  grid-template-columns: 200px 150px 100px;
+  column-gap: 10px;
+  row-gap: 10px;
+  align-items: center;
+}
+
+.container{
+  margin-bottom: 10px;
+  align-items: stretch;
+}
+
+.input,
+#date{
+  font-size: 15px;
+  padding: 6px;
+}
+
+.btn {
+  background-color: green;
+  color: white;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.dlt {
+  background-color: darkred;
+  color: white;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

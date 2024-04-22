@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><Dom-projects></Dom-projects></title>
+    <style>
+        body {
+          font-family: Arial;
+          background-color: antiquewhite;
+        }
+  
+        .input {
+          font-size: 15px;
+          padding: 10px;
+        }
+  
+        .btn {
+          background-color: green;
+          color: white;
+          border: none;
+          font-size: 15px;
+          padding: 12px 15px;
+          cursor: pointer;
+        }
+  
+        /* Give the error message a red color. */
+        .error-message {
+          color: red;
+        }
+      </style>
+
+</head>
+<body>
+    <p>YOutube Subscribe Button</p>
+    <button class="btn" onclick="subscribe();">Subscribe</button>
+
+<!--  -->
+    <p>AmazonShipping Calculator</p>
+    <input class="input" type="number" placeholder="cost of order" 
+    onkeydown="handleCost(event);
+    "> 
+    <button class="btn" onclick="calculateYotal()">Calculate</button>
+    <p class="total-cost"></p>
+
+    <p class="js-error-message error-message">a</p>
+    <!--  -->
+
+<!--  -->
+    <input placeholder="Type something" class="js-input"
+    onkeypress="
+      const inputElement = document.querySelector('.js-input');
+      document.querySelector('.js-message')
+        .innerHTML = inputElement.value;
+    ">
+
+  <p class="js-message"></p>
+  <!--  -->
+
+    <script>
+        const btn = document.querySelector('.btn');
+        const input = document.querySelector('.input');
+        const totalCost = document.querySelector('.total-cost');
+
+
+        function subscribe(){
+            const btn = document.querySelector('.btn');
+//    btn.innerHTML='Subscribed';
+            btn.addEventListener('click',()=>{
+    if(btn.innerText='Subscribe'){
+        btn.innerText='Subscribed';
+        btn.classList.add('is-subscribe')
+    }else{
+        btn.innerText='Subscribe';
+        btn.classList.remove('is-subscribe')
+    }
+})
+        }
+
+        function handleCost(event){
+            console.log(event.key)
+    if(event.key ==='Enter')
+    calculateYotal();
+        }
+
+
+        function calculateYotal(){
+            let inputValue = Number(input.value) ;
+            
+            document.querySelector('.js-error-message')
+          .innerHTML = '';
+            if(inputValue<0){
+                document.querySelector('.js-error-message').innerHTML = 'Error: cost cannot be less than $0';
+          // If we display an error, we can use return to
+          // end this function immediately. This is called
+          // an "early return" and it makes the code cleaner
+          // because it reduces nesting / indents.
+          return;
+            }
+            // }else if(inputValue>=40){
+            //     inputValue;
+            // }
+            if(input.value<40){
+                inputValue = inputValue + 10;
+            }
+
+            totalCost.innerHTML = `$${inputValue}`;
+        }
+    </script>
+    
+</body>
+</html>

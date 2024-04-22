@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+
+<link rel="stylesheet" href="styles/12-style.css">
+<body>
+    <p class="title">Rock Paper Scissor</p>
+    <button class="img a">&#9994</button>
+
+    <button class="img b">&#9995</button>
+
+    <button class="img c">&#9996</button>
+
+<p class="js-result">You win.</p>
+<p class="js-moves">You <span class="span">&#9994</span> <span class="span">&#9995</span>Computer</p>
+<p class="scoreee"></p>
+
+   <button class="reset" onclick="
+   score.wins=0;
+   score.losses=0;
+   score.ties=0;
+   localStorage.removeItem('score');
+   updateScore()
+   "
+   >Reset Score</button>
+   <button class="auto" onclick="autoPlay()">Auto Play</button>
+   
+
+   
+
+    <script src="scripts/12-rps.js">
+       
+
+    </script>
+    
+</body>
+</html>

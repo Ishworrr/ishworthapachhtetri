@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <style>
+        .toggle-button {
+  background-color: rgb(230, 230, 230);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.is-toggled {
+  background-color: black;
+  color: white;
+}
+    </style>
+  </head>
+
+  <body>
+    <button class="toggle-button js-button" >Gaming</button> 
+    <!-- onclick="toggleButton('.js-button');" -->
+
+    <button class="toggle-button js-button-2" >Music</button>
+
+    <button class="toggle-button js-button-3">Tech</button>
+
+<script>
+
+// The word "toggle" means turn on/off.
+// function toggleButton(selector) {
+//   const button = document.querySelector(selector);
+//   if (!button.classList.contains('is-toggled')) {
+
+//     // Before turning this button ON, check if there's
+//     // already a button that's turned ON and turn it OFF.
+//     turnOffPreviousButton();
+
+//     button.classList.add('is-toggled');
+//   } else {
+//     button.classList.remove('is-toggled');
+//   }
+// }
+
+// function turnOffPreviousButton() {
+//   const previousButton = document.querySelector('.is-toggled');
+//   if (previousButton) {
+//     previousButton.classList.remove('is-toggled');
+//   }
+// }
+const buttonAll = document.querySelectorAll('button');
+
+
+
+buttonAll.forEach(button => {
+        button.addEventListener('click', () => {
+          // Remove 'is-toggled' class from all buttons
+          buttonAll.forEach(btn => {
+            btn.classList.remove('is-toggled');
+          });
+
+          // Add 'is-toggled' class to the clicked button
+          button.classList.add('is-toggled');
+        });
+      });
+
+
+
+</script>
+   
+  </body>
+</html>

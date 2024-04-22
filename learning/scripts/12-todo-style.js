@@ -1,0 +1,190 @@
+
+const btn = document.querySelector('.btn');
+const input = document.querySelector('.input');
+const divEl = document.getElementById('todoList');
+const date = document.getElementById('date');
+
+const todoList = [
+    {
+   name:'make a',
+duDate: '2024-12-12'
+},
+{
+   name:'make b',
+duDate: '2024-12-12'}
+
+];
+
+renderTodolist();
+
+function renderTodolist() {
+let todoLi='';
+
+todoList.forEach((element,index) => {
+    // const element = todoList[i];
+const {name, duDate}= element;
+const pEl = `
+    <div>${name}</div> <div>${duDate}</div>
+    <button class="dlt" onclick="
+    
+    ">Delete</button>
+    `;
+todoLi += pEl;
+});
+
+// for (let i = 0; i < todoList.length; i++) {
+// const element = todoList[i];
+// // const name = element.name;
+// // const duDate = element.duDate;
+// const {name, duDate}= element;
+// const pEl = `
+//     <div>${name}</div> <div>${duDate}</div>
+//     <button class="dlt" onclick="
+//     todoList.splice(${i}, 1);
+//     renderTodolist();
+//     ">Delete</button>
+//     `;
+// todoLi += pEl;
+
+// }
+//console.log(todoLi);
+divEl.innerHTML = todoLi;
+
+document.querySelectorAll('.dlt').forEach((deleteButton, index) => {
+    deleteButton.addEventListener('click', () => {
+    todoList.splice(index, 1);
+    renderTodolist();
+});
+});
+
+}
+
+btn.addEventListener('click', addTodo);
+
+function addTodo() {
+const inputValue = input.value;
+const dateValue = date.value;
+console.log(dateValue);
+
+todoList.push({
+    name: inputValue,
+    duDate: dateValue
+});
+
+//  console.log(todoList);
+input.value = '';
+renderTodolist();
+
+}
+
+
+  function getLastValue(array) {
+    const lastIndex = array.length - 1;
+    return array[lastIndex];
+  }
+  console.log(getLastValue([1, 20, 22, 24, 5]));
+  console.log(getLastValue(['hi', 'hello', 'hey']));
+
+
+  function arraySwap(array) {
+    const lastIndex = array.length - 1;
+
+    // We need to save the values first before
+    // swapping. Otherwise, if we swap directly,
+    // we would lose one of the values.
+    const lastValue = array[lastIndex];
+    const firstValue = array[0];
+
+    array[0] = lastValue;
+    array[lastIndex] = firstValue;
+
+    return array;
+  }
+  console.log(arraySwap([1, 20, 22, 24, 5]));
+  console.log(arraySwap(['hi', 'hello', 'hey']));
+
+  for(let i=5; i>=0; i--){
+    console.log(i)
+  }
+
+   a=[1,2,3]
+   b=[];
+   for(let i=0;i<a.length;i++){
+    b.push(a[i]+1);
+   }
+   console.log(b);
+
+
+//        function addOne(array){
+//         const b={
+//             min:array[0],max:array[0],
+//         };
+//         for(let i=0; i<array.length;i++){
+//             const c = array[i];
+//            if(c<b.min){
+//             b.min=c;
+//            }
+//            if(c>b.max){
+//             b.max=c;
+
+//            }
+//         }
+// return b;
+//        }
+//        console.log(addOne([1, -3, 5]));
+//       console.log(addOne([-2, 3, -5, 7, 10]));
+
+function minMax(nums) {
+    // We'll set the starting values of min and max
+    // to null this time.
+    const result = {
+      min: null,
+      max: null
+    };
+
+    for (let i = 0; i < nums.length; i++) {
+      const value = nums[i];
+
+      // If the min is null OR the value is
+      // less than the min, update the min.
+      if (result.min === null || value < result.min) {
+        result.min = value;
+      }
+
+      // If the max is null OR the value is
+      // greater than the max, update the max.
+      if (result.max === null || value > result.max) {
+        result.max = value;
+      }
+
+      // We have to use 2 if-statements above instead of
+      // an if-else statement. This makes sure both the
+      // min and max are set if they are null.
+    }
+
+    return result;
+  }
+
+  console.log(minMax([1, -3, 5]));
+  console.log(minMax([-2, 3, -5, 7, 10]));
+
+  console.log(minMax([]));
+  console.log(minMax([3]));
+  
+// for (let i = 1; i <=20; i++) {
+
+//     if(i%3===0){
+//         console.log('FIZZ')
+//     }
+//     if(i%5===0){
+//         console.log('BUzz')
+//     }
+//     if(i%3===0 && i%5===0){
+//         console.log('FIZZBUZZ')
+//     }
+//     else{
+//         console.log(i);
+//     }
+
+
+// }

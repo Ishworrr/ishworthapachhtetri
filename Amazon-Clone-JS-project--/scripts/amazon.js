@@ -33,7 +33,7 @@
 let productsHTML = ''; //done after const html because we wnat to add all product
 
 products.forEach((product)=>{
-    console.log(product);
+    //console.log(product);
     //const html=`
      productsHTML +=`
             <div class="product-container">
@@ -79,15 +79,50 @@ products.forEach((product)=>{
             <img src="images/icons/checkmark.png">
             Added
             </div>
-
-            <button class="add-to-cart-button button-primary">
-            Add to Cart
+                                                                
+            <button class="add-to-cart-button button-primary" data-a = '${product.id}'>
+            Add to Cart             
             </button>
         </div>
     `;
-     console.log(productsHTML);
+    // console.log(productsHTML);
 
-})
+});
 
 const productsGrid = document.querySelector(".products-grid");
+
 productsGrid.innerHTML = productsHTML;
+
+const AddToCart = document.querySelectorAll(".button-primary");
+
+AddToCart.forEach((button)=>{
+    button.addEventListener("click",()=>{
+    //    alert("Added to cart");
+      console.log(button.dataset.a)
+      const productId = button.dataset.a;
+     
+      let matchingItem;
+
+      cart.forEach((item)=>{
+        if(item.productId === productId){
+        //   item.quantity++;
+          matchingItem=item;
+        }
+      })
+
+      if(matchingItem){
+        matchingItem.quantity++;
+      }else{
+        cart.push(
+            {   productId: productId,
+                quantity: 1,
+            });
+           // console.log(cart);
+          
+        }
+
+      console.log(cart)
+      
+
+    });
+});

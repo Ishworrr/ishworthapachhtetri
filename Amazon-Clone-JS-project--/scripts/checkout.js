@@ -14,6 +14,10 @@ const orderSummary = document.querySelector('.order-summary');
 // const formatOfDate = delveryDate.format('dddd, MMMM D');
 // console.log(formatOfDate);
 
+function renderOrderSummary() {
+  
+
+
 let cartSummaryHTML='';
 cart.forEach((cartItem)=>{
     const productIds = cartItem.productId;  
@@ -217,6 +221,9 @@ document.querySelectorAll('.delivery-option')
       // const deliveryOptionId = option.querySelector('input').value;
       const {productId,deliveryOptionId} = option.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
+      renderOrderSummary();
     });
   });
+}
 
+renderOrderSummary();

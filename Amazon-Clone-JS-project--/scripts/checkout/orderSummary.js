@@ -4,6 +4,7 @@ import { currency } from "../utils/money.js";
 import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import {deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
+import {renderPaymentSummary  } from "./paymentSummary.js";
 
 
 // // console.log(dayjs());
@@ -158,6 +159,7 @@ DeleteLink.forEach((link)=>{
      container.remove();
    
 updatingCartQuantity()
+renderPaymentSummary();
     })
 });
 })
@@ -180,6 +182,8 @@ document.querySelectorAll('.js-update-link') //update
       );
       container.classList.add('is-editing-quantity');
     });
+
+    renderPaymentSummary();
   });
 
   document.querySelectorAll('.js-save-link') //save
@@ -207,8 +211,10 @@ document.querySelectorAll('.js-update-link') //update
 
       const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
       quantityLabel.innerHTML = newQuantity;
-
+     
       updatingCartQuantity();
+
+      renderPaymentSummary();
     });
   });
 
@@ -221,6 +227,7 @@ document.querySelectorAll('.delivery-option')
       const {productId,deliveryOptionId} = option.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
+      renderPaymentSummary();
     });
   });
 }

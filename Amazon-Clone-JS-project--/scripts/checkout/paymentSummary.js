@@ -81,12 +81,12 @@ export function renderPaymentSummary() {
 
  <div class="payment-summary-row">
    <div>Shipping &amp; handling:</div>
-   <div class="payment-summary-money">${currency(shippingPriceCents)}</div>
+   <div class="payment-summary-money">$${currency(shippingPriceCents)}</div>
  </div>
 
  <div class="payment-summary-row subtotal-row">
    <div>Total before tax:</div>
-   <div class="payment-summary-money">${currency(totalBeforeTaxCenst)}</div>
+   <div class="payment-summary-money">$${currency(totalBeforeTaxCenst)}</div>
  </div>
 
  <div class="payment-summary-row">

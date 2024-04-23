@@ -1,11 +1,10 @@
 import {cart, removeFromCart, calculateCartQuantity, updateQuantity, updateDeliveryOption} from '../../data/cart.js';
-import {products} from '../../data/products.js';
+import {products, getProduct} from '../../data/products.js';
 import { currency } from "../utils/money.js";
 import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
-import {deliveryOptions } from "../../data/deliveryOptions.js";
+import {deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
 
-const orderSummary = document.querySelector('.order-summary');
 
 // // console.log(dayjs());
 // const today = dayjs();
@@ -15,30 +14,30 @@ const orderSummary = document.querySelector('.order-summary');
 // console.log(formatOfDate);
 
  export function renderOrderSummary() {
-  
+    const orderSummary = document.querySelector('.order-summary');
 
 
 let cartSummaryHTML='';
 cart.forEach((cartItem)=>{
-    const productIds = cartItem.productId;  
-    let matchingProduct ;
-    products.forEach((product)=>{
-        if(product.id === productIds){
-            matchingProduct = product;
-        }
+    const productId = cartItem.productId;  
+    const matchingProduct = getProduct(productId);
+    // products.forEach((product)=>{
+    //     if(product.id === productIds){
+    //         matchingProduct = product;
+    //     }
        
-    })
+    // })
     console.log(matchingProduct);
     console.log(cartItem);
 
     const deliveryOptionId = cartItem.deliveryOptionId;
-    let deliveryOption;
+    const deliveryOption = getDeliveryOption(deliveryOptionId);
 
-    deliveryOptions.forEach((option)=>{ //we take deliveryID form deliveryoption.js
-        if(option.id === deliveryOptionId){
-            deliveryOption = option;
-        };
-      })
+    // deliveryOptions.forEach((option)=>{ //we take deliveryID form deliveryoption.js
+    //     if(option.id === deliveryOptionId){
+    //         deliveryOption = option;
+    //     };
+    //   })
       const today= dayjs();
       const deliveryDate = today.add(
         deliveryOption.delveryDays,

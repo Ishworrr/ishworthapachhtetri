@@ -17,6 +17,16 @@ export const deliveryOptions = [
 
 ]
 
+export function getDeliveryOption(deliveryOptionId) {
+  let deliveryOption;
+
+  deliveryOptions.forEach((option)=>{ //we take deliveryID form deliveryoption.js
+      if(option.id === deliveryOptionId){
+          deliveryOption = option;
+      };
+    });
+    return deliveryOption;
+  }
 
 /*  deleted from checlout instead ${deliveryOptionsHTMl}
 <div class="delivery-option">

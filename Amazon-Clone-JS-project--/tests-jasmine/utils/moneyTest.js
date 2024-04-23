@@ -1,4 +1,4 @@
-import { currency } from "../scripts/utils/money.js";
+import { currency } from "../../scripts/utils/money.js";
 
 //console.log('test suite: currency')
 // if (currency(20095)==='20.95') {

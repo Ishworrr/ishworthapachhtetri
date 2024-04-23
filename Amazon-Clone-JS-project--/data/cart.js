@@ -29,6 +29,7 @@ function saveToStorage() {
 //     }
 // }
 //moved from amazon.js (it was in AddTOCart.foreach())
+
 export function addingToCart(productId){
     let matchingItem;
 
@@ -79,6 +80,7 @@ export function removeFromCart(deleteID) {
 
     saveToStorage();
 }
+
 export function calculateCartQuantity() {
     let cartQuantity = 0;
   
@@ -89,7 +91,7 @@ export function calculateCartQuantity() {
     return cartQuantity;
   }
 
-
+// This code was copied from the solutions of exercises 14f - 14n.
 export function updateQuantity(productId, newQuantity) {
 
     let matchingItem;
@@ -115,6 +117,8 @@ export function updateQuantity(productId, newQuantity) {
       }
     });
     matchingItem.deliveryOptionId = deliveryOptionId;
+
     saveToStorage();
-    
-  }
+}
+
+

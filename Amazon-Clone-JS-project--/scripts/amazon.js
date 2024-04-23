@@ -98,10 +98,11 @@ const cartQuantityDiv = document.querySelector(".cart-quantity");
 productsGrid.innerHTML = productsHTML;
 
 
+
 const AddToCart = document.querySelectorAll(".button-primary");
 
    
-    function updatingCartQuantity(productId) {
+   export function updatingCartQuantity(productId) {
         // let cartQuantity=0;
 
         // cart.forEach((cartItem)=>{
@@ -145,7 +146,8 @@ const AddToCart = document.querySelectorAll(".button-primary");
     }
 
 
-    
+
+
 AddToCart.forEach((button)=>{
     button.addEventListener("click",()=>{
     //    alert("Added to cart");

@@ -295,7 +295,7 @@ export function renderOrderSummary() {
               ${matchingProduct.name}
             </div>
             <div class="product-price">
-              $${currency(matchingProduct.priceCents)}
+              ${matchingProduct.getPriceUrl()}
             </div>
             <div class="product-quantity js-product-quantity-${matchingProduct.id}">
             <span>
@@ -461,3 +461,5 @@ document.querySelectorAll('.js-update-link')    //update
 
 
 }
+
+//    line--298          $${currency(matchingProduct.priceCents)}

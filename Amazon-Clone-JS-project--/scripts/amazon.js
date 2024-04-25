@@ -51,14 +51,14 @@ products.forEach((product)=>{
 
             <div class="product-rating-container">
             <img class="product-rating-stars"
-                src="images/ratings/rating-${(product.rating.stars)*10}.png">
+                src="${product.getStarsUrl()}">
             <div class="product-rating-count link-primary">
             ${product.rating.count}
             </div>
             </div>
 
             <div class="product-price">
-            $${currency(product.priceCents)}
+            $${product.getPriceUrl()}
             </div>
 
             <div class="product-quantity-container">
@@ -168,3 +168,7 @@ AddToCart.forEach((button)=>{
 //     const quantityValue = Number(quantitySelector.value);
 //     console.log(quantityValue);
 //   });
+
+
+// line54-- src="images/ratings/rating-${(product.rating.stars)*10}.png">
+//line 61 ---             $${currency(product.priceCents)}

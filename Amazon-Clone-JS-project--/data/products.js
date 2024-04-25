@@ -780,3 +780,33 @@ export const products = [
 return new Product(productDetails);
 });
 console.log(products);
+
+
+// const date = new Date();
+// const currentTime = date.getHours();
+// console.log(date.toLocaleString())
+
+// const obj2 ={
+//   a:2,
+//   b:this.a,
+// }
+// console.log(obj2);
+
+/*practose code
+function logthis() {
+  console.log(this); //inside fregualr fn this becomes undefines
+  
+}
+
+logthis();
+logthis.call('hello'); // calls in this way
+
+
+this
+const obj3 = {
+  method:()=>{
+    console.log(this);// inside method this poiunts to outer obj
+  }
+}
+obj3.method();
+*/

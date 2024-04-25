@@ -281,13 +281,13 @@ export function renderOrderSummary() {
       'days'
     );
     const dateString = deliveryDate.format(
-      'dddd, MMMM D'
+      'dd, MMMM D'
     );
 
     cartSummaryHTML += `
       <div class="cart-item-container
         js-cart-item-container-${matchingProduct.id}">
-        <div class="delivery-date">
+        <div class="delivery-date js-delivery-date">
           Delivery date: ${dateString}
         </div>
 

@@ -2,19 +2,19 @@ class CartAdd{
     // cart =undefined;
     // localStorageKey=undefined;
     cart ;
-    localStorageKey; //if constructor
+    #localStorageKey; //if constructor
 
     constructor(){
         // cart17.localStorageKey = 'cart-oop';
         // cart17.loadFromStorageJAsmine()
-        this.localStorageKey = 'cart-oop';
-        thus.loadFromStorageJAsmine()
+        this.#localStorageKey = 'cart-oop';
+        this.loadFromStorageJAsmine()
 
     }
 
 
     loadFromStorageJAsmine(){   //made function for jasmine
-        this.cart=JSON.parse(localStorage.getItem(this.localStorageKey));//get cart after set 
+        this.cart=JSON.parse(localStorage.getItem(this.#localStorageKey));//get cart after set 
  
      if(!this.cart){ //if no cart in local storage or empty we give default value
         this.cart=[   //cart17 is this, to improve code, and doesnot matter variable name
@@ -33,7 +33,7 @@ class CartAdd{
  
      };
      saveToStorage() {
-        localStorage.setItem(this.localStorageKey, JSON.stringify(this.cart)); //from 'cartt' to 'cart-oop' so no affect original
+        localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cart)); //from 'cartt' to 'cart-oop' so no affect original
         
     };
 

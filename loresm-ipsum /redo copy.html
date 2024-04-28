@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paragraph Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    p {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <input type="number" id="inputNumber" placeholder="Enter desired number">
+    <button id="generateButton">Generate Paragraph</button>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    document.getElementById('generateButton').addEventListener('click', function() {
+      const inputNumber = parseInt(document.getElementById('inputNumber').value);
+      if (!isNaN(inputNumber) && inputNumber > 0) {
+        const output = document.getElementById('output');
+        output.innerHTML = '';
+        for (let i = 0; i < inputNumber; i++) {
+          const paragraph = document.createElement('p');
+          paragraph.textContent = `Paragraph ${i + 1}`;
+          output.appendChild(paragraph);
+        }
+      } else {
+        alert('Please enter a valid positive number.');
+      }
+    });
+  </script>
+</body>
+</html>

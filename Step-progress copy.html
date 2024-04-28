@@ -15,12 +15,12 @@
   height: 100vh;
   align-items: center;
   background-color: yellow;
+  box-sizing: border-box;
 }
 
 .container {
   text-align: center;
 }
-
 .progress{
   width: 500px;
   display: flex;
@@ -30,14 +30,14 @@
 .progress-front {
   position: absolute;
   height: 4px;
-  width: 0%;
+  width: 50%;
   background-color: green;
   border: none;
   z-index: -1;
   margin: 0;
   top: 50%;
   transform: translateY(-50%);
-  transition: 0.4s linear width;
+  /* transition: 0.4s linear width; */
 }
 
 
@@ -53,7 +53,6 @@
   transform: translateY(-50%);
 }
 
-
 .step{
     width:30px;
     height:30px;
@@ -65,16 +64,22 @@
   color: lightgray;
   border-radius: 50%;
 }
+
 .step.checked {
   color: green;
   border-color: green;
   transition: all 0.4s linear;
   transition-delay: 0.3s;
 }
-
+/* .step.checked small{
+  color: rgb(82, 137, 81);
+  font-size: 1.7rem;
+} */
 .step.checked small{
   position: absolute;
-  bottom: -20px;
+  font-size: 1.7rem;
+  top: 70%;
+  color: rgb(82, 137, 81);
   font-family: cursive;
 }
 
@@ -96,7 +101,6 @@
 .btn:active {
   transform: scale(0.97);
 }
-
 .btn:disabled {
   background-color: lightgray;
 }
@@ -106,8 +110,7 @@
     width: 90vw;
   }
 }
-       
-       </style>
+        </style>
 </head>
 <body>
     <div class="container">
@@ -115,8 +118,8 @@
                 <hr class="progress-front">
                 <hr class="progress-back">
             <div class="step checked">
-                <i class="fas fa-check"> </i>
-                    <small>start</small>
+                <i class="fas fa-check tick"> </i>
+                <small>start</small>
             </div>
             <div class="step">
                 <i class="fas fa-times"></i>
@@ -146,69 +149,57 @@
     </div>  
 
     <script>
-      const nextEl = document.getElementById('next');
-      const prevEl = document.getElementById('prev');
-      const stepsEl = document.querySelectorAll('.step');
-      const progressEl =  document.querySelector('.progress-front');
+      const progress = document.querySelector('.progress-front');
+      const steps = document.querySelectorAll('.step');
+      const next = document.getElementById('next');
+      const prev = document.getElementById('prev');
+let count = 0
+      next.addEventListener('click',()=>{
+       count++;
+       if(count >= steps.length){
+        count = steps.length;
+       }
+       alll();
+   
+      })
+
+      prev.addEventListener('click',()=>{
+       count--;
+       if(count < 0){
+        count = 0;
+       }
+       alll();
+       
+      })
       
-     
-      let currentchecked =0;
+  function alll() {
+    steps.forEach((step,index)=>{
+    if(index<count){
+      step.classList.add('checked');
+      step.innerHTML=`
+      <i class="fas fa-check"> </i>
+        
+      <small>${index===0?'Start': index===steps.length-1?'Final':'Step' + index}</small>
+      `
+    }else{
+        step.classList.remove( 'checked') ;
+        step.innerHTML=`
+        <i class="fas fa-times"></i>
+        `;
+    }   
+  })
 
-      nextEl.addEventListener("click",()=>{
-        currentchecked++;
-
-        if(currentchecked>stepsEl.length){
-          currentchecked= stepsEl.length;
-        };
-        updateProgress();
-
-      });
-
-
-      prevEl.addEventListener("click",()=>{
-        currentchecked--;
-
-        if(currentchecked<0){
-          currentchecked= 0;
-        };
-        updateProgress();
-
-      });
-
-
-      function updateProgress(){
-        stepsEl.forEach((stepEl, idx)=>{
-          if (idx < currentchecked) {
-            stepEl.classList.add('checked');
-            stepEl.innerHTML=`
-            <i class="fas fa-check"> </i>
-            <small>${idx===0 ? 'Start'+ "("+stepsEl.length+")" : idx===stepsEl.length-1 ? "Final" : "Step" + idx} </small>
-            `;
-          }else{
-            stepEl.classList.remove( 'checked') ;
-            stepEl.innerHTML=`
-            <i class="fas fa-times"></i>
-            `;
-          }
-
-        });
-        const checkedNumber = document.querySelectorAll(".checked");
-
-  progressEl.style.width =
-    ((checkedNumber.length - 1) / (stepsEl.length - 1)) * 100 + "%";
-
-    if(currentchecked===1){
-      prevEl.disabled =true;
-    }else if(currentchecked === stepsEl.length ){
-      nextEl.disabled = true;
-
-      }else{
-        prevEl.disabled = false;
-        nextEl.disabled = false;
-
-
-      }
-    }
+  const checked = document.querySelectorAll('.checked')
+  progress.style.width=((checked.length-1)/(steps.length-1))*100 + '%';
+  if(count === steps.length){
+    next.disabled = true;
+  }else if(count === 0){
+    prev.disabled = true;
+  }else{
+    prev.disabled = false;
+    next.disabled = false;
+  }
+}
       </script>
 </body>
 </html>

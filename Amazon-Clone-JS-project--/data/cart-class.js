@@ -1,23 +1,23 @@
 class CartAdd{
     // cart =undefined;
     // localStorageKey=undefined;
-    cart ;
+    cart17 ;
     #localStorageKey; //if constructor
 
     constructor(){
         // cart17.localStorageKey = 'cart-oop';
         // cart17.loadFromStorageJAsmine()
         this.#localStorageKey = 'cart-oop';
-        this.loadFromStorageJAsmine()
+        this.#loadFromStorageJAsmine()
 
     }
 
 
-    loadFromStorageJAsmine(){   //made function for jasmine
-        this.cart=JSON.parse(localStorage.getItem(this.#localStorageKey));//get cart after set 
+    #loadFromStorageJAsmine(){   //made function for jasmine
+        this.cart17=JSON.parse(localStorage.getItem(this.#localStorageKey));//get cart after set 
  
-     if(!this.cart){ //if no cart in local storage or empty we give default value
-        this.cart=[   //cart17 is this, to improve code, and doesnot matter variable name
+     if(!this.cart17){ //if no cart in local storage or empty we give default value
+        this.cart17=[   //cart17 is this, to improve code, and doesnot matter variable name
                  {
                  productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
                  quantity: 2,
@@ -33,14 +33,14 @@ class CartAdd{
  
      };
      saveToStorage() {
-        localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cart)); //from 'cartt' to 'cart-oop' so no affect original
+        localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cart17)); //from 'cartt' to 'cart-oop' so no affect original
         
     };
 
     addingToCart(productId){
         let matchingItem;
     
-        this.cart.forEach((cartItem)=>{
+        this.cart17.forEach((cartItem)=>{
         if(cartItem.productId === productId){
         //   item.quantity++;
             matchingItem=cartItem;
@@ -52,7 +52,7 @@ class CartAdd{
         if(matchingItem){
             matchingItem.quantity+=quantityy; //+=1
         }else{
-            this.cart.push(
+            this.cart17.push(
                 {  
                     productId,  // productId: productId,
                     quantity: quantityy,  //  quantity: 1
@@ -60,7 +60,7 @@ class CartAdd{
                 });
         }
     this.saveToStorage(); //to access fn inside object
-    businessCart17.addingToCart('id2');
+    // businessCart17.addingToCart('id2');
     //before
     //   if(matchingItem){
     //     matchingItem.quantity++;
@@ -76,21 +76,21 @@ class CartAdd{
 
     removeFromCart(deleteID) {
         const newCart = [];
-        this.cart.forEach((cartItem) => {
+        this.cart17.forEach((cartItem) => {
             if (cartItem.productId !== deleteID) {  //cartItem is from cart.js's productid and quantity, if not equal to delteID which we have given ${macthingPRoduct.id}
                 newCart.push(cartItem);
             }
         });
         
-        this.cart = newCart; //updating after delete from above(scrol abpve)
+        this.cart17 = newCart; //updating after delete from above(scrol abpve)
     
         this.saveToStorage();
     };
 
- calculateCartQuantity() { //extra from exercise
+calculateCartQuantity() { //extra from exercise
         let cartQuantity = 0;
       
-        this.cart.forEach((cartItem) => {
+        this.cart17.forEach((cartItem) => {
           cartQuantity += cartItem.quantity;
         });
       
@@ -101,7 +101,7 @@ class CartAdd{
       
         let matchingItem;
       
-        this.cart.forEach((cartItem) => {
+        this.cart17.forEach((cartItem) => {
           if (productId === cartItem.productId) { 
             matchingItem = cartItem;
           }
@@ -115,7 +115,7 @@ class CartAdd{
     updateDeliveryOption(productId,deliveryOptionId) {
         let matchingItem;
       
-       this.cart.forEach((cartItem) => {
+       this.cart17.forEach((cartItem) => {
           if (productId === cartItem.productId) { 
             matchingItem = cartItem;
           }
@@ -127,15 +127,15 @@ class CartAdd{
 }
 
 
-const cart17 = new CartAdd('cart-oop');
+export const cart17 = new CartAdd('cart-oop');
 const businessCart17 = new CartAdd('cart-business');
 
-cart17.localStorageKey = 'cart-oop';
-businessCart17.localStorageKey = 'cart-business';
+// cart17.localStorageKey = 'cart-oop';
+// businessCart17.localStorageKey = 'cart-business';
 
-cart17.loadFromStorageJAsmine()
+// cart17.loadFromStorageJAsmine()
 
-businessCart17.loadFromStorageJAsmine()
+// businessCart17.loadFromStorageJAsmine()
   
 
   console.log(cart17);

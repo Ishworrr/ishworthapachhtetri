@@ -1,5 +1,5 @@
 function CartAdd(localStorageKey) {
-    const cart17={     //in video cart
+   const cart17={     //in video cart
         cart :undefined   ,    // in video cartItem, I kept original
       
       loadFromStorageJAsmine(){   //made function for jasmine
@@ -79,7 +79,8 @@ function CartAdd(localStorageKey) {
        calculateCartQuantity() { //extra from exercise
               let cartQuantity = 0;
             
-              this.cart.forEach((cartItem) => {
+            //  this.cart.forEach((cartItem) => {
+              this.cart17.forEach((cartItem) => {
                 cartQuantity += cartItem.quantity;
               });
             

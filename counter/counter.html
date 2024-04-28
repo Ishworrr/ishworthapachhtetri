@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <style>
+        body{
+            box-sizing: border-box;
+            margin: 0 auto;
+            align-items: center;
+            text-align: center;
+            
+        }
+        .container{
+            width:450px;
+            border: 1px solid black;
+            border-radius: 10px;
+            margin: 0 auto;
+            margin-top: 100px;
+            padding: 20px;
+            background-color:azure;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,4);
+        }
+
+        h1{
+            font-size: 40px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .counter{
+            font-size: 6rem;
+           
+        }
+
+        .btns{
+            margin-top: 40px;
+        }
+        button{
+            padding: 10px 20px;
+            font-size: 20px;
+            margin: 10px;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,4);
+            cursor: pointer;
+        }
+        button:hover{
+           background-color: azure;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Counter</h1>
+        <span class="counter">0</span>
+        <div class="btns">
+            <button class="Increase">Increase</button>
+            <button class="Reset">Reset</button>
+            <button class="Decrease">Decrease</button>
+        </div>
+    </div>
+
+    <script>
+        const counter = document.querySelector('.counter');
+        const increase = document.querySelector('.Increase');
+        const reset = document.querySelector('.Reset')
+        const decrease = document.querySelector('.Decrease')
+
+        let count=0;
+
+        increase.addEventListener('click',()=>{
+            counter.innerHTML = count++;
+            counter.style.color = 'green';
+            if(count>10){
+                counter.innerHTML = count=0;
+            }
+        })
+
+        reset.addEventListener('click',()=>{
+
+            counter.innerHTML = count=0;
+            counter.style.color = 'black';
+        })
+
+        decrease.addEventListener('click',()=>{
+            counter.innerHTML = count--;
+            counter.style.color = 'red';
+        })
+    </script>
+    
+</body>
+</html>

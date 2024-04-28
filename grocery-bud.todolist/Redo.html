@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todo List</title>
+    <style>
+      body {
+  font-family: Arial;
+}
+
+.list,
+.container {
+  display: grid;
+  grid-template-columns: 200px 150px 100px;
+  column-gap: 10px;
+  row-gap: 10px;
+  align-items: center;
+}
+
+.container {
+  margin-bottom: 10px;
+  align-items: stretch;
+}
+
+.input,
+.date {
+  font-size: 15px;
+  padding: 6px;
+}
+
+.add {
+  background-color: green;
+  color: white;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.delete-todo-button{
+  background-color: darkred;
+  color: white;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+      </style>
+  </head>
+  <body>
+
+    <p>Todo List</p>
+
+    <div class="container">
+      <input placeholder="Todo name" class="input">
+      <input type="date" class="date">
+      <button class="add">Add</button>
+    </div>
+
+    <div class="list js-list"></div>
+
+    <script>
+const list = document.querySelector('.js-list');
+const container = document.querySelector('.container');
+const add = document.querySelector('.add');
+const input = document.querySelector('.input');
+const date = document.querySelector('.date');
+
+let todo =[{
+  name:'a',
+  dateList:'22/04/2024'
+}];
+
+ todo =JSON.parse(localStorage.getItem('todoss')) 
+// || [{
+//   name:'a',
+//   dateList:'22/04/2024'
+// }];
+
+renderF()
+function renderF() {
+   let createList = '';
+  
+todo.forEach((element, i) => {
+  const { name,dateList }=element;
+
+  const divList = `
+  <div>${name}</div>
+   <div>${dateList}</div>
+      <button class="delete-todo-button js-delete-todo-button">Delete</button> 
+  `;
+   createList += divList;
+
+});
+
+list.innerHTML = createList;
+
+
+document.querySelectorAll('.delete-todo-button').forEach((deleteButton, i) => {
+      deleteButton.addEventListener('click', () => {
+        todo.splice(i, 1);
+       // todo = todo.filter(item => item.text !== createList);
+      localStorage.setItem('todoss', JSON.stringify(todo));
+        renderF();
+      });
+    });
+  }
+
+  add.addEventListener('click', () => {
+  addTodo();
+
+});
+
+function addTodo() {
+  const inputValue = input.value;
+  console.log(inputValue)
+
+  const dateValue = date.value;
+ console.log(dateValue)
+//  if (inputValue === '') {
+//     alert('Please enter a todo');
+//     return;
+//   }
+
+todo.push({
+    name: inputValue,
+    dateList: dateValue,
+
+  });
+
+  input.value = '';
+
+  localStorage.setItem('todoss', JSON.stringify(todo))
+
+renderF();
+}
+
+function setItem(){
+
+}
+    
+    </script>
+  </body>
+</html>

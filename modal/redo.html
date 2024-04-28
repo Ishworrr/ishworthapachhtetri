@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modal</title>
+    <!-- font-awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <!-- styles -->
+    <style>
+      *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        }
+    
+       
+    body{
+        background: #eaeaea;
+       height: 100vh;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       background-image: url('hero.jpeg');
+    }
+
+    .container{
+      background-color: rgb(245, 241, 236);
+      width:600px;
+      height:300px;
+   text-align: center;
+      padding: 10px 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    
+    }
+    .container h3, h4{
+      margin-bottom: 20px;
+      font: 3.5em sans-serif;
+      margin-top: 30px;
+    }
+    .container button{
+      background-color: bisque;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 25px;
+      margin-top: 30px;
+    }
+
+    .back{
+      background-color: rgb(245, 241, 236);
+    width:600px;
+      height:300px;
+   text-align: center;
+      padding: 10px 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      position: relative;
+      /* display: none; */
+   
+    }
+    .h{
+      margin-top: 6rem;
+    }
+    .cross{
+      background-color: transparent;
+      border: none;
+      color: red;
+      font: 2em sans-serif;
+      position: absolute;
+      top:20px;
+      right:40px;
+      transition: transform 0.3s ease-in-out;
+    }
+    .cross:hover{
+      cursor: pointer;
+     transform: rotate(360deg);;
+    }
+    .active{
+      display: none;
+      /* width: 0; */
+
+      
+    }
+
+
+    </style>
+  </head>
+  <body>
+   <div class="container">
+    <h3>Modal Project</h3>
+    <button class="click">Open Modal</button>
+   </div>
+   <div class="back active">
+    <h4 class="h">Modal Content</h4>
+    <button class="cross"><i class="fas fa-times"></i></button>
+   </div>
+
+    <!-- javascript -->
+    <script>
+
+const click = document.querySelector(".click");
+const back = document.querySelector(".back");
+const container = document.querySelector(".container");
+
+const cross = document.querySelector(".cross");
+
+// click.addEventListener("click",()=>{
+//   back.style.display = "block";
+//   container.style.display = "none";
+// });
+
+// cross.addEventListener("click",()=>{
+//   container.style.display = "block";
+//   back.style.display = "none";
+// });
+
+click.addEventListener("click",()=>{
+  container.classList.add('active') //togglw
+  back.classList.remove('active')//togglw
+
+});
+
+cross.addEventListener("click",()=>{
+  back.classList.add('active')//togglw
+  container.classList.remove('active')//togglw
+ 
+});
+    </script>
+  </body>
+</html>

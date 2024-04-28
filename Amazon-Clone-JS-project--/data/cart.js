@@ -1,3 +1,4 @@
+// import {cart17} from '../data/cart-class.js';
 export let cart;
 loadFromStorageJAsmine()
 // //get cart after set 

@@ -256,6 +256,7 @@
 // }
 
 import {cart, removeFromCart, updateDeliveryOption,calculateCartQuantity,updateQuantity} from '../../data/cart.js';
+// import {cart17} from '../../data/cart-class.js';
 import {products, getProduct} from '../../data/products.js';
 import {currency} from '../utils/money.js';
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
@@ -431,7 +432,7 @@ document.querySelectorAll('.js-update-link')    //update
         alert('Quantity must be at least 0 and less than 1000');
         return;
       }
-     updateQuantity(productId, newQuantity);
+ updateQuantity(productId, newQuantity);
 
      const container = document.querySelector(`.js-cart-item-container-${productId}`);
      container.classList.remove('is-editing-quantity');
@@ -453,7 +454,7 @@ document.querySelectorAll('.js-update-link')    //update
     .forEach((element) => {
       element.addEventListener('click', () => {
         const {productId, deliveryOptionId} = element.dataset;
-        updateDeliveryOption(productId, deliveryOptionId);
+ updateDeliveryOption(productId, deliveryOptionId);
         renderOrderSummary();
         renderPaymentSummary();
       });

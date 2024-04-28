@@ -77,6 +77,7 @@ renderTodolist();
 
 }
 
+////////// extra
 
   function getLastValue(array) {
     const lastIndex = array.length - 1;

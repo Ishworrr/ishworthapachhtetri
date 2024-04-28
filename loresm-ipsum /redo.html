@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lorem Ipsum</title>
+
+    <!-- styles -->
+<style>
+
+  body{
+    margin: 0;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    background-color: #222;
+    color: #fff;
+    display: flex;
+  
+  }
+  .container{
+    margin-top: 5rem;
+  }
+  h3{
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  label{
+    font-size: 24px;
+  }
+  input{
+    padding: 10px 20px;
+    font-size: 20px;
+  }
+  button{
+    background-color: aquamarine;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  button:active{
+    background-color: rgb(12, 15, 14);
+    color: white;
+  }
+  .aa{
+    margin-top: 50px;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 10px;
+  }
+
+</style>
+  </head>
+  <body>
+    <div class="container">
+      <h3>tired of boring lorem ipsum?</h3>
+      <div class="lorem-form">
+        <label for="amount">paragraphs:</label>
+        <input type="number" class="input" id="amount" placeholder="5" />
+        <button type="submit" class="btn">generate</button>
+      </div>
+      <div class="lorem-text">
+
+      </div>
+    </div>
+
+    <!-- javascript -->
+    <script>
+      const btn = document.querySelector(".btn");
+      const input = document.querySelector(".input");
+      const para = document.querySelector(".lorem-text");
+
+      lorem100='Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit fugiat architecto nisi sequi praesentium porro eius explicabo accusantium natus saepe dolore quos nostrum, quibusdam temporibus nihil? Eius, quaerat! Ut, id magnam dolores sequi, ullam corporis nemo minus odio ducimus iste a officiis accusantium officia facere esse exercitationem error quos? Totam magnam iste libero tempora excepturi! Repudiandae officiis maiores nisi mollitia, labore temporibus. Amet reiciendis tempore obcaecati, cum repellendus ducimus fugiat dicta, nihil atque modi porro animi ea quis blanditiis illum quas architecto itaque, voluptatibus est magni commodi deserunt cumque provident numquam. Ex esse molestias eos, eum repudiandae corporis? Necessitatibus, consequatur.';
+    
+      btn.addEventListener('click',()=>{
+      // function addLorem() {
+        const amount = parseInt(input.value);
+            let count=0
+
+        if(amount>0 && !isNaN(amount)){
+
+            para.innerHTML=''
+
+            for (let index = 0; index < amount; index++) {
+              const p = document.createElement('p');
+            p.innerHTML=`<p class="aa">${lorem100}</p>`
+            para.appendChild(p);
+                   }
+
+        }else {
+        alert('Please enter a valid positive number.');
+                   }
+                 
+          // }
+
+           
+      })
+    </script>
+  </body>
+</html>

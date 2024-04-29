@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Live Streaming</title>
+</head>
+<body>
+
+    <h2>How to build a video livestream in your web app with javascript & HTML 5</h2>
+    <video autoplay="" id="stream-elem" controls width="600" height="400">
+        <source src="" type=""  >
+    </video>
+
+    <button id="start-stream">Start Stream</button>
+    <button id="stop-media">Stop Stream</button>
+
+
+    
+    <script>
+        const videoElem = document.getElementById('stream-elem')
+
+var startBtn = document.getElementById('start-stream')
+var endBtn = document.getElementById('stop-media')
+
+var recorder;
+
+const settings = {
+    video: true,
+    audio: true
+}
+
+startBtn.addEventListener('click', function (e) {
+    navigator.mediaDevices.getUserMedia(settings).then((stream) => {
+        console.log(stream);
+        videoElem.srcObject = stream
+
+        recorder = new MediaRecorder(stream)
+        console.log(recorder);
+
+        recorder.start();
+
+        const blobContainer = [];
+
+        recorder.ondataavailable = function (e) {
+            blobContainer.push(e.data)
+        }
+
+        recorder.onerror = function (e) {
+            return console.log(e.error || new Error(e.name));
+        }
+
+        recorder.onstop = function (e) {
+            console.log(blobContainer);
+            var newVideoEl = document.createElement('video')
+            newVideoEl.height = '400'
+            newVideoEl.width = '600'
+            newVideoEl.autoplay = true
+            newVideoEl.controls = true
+            var blob = new Blob(blobContainer, { type: 'video/mp4' });
+            newVideoEl.src = window.URL.createObjectURL(blob);
+            document.body.removeChild(videoElem)
+            document.body.insertBefore(newVideoEl, startBtn);
+
+            var formdata = new FormData();
+            formdata.append('blobFile', blob);
+
+            fetch('uploader.php', {
+                method: 'POST',
+                body: formdata
+            }).then(()=>{
+                alert('streamed video file uploaded')
+            })
+
+            blobContainer.length = 0; // Clear the blobContainer
+        }
+    })
+})
+
+endBtn.addEventListener('click', function (e) {
+    videoElem.pause();
+    recorder.stop();
+})
+
+    </script>
+</body>
+</html>

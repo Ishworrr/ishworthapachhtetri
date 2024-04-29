@@ -15,6 +15,7 @@
             font-family: cursive;
             font-family: 'Courier New', Courier, monospace;
         }
+
         .clock{
             background-color: lightgray;
             width: 350px;
@@ -25,99 +26,93 @@
             position: relative;
         }
         img{
-            width: 70px;
             position: absolute;
-            left:50%;
-            transform: translate(-50%);
-            top: 60px;
-            z-index: 2;
-            color: lightgray;
-            background-color: lightgray;
-            backdrop-filter: brightness(.5);
-         
+            width: 70px;
+            background-color: transparent;
+            border-radius: 50%;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .twelve{
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .three{
+            position: absolute;
+            top: 45%;
+            right: 10%;
+            transform: translateX(-50%);
+        }
+        .nine{
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .six{
+            position: absolute;
+            top: 45%;
+            left: 10%;
+            transform: translateX(-50%);
         }
         .numbers div{
-            position: absolute;
             font-size: 30px;
             font-weight: bold;
             color: lightgoldenrodyellow;
             text-shadow: 1px 1px 4px rgba(0,0,0,.7);
-
+            /* position: absolute; */
         }
-        .twelve{
-            top:8px;
-            left: 50%;
-            transform: translate(-50%);
-
-        }
-        .three{
-            top:50%;
-            /* right: 6px; */
-            right: 6%;
-            transform: translateY(-50%);
-
-        }
-        .six{
-            left:50%;
-            bottom:6px;
-            /* transform: translateX(-50%); */
-            transform: translate(-50%);
-
-        }
-        .nine{
-            top:50%;
-            left:6px;
-            /* transform: translateX(-50%); */
-            transform: translateY(-50%);
-
-        }
-
-        .arrows{
-            display: flex;
+       
+            .arrows{
             width:100% ;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
+
         .arrows::before{
             content: '';
-            
             width:25px;
             height:25px;
-            background-color: greenyellow;
+            background-color: rgb(247, 240, 240);
             border-radius: 50%;
             text-shadow: 1px 1px 4px rgba(0,0,0,.7);
             z-index: 4;
+            position: absolute;
         }
         .arrows div{
-            background-color: aliceblue;
-            width:7px;
-            height:120px;
+            background-color: aquamarine;
+            width:10px;
+            height: 120px;
+            border-radius: 50%;
             position: absolute;
             bottom: 50%;
-            transform-origin: bottom center;
+            transform-origin: bottom;
+            /* transform: rotate(0deg); */
             z-index: 3;
             border-radius: 50% 50% 0 0 ;
-            box-shadow: 1px 1px 4px rgba(0,0,0,.7);
-
-         
+            box-shadow: 1px 1px 4px rgba(0,0,0,.7); 
         }
-
-        .arrows .hour{
-            height:70px;
+      .arrows .hour{
+            height:90px;
+            background-color: rgb(249, 0, 0);
             transform: rotate(0deg);
-
         }
-        .arrows .minute{
+       .arrows .minute{
             height:110px;
+            background-color: rgb(228, 29, 29);
+            width:8px;
             transform: rotate(90deg);
-
         }
-        .arrows .second{
-            background-color: aqua;
-            transform: rotate(250deg);
-
+     .arrows .second{
+            background-color: rgb(172, 40, 20);
+            width:5px;
+            height:120px;
+            transform: rotate(270deg);
         }
     </style>
 </head>
@@ -141,35 +136,24 @@
         const hour = document.querySelector('.hour');
         const minute = document.querySelector('.minute');
         const second = document.querySelector('.second');
-        const arrows = document.querySelector('.arrows');
-        clock() 
-      function clock() { 
-        const timeNow = new Date();
-       // console.log(timeNow);
-        // setTimeout(clock,1000);
-        setInterval(clock,1000);
-        console.log(timeNow);//will update every 1s and crete function for settimeout
-        
-        const hourr = timeNow.getHours();
-         const minutee = timeNow.getMinutes();
-         const secondd = timeNow.getSeconds();
-          console.log(hourr,minutee,secondd);
 
-          const hourDeg = (hourr/12)*360;
-          hour.style.transform = `rotate(${hourDeg}deg)`
-          
-          const minuteDeg = (minutee/60)*360;
-          minute.style.transform = `rotate(${minuteDeg}deg)`
-          
-          const secondDeg = (secondd/60)*360;
-          second.style.transform = `rotate(${secondDeg}deg)`
-
+      function aa(){  
+        const time = new Date();
+        const sec = time.getSeconds();      
+        const min = time.getMinutes();
+        const hr = time.getHours();
+        console.log(sec,min,hr)
+        // const secDeg = sec * 6;// (sec/60s)*360deg or (sec*360deg)/60
+        // const minDeg = min * 6;
+        // const hrDeg = hr * 30;
+        const secDeg = (sec * 360)/60;// (sec/60s)*360deg or (sec*360deg)/60
+        const minDeg = (min * 360)/60;
+        const hrDeg = (sec * 360)/12;
+        second.style.transform = `rotate(${secDeg}deg)`;
+        minute.style.transform = `rotate(${minDeg}deg)`;
+        hour.style.transform = `rotate(${hrDeg}deg)`;
     }
-    setInterval(clock,1000);
-    
-
-
-         
+    setInterval(aa,100);
 
     </script>
 </body>

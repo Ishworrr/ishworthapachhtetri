@@ -137,7 +137,7 @@ p {
 }
 /*  global classes */
 
-.btn {
+/* .btn {
   text-transform: uppercase;
   background: transparent;
   color: var(--clr-black);
@@ -154,7 +154,7 @@ p {
 .btn:hover {
   color: var(--clr-white);
   background: var(--clr-black);
-}
+} */
 /* section */
 .section {
   padding: 5rem 0;
@@ -233,7 +233,8 @@ h1 {
   transition: var(--transition);
 }
 .switch-btn span {
-  display: inline-block;
+  /* display: inline-block; */
+  display: flex;
   font-size: 0.85rem;
   cursor: pointer;
   text-transform: capitalize;

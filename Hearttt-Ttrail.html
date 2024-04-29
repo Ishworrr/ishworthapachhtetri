@@ -15,21 +15,20 @@
             background:url('https://cdn0.iconfinder.com/data/icons/3d-front-gradient/512/heart-front-gradient.png');
             width: 100px;
             height: 100px;
-        background-size: contain;
+        background-size: cover;
         position: absolute;
-        /* left:50%;
-        top:50%; */
-        /* transform: translate(-50%,-50%); */
-        cursor: pointer;
-        animation: heart 2s linear;
+        left:50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+        animation: heart 6s linear;
         }
         /* span:nth-child(2){
             animation: heart 0.5s linear;
-        } */
-        /* span:nth-child(1){
+        }
+        span:nth-child(1){
             animation: heart 0.5s linear;
-        } */
-        /* span:hover{
+        }
+        span:hover{
             animation: heart 0.5s linear;
 
         } */
@@ -49,15 +48,15 @@
             } */
 
             0%{
-                /* transform: translate(-50%,-50%); */
+                transform: translate(-50%,-50%);
                 opacity: 1;
-                /* filter: hue-rotate(0); */
+                filter: hue-rotate(0);
                 /* filter: brightness(1); */
             }
             100%{
                 transform: translate(-50%,-5000%);
                 opacity: .3;
-                /* filter: hue-rotate(100deg); */
+                filter: hue-rotate(1080deg);
                 /* filter: brightness(2); */
             }
         }
@@ -77,16 +76,17 @@
 
         bodyEl.addEventListener('mousemove',(e)=>{
             
-            const heart = document.createElement('span');
+     
             const x = e.offsetX;
          
             const y = e.offsetY;
             
+             const heart = document.createElement('span');
             heart.style.left=x +'px';
             heart.style.top=y +'px';
            // heart.style.right=y +'px';
            // heart.style.animationDuration = Math.random()*2 + 's';
-           const size = Math.random() *150;
+           const size = Math.random() *100;
            heart.style.width = size+'px';
            heart.style.height = size+'px';
 
@@ -96,7 +96,7 @@
             // console.log(e.offsetY)
             setTimeout(()=>{
                 heart.remove();
-            },2000)
+            },1000)
         })
 
       

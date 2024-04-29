@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+    body{
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: rgb(239, 237, 236);
+        text-align: center;
+    }
+    .stats{
+        border: 1px dotted red;
+        width:250px;
+        margin:10px;
+        position: relative; 
+    }
+    .icon{
+        position: absolute;
+        top:-5px ;
+        left:50%;
+        transform: translate(-50%,-50%);
+        color: lightcoral;
+    }
+    .first{
+        font-size: 60px;
+        align-items: center;
+        margin: 20px;
+        color:purple; 
+    }
+    h4{
+        margin: 20px;
+        font-size: 22px;
+        white-space: nowrap;
+    }
+    
+    @media (max-width:700px) {
+       body{      
+           flex-direction: column;
+        }
+        .stats{
+            margin: 20px;
+        }
+        
+    }
+    </style>
+<body>
+    <div class="stats">
+<i class="fa-solid fa-briefcase fa-3x icon"></i>
+<div class="first" data-ceil="15">15</div>
+<h4>Work Experience</h4>
+
+        </div>
+
+<div class="stats">
+    <i class="fa-solid fa-cloud fa-3x icon"></i>
+    <div class="first" data-ceil="260">260</div>
+    <h4>Website Made</h4>
+    
+            </div>
+
+    <div class="stats">
+        <i class="fab fa-apple fa-3x icon"></i>
+        <div class="first" data-ceil="27">27</div>
+        <h4>Apps Made</h4>
+        
+                </div>
+
+    <script>
+       const firsts = document.querySelectorAll('.first');
+       const stats = document.querySelectorAll('.stats');
+
+      
+        firsts.forEach((first)=>{
+        // let Num =+ first.innerText;
+        first.innerHTML='0';
+        strat();
+    function strat(){
+        let Num = first.innerText;
+        const ceil = first.getAttribute('data-ceil');
+            const increase = ceil/15;
+            // Num = Math.floor(Math.random()*(Num+increase));
+            // Num = Math.floor(Math.random((Num+increase)));
+            Num = Math.floor((Num+increase));
+            first.innerHTML=Num;
+
+            if(Num<=ceil){
+           
+                setTimeout(() => {
+                    strat()
+                }, 1000);
+            }else{
+                first.innerHTML=ceil;
+            }
+
+       }
+  
+  
+    })
+       
+
+        
+    </script>
+</body>
+</html>

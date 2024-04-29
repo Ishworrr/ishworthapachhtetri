@@ -83,19 +83,21 @@ async function func1(one){
 
   console.log(result);
 
-  if(result.title){
-    titleEl.innerText = one;
+  if(result.title){ //if result which brings api result has title then 
+    //run this (tiitle appears when you search a wrong word)
+   
     pEl.style.display="none";
     secondEl.style.display="block";
+    titleEl.innerText = one;
     meaningEl.innerText = "N/A"
-    audioEl.style.display='none'; 
+    audioEl.style.display='none';
   }else{
     pEl.style.display="none";
     secondEl.style.display="block";
-    audioEl.style.display='inline-flex'; 
     titleEl.innerText = result[0].word;
     meaningEl.innerText = result[0].meanings[0].definitions[0].definition;
     audioEl.src = result[0].phonetics[0].audio;
+    audioEl.style.display='inline-flex'; 
   }
 
   
@@ -103,7 +105,7 @@ async function func1(one){
  
   } catch (error) {
     console.log(error)
-    infoTextEl.innerText = `an error happened, try again later`;
+    pEl.innerText = `an error happened, try again later`;
     
   }
  
@@ -112,7 +114,7 @@ async function func1(one){
 }
 
 inputEl.addEventListener('keyup',(e)=>{
-  if(e.target.value &&e.key==='Enter'){
+  if(e.target.value && e.key==='Enter'){
     func1(e.target.value)
   }
  
@@ -124,7 +126,7 @@ inputEl.addEventListener('keyup',(e)=>{
 </html>
 
 
-<template>
+<!-- <template>
     <section class="brands-section">
       <h2>Brands that trust Vpply</h2>
       <div
@@ -235,4 +237,4 @@ inputEl.addEventListener('keyup',(e)=>{
     }
   }
   </style>
-  
+   -->

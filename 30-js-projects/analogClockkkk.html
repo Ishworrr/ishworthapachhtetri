@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Clock</title>
+    <style>
+  body{
+            height: 100vh;
+            margin:0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: salmon;
+            font-family: cursive;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .clock{
+            background-color: lightgray;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            border:5px solid darkgray;
+            box-shadow: 1px 1px 4px rgba(0,0,0,.7);
+            position: relative;
+        }
+        img{
+            width: 70px;
+            position: absolute;
+            left:50%;
+            transform: translate(-50%);
+            top: 60px;
+            z-index: 2;
+            color: lightgray;
+            background-color: lightgray;
+            backdrop-filter: brightness(.5);
+         
+        }
+        .numbers div{
+            position: absolute;
+            font-size: 30px;
+            font-weight: bold;
+            color: lightgoldenrodyellow;
+            text-shadow: 1px 1px 4px rgba(0,0,0,.7);
+
+        }
+        .twelve{
+            top:8px;
+            left: 50%;
+            transform: translate(-50%);
+
+        }
+        .three{
+            top:50%;
+            /* right: 6px; */
+            right: 6%;
+            transform: translateY(-50%);
+
+        }
+        .six{
+            left:50%;
+            bottom:6px;
+            /* transform: translateX(-50%); */
+            transform: translate(-50%);
+
+        }
+        .nine{
+            top:50%;
+            left:6px;
+            /* transform: translateX(-50%); */
+            transform: translateY(-50%);
+
+        }
+
+        .arrows{
+            display: flex;
+            width:100% ;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .arrows::before{
+            content: '';
+            
+            width:25px;
+            height:25px;
+            background-color: greenyellow;
+            border-radius: 50%;
+            text-shadow: 1px 1px 4px rgba(0,0,0,.7);
+            z-index: 4;
+        }
+        .arrows div{
+            background-color: aliceblue;
+            width:7px;
+            height:120px;
+            position: absolute;
+            bottom: 50%;
+            transform-origin: bottom center;
+            z-index: 3;
+            border-radius: 50% 50% 0 0 ;
+            box-shadow: 1px 1px 4px rgba(0,0,0,.7);
+
+         
+        }
+
+        .arrows .hour{
+            height:70px;
+            transform: rotate(0deg);
+
+        }
+        .arrows .minute{
+            height:110px;
+            transform: rotate(90deg);
+
+        }
+        .arrows .second{
+            background-color: aqua;
+            transform: rotate(250deg);
+
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="numbers">
+            <div class="twelve">12</div>
+            <div class="three">3</div>
+            <div class="six">6</div>
+            <div class="nine">9</div>
+        </div>
+        <div class="arrows">
+            <div class="hour"></div>
+            <div class="minute"></div>
+
+            <div class="second"></div>
+        </div>
+        <img src="https://banner2.cleanpng.com/20180131/wve/kisspng-london-logo-designer-rolex-logo-png-file-5a724959ad4458.6810443115174393217097.jpg" alt="">
+    </div>
+    <script>
+        const hour = document.querySelector('.hour');
+        const minute = document.querySelector('.minute');
+        const second = document.querySelector('.second');
+        const arrows = document.querySelector('.arrows');
+        clock() 
+      function clock() { 
+        const timeNow = new Date();
+       // console.log(timeNow);
+        // setTimeout(clock,1000);
+        setInterval(clock,1000);
+        console.log(timeNow);//will update every 1s and crete function for settimeout
+        
+        const hourr = timeNow.getHours();
+         const minutee = timeNow.getMinutes();
+         const secondd = timeNow.getSeconds();
+          console.log(hourr,minutee,secondd);
+
+          const hourDeg = (hourr/12)*360;
+          hour.style.transform = `rotate(${hourDeg}deg)`
+          
+          const minuteDeg = (minutee/60)*360;
+          minute.style.transform = `rotate(${minuteDeg}deg)`
+          
+          const secondDeg = (secondd/60)*360;
+          second.style.transform = `rotate(${secondDeg}deg)`
+
+    }
+    setInterval(clock,1000);
+    
+
+
+         
+
+    </script>
+</body>
+</html>

@@ -105,13 +105,13 @@
         <div class="password">
 <h2>Generate Random Password</h2>
 
-<div class="copy">
+    <div class="copy">
 
-<input id="input" class="input" type="text"
- placeholder="Get password" />
+    <input id="input" class="input" type="text"
+    placeholder="Get password" />
 
- <i class="fa-regular fa-copy fa-2x"></i>
-</div>
+    <i class="fa-regular fa-copy fa-2x"></i>
+    </div>
 <button class="btn" id="btn">Generate</button>
 </div>
 
@@ -129,16 +129,7 @@
         });
         createPassword();
 
-        copyIcon.addEventListener('click',()=>{
-           copy();
-           if(inputEl.value){
-            alertEl.classList.remove("active");
-           setTimeout(() => {
-            alertEl.classList.add("active");
-           }, 2000);
-           }
-          
-        });
+       
 
        function createPassword(){
         const chars ='0123456789abcdefghijklmnopqrstuvwxtz!@#$%^&*()_+?:{}[]ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -161,6 +152,16 @@ function copy(){
 
           
 }
+copyIcon.addEventListener('click',()=>{
+           copy();
+           if(inputEl.value){
+            alertEl.classList.remove("active");
+           setTimeout(() => {
+            alertEl.classList.add("active");
+           }, 2000);
+           }
+          
+        });
 
 
 

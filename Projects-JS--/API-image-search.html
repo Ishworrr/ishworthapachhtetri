@@ -137,11 +137,9 @@
                     flex-direction: column;
                 }
                 input {
-    margin-bottom: 20px;
-    width: 85%;
-  }
-
-
+                    margin-bottom: 20px;
+                    width: 85%;
+                }
                 
             }
 
@@ -189,63 +187,69 @@
 
             <script>
                 const accessKey = "314q-4NqUwcysXyQbU5bQ2RHx36E31CYw8o_Nr3Fw8g";
-                const inputEl = document.querySelector('.input');
-                const btnEl = document.getElementById('show');
-                const fromEl = document.querySelector('form');
-                const resultsEl = document.querySelector('.results');
+                const input = document.querySelector('.input');
+                const btnLast = document.getElementById('show');
+                const btnFirst = document.getElementById('btn');
+                const form = document.querySelector('form');
+                const Results = document.querySelector('.results');
 
-
-                let inputData='';
                 let page = 1;
+                f1()
+            async function f1() {
+                const url =  await fetch(`https://api.unsplash.com/search/photos?page=${page}&query=${input.value}&client_id=${accessKey}`);
+                const data = await url.json();
+                const APIreults = data.results;
 
-              async function searchImage(){
-                inputData = inputEl.value;
-           const url=`https://api.unsplash.com/search/photos?page=${page}&query=${inputData}&client_id=${accessKey}`
-           console.log(url);
-           const response= await fetch(url);
-           const data = await response.json();
-           console.log(data);
-           if(page===1){
-            resultsEl.innerHTML='';
-           }
+                if (data.results && data.results.length > 0) {
+                console.log(data)
+                console.log(APIreults)
 
-           const results= data.results;
-           results.map((result)=>{
-            const images = document.createElement('div');
-           images.classList.add("result");
+            // if(page ===1){
+            //     Results.innerHTML=''
+            // }
 
-           const image= document.createElement('img');
-           image.src= result.urls.small;
-           image.alt= result.alt_description;
-           
-           const imageLink = document.createElement('a');
-           imageLink.href=result.links.html;
-           imageLink.target ="_blank";
-           imageLink.textContent = result.alt_description;
+                APIreults.forEach(element => {
+                    console.log(element);
+                    const div = document.createElement('div');
+                     div.classList.add("result");
+                    const img = document.createElement('img')
+    
+                    img.src = element.urls.full;
+                    img.alt = element.alt_description;
+                    const a = document.createElement('a')
+                    a.href = element.links.html;
+                    a.target ="_blank";
+                    a.textContent = element.alt_description;
+                    Results.appendChild(div)
+                    div.appendChild(img)
+                    div.appendChild(a)
 
-            images.appendChild(image);
-            images.appendChild(imageLink);
-           resultsEl.appendChild(images);
-           })
-           
-             page++;
+                    page++;
            if(page>1){
-            btnEl.style.display='block';
+            btnLast.style.display='block';
+            // document.body.style.backgroundColor = "red";
            }
-              }
-
-                fromEl.addEventListener('submit',(e)=>{
-                    e.preventDefault();
-                    page=1;
-                    console.log('submit');
-                    searchImage();
-
-                });
-                btnEl.addEventListener('click',()=>{
-                    searchImage();
+               
+            })
+        }else{
+            console.log("No results found.");
+        }
+    }
+        form.addEventListener('submit',(e)=>{
+            e.preventDefault()
+            f1()
+        })
+        btnFirst.addEventListener('click',()=>{
+                    f1();
 
                 })
 
+        btnLast.addEventListener('click',()=>{
+                    f1();
+
+                })
+
+                // reults.forEach()
 
                 </script>
 

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing App</title>
+</head>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+canvas{
+    border: 2px solid red;
+    border-radius: 5px;
+ 
+}
+
+.toolbox{
+    background-color: rgb(35, 147, 245);
+    width:804px;
+    padding:10px 20px;
+    border-radius: 5px;
+    font-size: 24px;
+    display: flex;
+    border: 2px solid rebeccapurple;
+}
+.toolbox>*{
+    background-color: #f5f5f5;
+    border: none;
+    font-size: 2rem;
+    padding: .25rem;
+    width:50px;
+    margin: 2px;
+    align-items: center;
+    text-align: center;
+    height: 50px;
+    /* display: inline-flex; */
+    justify-content: center;
+}
+.toolbox>*:last-child{
+    margin: auto;
+    width: 100px;
+    font-size: 3rem;
+}
+
+    </style>
+<body>
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <div class="toolbox">
+        <button id="increase">+</button>
+        <span id="size">30</span>
+        <button id="decrease">-</button>
+        <input type="color" name="color" id="color">
+        <button id="clear">💩</button>
+    </div>    
+
+    <script>
+          const canvas = document.getElementById("canvas");
+          const ctx = canvas.getContext("2d");
+          const increase = document.getElementById("increase");
+          const size = document.getElementById("size");
+          const decrease = document.getElementById("decrease");
+          const colorEl = document.getElementById("color");
+          const clear = document.getElementById("clear");
+
+          let sizeValue = 30;
+          let isPressed = false;
+          let x=undefined;
+          let y=undefined;
+          let color ='black'
+
+          canvas.addEventListener('mousedown',(e)=>{
+            isPressed=true;
+            x= e.offSetX;
+            y= e.offSetY;
+          })
+          
+
+        //   canvas.addEventListener('mouseup',(e)=>{
+        //     isPressed=false;
+        //     // x=undefined;
+        //     // y= undefined;
+        //   })
+
+          canvas.addEventListener('mousemove',(e)=>{
+     
+    //         if(isPressed){ 
+    //     const x= e.offsetX;
+    //         const y= e.offsetY;
+    //  drawCircle(x,y)
+    //     }
+
+
+    //smoother line
+    if(isPressed){ 
+        const x2= e.offsetX;
+            const y2= e.offsetY;
+     drawLine(x,y,x2,y2)
+     x = x2;
+          y = y2;
+        }
+          })
+   
+     
+
+          function drawCircle(x,y) {
+            ctx.beginPath();
+            ctx.arc(x,y,sizeValue,0,Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = color;
+
+            // ctx.beginPath();
+            // ctx.arc(x,y,sizeValue,0,MAth.PI*2)
+            // ctx.fillStyle=color;
+            // ctx.fill()
+          }
+            
+          drawCircle()
+
+
+          function drawLine(x,y,x2,y2) {
+            // ctx.beginPath();
+            // ctx.moveTo(x,y);
+            // ctx.lineTo(x2,y2);
+            // ctx.strokeStyle = color;
+            // ctx.lineWidth = sizeValue;
+            // ctx.stroke();
+            
+            ctx.beginPath()
+            ctx.moveTo(x,y)
+            ctx.lineTo(x2,y2)
+            ctx.stroke();
+            ctx.strokeStyle=color;
+            ctx.lineWidth=sizeValue;
+   
+          }
+
+increase.addEventListener('click',()=>{
+    sizeValue+=5;
+    if(sizeValue>50){
+        sizeValue=50;
+    }
+    updateSizeOnScreen()
+
+})
+decrease.addEventListener('click',()=>{
+    sizeValue-=5;
+    if(sizeValue<=1){
+        sizeValue=1;
+    }
+    updateSizeOnScreen()
+    
+})
+function updateSizeOnScreen() {
+    size.innerHTML = sizeValue;
+}
+
+colorEl.addEventListener('change',(e)=>{
+  color=e.target.value
+})
+clear.addEventListener('click',(e)=>{
+ctx.clearRect(0,0,canvas.width,canvas.height)
+})
+
+
+          
+        </script>
+</body>
+</html>

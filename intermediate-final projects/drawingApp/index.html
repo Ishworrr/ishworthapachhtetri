@@ -31,7 +31,7 @@ canvas {
 .toolbox {
     background-color: rebeccapurple;
     border: 1px solid rebeccapurple;
-    display: flex;
+    /* display: flex; */
     padding: 1rem;
     width: 804px;
 }
@@ -78,7 +78,7 @@ const clearEl = document.getElementById("clear");
         // let x=50; //before smooth line
         // let y=50;
         let color = 'black';
-        let isPressed=false; //so that  mousemove will not draw when mouse button is not pressed
+        let isPressed=false; //so that  mousemove will not draw,only when mouse button is not pressed
 
          //for smooth line ,other works good too
          let x = undefined;
@@ -88,7 +88,7 @@ const clearEl = document.getElementById("clear");
           isPressed=true;
 
            //for smooth line ,other works good too
-           //for mclicking smooth line
+           //for clicking smooth line
            x = e.offsetX;
            y = e.offsetY;
 
@@ -135,8 +135,8 @@ const clearEl = document.getElementById("clear");
             ctx.beginPath();
           ctx.moveTo(x1,y1);
           ctx.lineTo(x2,y2);
-            //for circlr--- ctx.fill();
-            //for circlr---  ctx.fillStyle=color;
+            //for circle--- ctx.fill();
+            //for circle---  ctx.fillStyle=color;
 
             //for line---
           ctx.lineWidth = size * 2;//circle if changed because drawCircle(x2, y2); if drawCircle(x2, y2); 

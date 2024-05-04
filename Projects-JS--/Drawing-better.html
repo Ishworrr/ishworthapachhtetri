@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draing new</title>
+    <style>
+        body{
+            margin:0;
+            padding: 0;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        #canvas{
+            margin:0 auto;
+            border:1px solid red;
+        }
+        .buttons{
+            margin:0 auto;
+            width: 800px;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            background-color: antiquewhite;
+        }
+        .buttons button{
+            margin: 0 10px;
+            background-color: aliceblue;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 30px;
+            text-align: center;
+        }
+        
+        .buttons button:hover{
+            background-color: black;
+            color:aliceblue;
+            cursor: pointer;
+            filter: brightness(.9);
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <canvas width="800" height="600" id="canvas"></canvas>
+
+        <div class="buttons">
+            <button id="up">+</button>
+            <span id="size">30</span>
+            <button id="down">-</button>
+           <input type="color" name="color" id="color">
+            <button id="clear">clear</button>
+        </div>
+
+    </div>
+    
+</body>
+<script>
+    const container = document.querySelector('container')
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+  const colorEl = document.getElementById('color');
+  const span = document.getElementById("size");
+  const up= document.getElementById('up');
+  const down= document.getElementById('down');
+  const clear= document.getElementById('clear')
+
+  let sizeValue = 30;
+  let painting = false;
+  let x=undefined;
+  let y=undefined;
+  let color='black'
+
+  canvas.addEventListener('mousedown',(e)=>{
+    painting=true;
+    x=e.offsetX;
+    y=e.offsetY;
+   
+ 
+  })
+
+  canvas.addEventListener('mousemove',(e)=>{
+    if(painting){
+      const x2= e.offsetX;
+     const y2= e.offsetY;
+        draw(x,y,x2,y2)
+        x=x2;
+        y=y2
+    }
+ 
+  })
+canvas.addEventListener('mouseup',()=>{
+    painting=false;
+    x=undefined;
+    y=undefined;
+  })
+
+function drawCircle(x,y){
+    ctx.beginPath();
+    ctx.arc(x,y,sizeValue,0,Math.PI*2)
+    ctx.fill();
+    ctx.fillStyle=color;
+
+}
+drawCircle()
+
+
+function draw(x,y,x2,y2){
+ctx.beginPath();
+ctx.moveTo(x,y);
+ctx.lineTo(x2,y2);
+ctx.stroke();
+ctx.strokeStyle=color;
+ctx.lineWidth=sizeValue;
+
+}
+
+up.addEventListener('click',()=>{
+    sizeValue+=5;
+    if(sizeValue>50){
+        sizeValue=50
+    }
+    updateSize()
+})
+
+down.addEventListener('click',()=>{
+    sizeValue-=5;
+    if(sizeValue<1){
+        sizeValue=1
+    }
+updateSize()
+})
+
+function updateSize(){
+    span.innerHTML = sizeValue;
+}
+
+colorEl.addEventListener('change',(e)=>{
+  color=e.target.value
+})
+
+clear.addEventListener('click',()=>{
+    ctx.clearRect(0,0,canvas.width,canvas.height)
+})
+</script>
+</html>

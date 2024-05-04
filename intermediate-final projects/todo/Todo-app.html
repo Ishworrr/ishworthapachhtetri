@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+</head>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #444;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+h1 {
+    color: rgb(179, 131, 226);
+    font-size: 5rem;
+    text-align: center;
+    opacity: 0.4;
+}
+
+form {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    width: 400px;
+}
+
+.input {
+    border: none;
+    box-shadow:2px 4px 78px -12px rgba(0,0,0,.3) ;
+    color: #444;
+    font-size: 2rem;
+    padding: 1rem 2rem;
+    display: block;
+    width: 100%;
+    /* outline: none; */
+}
+
+.input::placeholder {
+    color: #d5d5d5;
+}
+
+.todos {
+    background-color: #fff;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+.todos li{
+    border: 1px solid #e5e5e5;
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    cursor: pointer;
+}
+
+.todos li.done{
+    color: #d5d5d5;
+  text-decoration: line-through;
+}
+small{
+    margin-top:3rem;
+    color: #b5b5b5;
+}
+    </style>
+<body>
+   <h1>todos</h1>
+        <form id="form">
+            <input
+                type="text"
+                id="input"
+                class="input"
+                placeholder="Enter your todo"
+                autocomplete="off"
+            />
+            <ul class="todos" id="todos">
+                <!-- <li>This is a todo</li> -->
+            </ul>
+        </form>
+        <small>Left click to toggle complete. <br />Right click to delete the
+        todo.</small>
+</body>
+<script>
+    const form = document.getElementById('form');
+    const input = document.getElementById('input');
+    const todosUL = document.getElementById("todos");
+
+    const todos = JSON.parse(localStorage.getItem('todos')) ;
+    if(todos){
+        todos.forEach((todo) => {
+            addTodo(todo);
+        });
+    }
+
+
+    form.addEventListener('submit',(e)=>{
+       e.preventDefault();
+       addTodo();
+   
+    })
+
+    function addTodo(todo) {
+
+        let todoText = input.value ;
+
+        if(todo){
+        todoText = todo.text;
+    }
+
+        if(todoText){
+            const todoEl = document.createElement('li');
+
+            if(todo && todo.done){
+                todoEl.classList.add('done');
+            }
+
+            todoEl.innerHTML = todoText;
+
+            todoEl.addEventListener('click',()=>{
+                todoEl.classList.toggle('done');
+                updateLs();
+            })
+
+            todoEl.addEventListener('contextmenu',(en)=>{
+                en.preventDefault();
+                todoEl.remove();
+                updateLs();
+            });
+
+            todosUL.appendChild(todoEl)
+            input.value='';
+            updateLs();
+
+        }
+        
+    }
+
+    function updateLs(){
+        const todosEl = document.querySelectorAll('li');
+        const todos =[];
+        todosEl.forEach((todoEl)=>{
+            todos.push({
+                text:todoEl.innerText,
+                done: todoEl.classList.contains("done"),
+            });
+
+        });
+        localStorage.setItem("todos", JSON.stringify(todos));
+    }
+
+
+
+</script>
+</html>

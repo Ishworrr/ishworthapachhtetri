@@ -158,3 +158,385 @@ function updatee(){
     </script>
 </body>
 </html>
+
+
+
+<!-- 
+
+<template>
+    <div class="vpply-upload_container">
+       - <span class="vpply-upload_title" v-if="!upload_data.upload_complete">Please wait while your video uploads, do not close this tab</span>
+       - <span class="vpply-upload_title" v-if="upload_data.upload_complete"> Your responses have been successfully uploaded </span>
+       - <div class="vpply-upload_items" v-if="!upload_data.upload_complete">
+        -    <div v-for="p, index in payload" :key="index" class="vpply-upload_item">
+      +<div v-for="(question, index) in payload" :key="index" class="question-container">
+       + <h3 class="question-title">{{ question.title }}</h3>
+        +<div class="vpply-upload_items" v-if="!question.uploaded">
+         + <div class="vpply-upload_item">
+            <span>{{ uploadMessage(index) }}</span>
+   - 
+            <div class="vpply-uploader_container">
+            -        <div class="vpply-uploader_inner" :style="`width: ${upload_data.loader_width[index]}%`">
+          -              <div class="vpply-uploader_effect" :style="`background: repeating-linear-gradient(45deg, ${brand_color}ce, ${brand_color}ce 15px, ${brand_color} 15px, ${brand_color} 30px);`">
+          -              </div>
+       -             </div>
+        +      <div class="vpply-uploader_inner" :style="{ width: `${upload_data.loader_width[index]}%` }">
+         +       <div class="vpply-uploader_effect"></div>
+              </div>
+    -
+              <div class="vpply-finished_upload_icon" :class="{ 'vpply-upload_done': upload_data.finished_index[index] }">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+     +   <span v-else class="vpply-upload_title">Your response for this question has been successfully uploaded</span>
+    +  </div>
+   + </div>
+  </template>
+  <script>
+  @@ -26,13 +25,13 @@
+    props: ['payload', 'upload_data', 'brand_color'],
+    methods: {
+      uploadMessage(index) {
+      -          return `${index + 1} of ${this.payload.length}`
+       -     }
+       + return `${index + 1} of ${this.payload.length}`;
+      }
+    }
+    
+ +};
+  </script>
+  +  
+    <style>
+    .vpply-upload_container {
+      text-align: center;
+   -->
+
+
+
+//changed part1
+
+<template>
+    <div class="vpply-upload_container">
+      <div v-for="(question, index) in payload" :key="index" class="question-container">
+        <h3 class="question-title">{{ question.title }}</h3>
+        <div class="vpply-upload_items">
+          <div class="vpply-upload_item">
+            <span>{{ uploadMessage(index) }}</span>
+            <div class="vpply-uploader_container">
+              <div class="vpply-uploader_inner" :style="{ width: `${upload_data.loader_width[index]}%` }">
+                <div class="vpply-uploader_effect"></div>
+              </div>
+              <div class="vpply-finished_upload_icon" :class="{ 'vpply-upload_done': upload_data.finished_index[index] }">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+            </div>
+          </div>
+          <span v-if="upload_data.uploading_index === index" class="uploading-message">Uploading your response...</span>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    props: ['payload', 'upload_data', 'brand_color'],
+    methods: {
+      uploadMessage(index) {
+        return `${index + 1} of ${this.payload.length}`;
+      }
+    }
+  };
+  </script>
+  
+  <script>
+  export default {
+    props: ['payload', 'upload_data', 'brand_color'],
+    methods: {
+      uploadMessage(index) {
+        return `${index + 1} of ${this.payload.length}`;
+      }
+    }
+  };
+  </script>
+  
+    
+    <style>
+    .vpply-upload_container {
+      text-align: center;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      height: 100%;
+      width: 100%;
+      border-radius: 8px;
+    }
+    .vpply-uploader_container {
+      width: 200px;
+      height: 28px;
+      border-radius: 16px;
+      background-color: #f1f1f1;
+    }
+    .vpply-upload_title{
+        font-weight: bold;
+        font-family: 'Lato', sans-serif;
+        margin: 16px;
+    }
+    .vpply-upload_items{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-height: 300px;
+        overflow: scroll;
+        padding: 16px;
+        box-sizing: border-box;
+    }
+    .vpply-upload_item{
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+    .vpply-upload_item > span:first-child{
+        margin-right: 16px;
+    }
+    .vpply-finished_upload_icon{
+        margin-left: 16px;
+        height: 24px;
+        width: 24px;
+        background-color: grey;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .vpply-upload_done{
+        background-color: green;
+    }
+    .vpply-percent_message{
+        color: #272727;
+        font-family: 'Lato', sans-serif;
+        display: flex;
+        flex-direction: column
+    }
+    .vpply-percent_message span{
+        margin-bottom: 8px;
+    }
+    .vpply-uploader_inner {
+      width: 0%;
+      border-radius: 16px;
+      height: inherit;
+      overflow: hidden;
+    }
+    .vpply-uploader_effect {
+      width: 400px;
+      height: 24px;
+      animation: 10s loader-filled infinite ease-in-out;
+    }
+    @keyframes loader-filled{
+        0%{transform: translateX(0)}
+        50%{transform: translateX(-200px)}
+        100%{transform: translateX(0px)}
+    }
+    </style>
+    
+
+
+
+    //changed part2
+    <template>
+        <div class="vpply-upload_container">
+          <div v-for="(question, index) in payload" :key="index" class="question-container">
+            <h3 class="question-title">{{ question.title }}</h3>
+            <div class="vpply-upload_items">
+              <div class="vpply-upload_item">
+                <span>{{ uploadMessage(index) }}</span>
+                <div class="vpply-uploader_container">
+                  <div class="vpply-uploader_inner" :style="{ width: `${upload_data.loader_width[index]}%` }">
+                    <div class="vpply-uploader_effect"></div>
+                  </div>
+                  <div class="vpply-finished_upload_icon" :class="{ 'vpply-upload_done': upload_data.finished_index[index] }">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                </div>
+              </div>
+              <span v-if="upload_data.uploading_index === index" class="uploading-message">Uploading your response...</span>
+            </div>
+          </div>
+        </div>
+      </template>
+      
+      <script>
+      export default {
+        props: ['payload', 'upload_data', 'brand_color'],
+        methods: {
+          uploadMessage(index) {
+            return `${index + 1} of ${this.payload.length}`;
+          }
+        }
+      };
+      </script>
+
+
+
+
+//chaneg 3
+<template>
+    <div class="vpply-upload_container">
+      <div v-for="(question, index) in payload" :key="index" class="question-container">
+        <h3 class="question-title">{{ question.title }}</h3>
+        <div class="vpply-upload_items">
+          <div class="vpply-upload_item">
+            <span>{{ uploadMessage(index) }}</span>
+            <div class="vpply-uploader_container">
+              <div class="vpply-uploader_inner" :style="{ width: `${upload_data.loader_width[index]}%` }">
+                <div class="vpply-uploader_effect"></div>
+              </div>
+              <div class="vpply-finished_upload_icon" :class="{ 'vpply-upload_done': upload_data.finished_index[index] }">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+            </div>
+          </div>
+          <span v-if="upload_data.uploading_index === index" class="uploading-message">Uploading your response...</span>
+        </div>
+        <!-- Include the message and CSS for uploading after each question -->
+        <div class="vpply-upload_message">
+          <span class="vpply-upload_title">Please wait while your video uploads, do not close this tab</span>
+          <!-- CSS for uploading -->
+          <div class="vpply-uploader_container">
+            <div class="vpply-uploader_inner" :style="{ width: `${upload_data.loader_width[index]}%` }">
+              <div class="vpply-uploader_effect"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    props: ['payload', 'upload_data', 'brand_color'],
+    methods: {
+      uploadMessage(index) {
+        return `${index + 1} of ${this.payload.length}`;
+      }
+    }
+  };
+  </script>
+
+
+//change 4
+<template>
+    <div class="vpply-upload_container">
+      <div v-for="(question, index) in payload" :key="index" class="question-container">
+        <h3 class="question-title">{{ question.title }}</h3>
+        <div class="vpply-upload_items">
+          <div class="vpply-upload_item">
+            <span>{{ uploadMessage(index) }}</span>
+            <div class="vpply-uploader_container">
+              <div class="vpply-uploader_inner" :style="{ width: `${upload_data.loader_width[index]}%` }">
+                <div class="vpply-uploader_effect"></div>
+              </div>
+              <div class="vpply-finished_upload_icon" :class="{ 'vpply-upload_done': upload_data.finished_index[index] }">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+            </div>
+          </div>
+          <span v-if="upload_data.uploading_index === index" class="uploading-message">Uploading your response...</span>
+        </div>
+        <!-- Include the submission page after each question is completed -->
+        <div v-if="upload_data.finished_index[index]" class="submission-page">
+          <!-- Your submission page HTML and CSS here -->
+          <span class="submission-message">Your responses have been successfully uploaded</span>
+          <!-- Additional content if needed -->
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    props: ['payload', 'upload_data', 'brand_color'],
+    methods: {
+      uploadMessage(index) {
+        return `${index + 1} of ${this.payload.length}`;
+      }
+    }
+  };
+  </script>
+  
+  <style>
+  /* Your CSS styles */
+  .vpply-upload_container {
+    text-align: center;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .question-container {
+    margin-bottom: 20px; /* Add margin between question containers */
+  }
+  
+  .question-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .vpply-upload_item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .vpply-upload_item > span:first-child {
+    margin-right: 16px;
+  }
+  
+  .vpply-uploader_container {
+    width: 200px;
+    height: 28px;
+    border-radius: 16px;
+    background-color: #f1f1f1;
+  }
+  
+  .vpply-uploader_inner {
+    width: 0%;
+    border-radius: 16px;
+    height: inherit;
+    overflow: hidden;
+  }
+  
+  .vpply-uploader_effect {
+    width: 400px;
+    height: 24px;
+    animation: 10s loader-filled infinite ease-in-out;
+  }
+  
+  .uploading-message {
+    margin-top: 8px;
+    color: #777;
+  }
+  
+  .submission-page {
+    margin-top: 20px;
+  }
+  
+  .submission-message {
+    font-weight: bold;
+    color: green;
+  }
+  </style>
+  

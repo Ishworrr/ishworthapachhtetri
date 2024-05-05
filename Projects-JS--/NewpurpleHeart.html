@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Heart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        *{
+            box-sizing: border-box;
+        }
+
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            height: 100vh;
+            background-color: rgb(228, 218, 238);
+            
+        }
+        .heart{
+            font-family: 'Poppins', sans-serif;
+            font-size: 50px;
+            color: #ff0000;
+            position: absolute;
+            top:-1vh;
+            transform: translateY(50%);
+            animation: fall 3s linear;
+            /* animation: infinite; */
+        }
+   
+        @keyframes fall {
+
+            to{
+                transform: translateY(105vh);
+            }
+            
+        }
+
+        </style>
+</head>
+
+<body>
+   
+    <script>
+function get(){
+    const heart = document.createElement('div')
+heart.classList.add('heart');
+// heart.innerHTML='♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡';
+
+heart.innerHTML='♡';
+heart.style.left=Math.random()*100+'vh';
+heart.style.animationDuration=Math.random()*2+10+'s';
+
+document.body.appendChild(heart);
+setTimeout(() => {
+    heart.remove();
+   }, 5000);
+    
+}
+
+// setTimeout(get, 100);
+    
+setInterval(get, 300);
+
+     
+        </script>
+</body>
+</html>

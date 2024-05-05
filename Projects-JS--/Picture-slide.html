@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Heart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        *{
+            box-sizing: border-box;
+        }
+
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            height: 100vh;
+            background-color: rgb(228, 218, 238);
+           
+          
+        }
+
+        .carousel{
+            box-shadow: rgba(183, 173, 173, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+            width:500px;
+            height:500px;
+            overflow:hidden;
+
+        }
+        .image-container{
+            display: flex;
+            transition: transform 0.9s linear;
+        }
+       img{
+        width:500px;
+            height:500px;
+            object-fit: cover;
+            transform: translateX(0);
+
+       }
+       .buttons button{
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 20px;
+        position: fixed;
+        background-color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+       }
+       #prev{
+        /* left: 10px; */
+        transform: translateX(250%);
+        background-color: aqua;
+    }
+       #next{
+        /* right: 10px; */
+        transform: translatex(400%);
+        background-color: lightcoral;
+       }
+        </style>
+</head>
+
+<body>
+    <div class="carousel">
+        <div class="image-container" id="imgs">
+            <img
+                src="https://images.unsplash.com/photo-1599394022918-6c2776530abb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1458&q=80"
+                alt=""
+            />
+            <img
+                src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
+                alt=""
+            />
+            <img
+                src="https://images.unsplash.com/photo-1599423300746-b62533397364?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
+                alt=""
+            />
+            <img
+                src="https://images.unsplash.com/photo-1599561046251-bfb9465b4c44?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1492&q=80"
+                alt=""
+            />
+        </div>
+        <div class="buttons">
+            <button id="prev">prev</button>
+            <button id="next">next</button>
+        </div>
+    </div>
+    <script>
+        const imgs = document.getElementById('imgs');
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+        const img = document.querySelectorAll('#imgs img')
+        let idx = 0;
+     
+       function go() {
+        idx++
+         if(idx>img.length-1){
+        idx=0
+        }
+        // else if(idx<0){
+        //     idx--
+        // }
+        // else{
+        //     idx=0
+        // }
+ imgs.style.transform = `translateX(${-idx*500}px)`
+
+      }
+
+prev.addEventListener('click',()=>{
+    idx--
+    if(idx<0){
+        idx=img.length-1
+    }
+    imgs.style.transform = `translateX(${-idx*500}px)`
+})
+
+next.addEventListener('click',()=>{
+idx++
+         if(idx>img.length-1){
+        idx=0
+        }
+
+        imgs.style.transform = `translateX(${-idx*500}px)`
+
+   
+    })
+
+setInterval(() => {
+    go()
+}, 3000);
+
+        </script>
+</body>
+</html>

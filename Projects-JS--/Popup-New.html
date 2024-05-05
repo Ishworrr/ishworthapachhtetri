@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>popup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        *{
+            box-sizing: border-box;
+        }
+
+        body{
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           min-height:100vh;
+           background-color: aliceblue;
+           font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+        }
+       
+        #btn{
+            background-color: rebeccapurple;
+            color: aliceblue;
+            border: none;
+            font-size: 40px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        #btn:hover{
+            background-color: rgb(250, 250, 250);
+            color: rebeccapurple;
+        }
+        .popup{
+            background-color: rgb(85, 159, 154);
+            color: aliceblue;
+            border: none;
+            font-size: 30px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 15px;
+            position: relative;
+            display: none;
+        }
+        .popup button{
+            background-color: rgb(27, 78, 232);
+            color: aliceblue;
+            border: none;
+            font-size: 20px;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 15px;
+            position: absolute;
+            top:5%;
+            right: 1%;
+        }
+
+        </style>
+</head>
+
+<body>
+    
+    <button id="btn"><i class="fa-solid fa-bars"></i> Open</button>
+    <div class="popup" id="popup">
+        <div class="pop">
+            <button id="close">Close X</button>
+            <h1>youtube</h1>
+
+            <p>i am the best developer around, got  that....</p>
+        </div>
+    </div>
+    
+    <script>
+        const btn = document.getElementById('btn')
+         const popup = document.getElementById('popup');
+         const close = document.getElementById('close');
+        btn.addEventListener('click',()=>{
+            popup.style.display = 'block';
+            btn.style.display='none';
+        })
+        close.addEventListener('click',()=>{
+            popup.style.display = 'none';
+            btn.style.display='block';
+        })
+    
+
+
+     
+        </script>
+</body>
+</html>

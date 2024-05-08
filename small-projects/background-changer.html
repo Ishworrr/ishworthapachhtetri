@@ -42,7 +42,8 @@
        button:active{
         background-color: blanchedalmond;
         box-shadow: 0;
-        transform: translate(2px,2px);
+        transform: translate(20px,2px);
+        background-color: hsl(hue, saturation, lightness);
        }
 
         </style>
@@ -65,11 +66,20 @@ function randomBg() {
 //     //return colors[Math.floor(Math.random() * colors.length)]; dont need trhis
 //     console.log(colors);
 
-    return `hsl(${Math.floor(Math.random()*360)},100%,50%)`;
+    // return `hsl(${Math.floor(Math.random()*360)},100%,50%)`;
+    // return `rgb(${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)}`;
+   // return `#${Math.floor(Math.random()*16777215).toString(16)}`
 
 
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
  
+
 
 
      

@@ -114,6 +114,10 @@ background-color: azure;
  
           }else if(buttonValue==='='){
             input.value = eval(input.value);    
+            setTimeout(() => {
+                input.value='';
+            }, 2000);
+            
           }else{
             input.value  += buttonValue;
           }

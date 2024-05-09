@@ -103,70 +103,24 @@
     
 
     <script>
-    //     const inputEl= document.getElementById( 'display' );
-    //       // const buttonsEl =document.querySelector(".buttons");
-    //     const buttonEl = document.querySelectorAll("button");
+       const button = document.querySelectorAll('button');
+       const input = document.getElementById('display');
+       button.forEach(button => {
+           button.addEventListener('click', function(e){
+              // let value = e.target.textContent;
+              value=button.innerHTML;
+               if(value ==='C'){
+                input.value = '';
+               }else if(value ==='='){
+                input.value = eval(input.value)
+               }
+                else{
+                    input.value += value;
+ 
+               }
 
-    //     console.log(buttonEl);
-       
-    //  for (let index = 0; index < buttonEl.length; index++) {   
-    //     buttonEl[index].addEventListener( "click", () =>{
-    //         const buttonValue = buttonEl[index].textContent;
-    //        console.log(buttonEl[index].textContent);
-    //         if(buttonValue==='C'){
-    //             clearResult();
-
-    //         }else if(buttonValue==='='){
-    //             calculateResult()
-    //         }else{
-    //             doit(buttonValue);
-    //         }
-    //     })
-    // }
-
-    //     function clearResult() {
-    //         inputEl.value='';
-            
-    //     }
-    //     function calculateResult() {
-    //         inputEl.value = eval(inputEl.value)
-    //     }
-    //     function doit(buttonValue) {
-    //         inputEl.value += buttonValue;
-            
-    //     }
-
-
-
-    const buttonsEl = document.querySelectorAll("button");
-
-const inputFieldEl = document.getElementById("display");
-
-for (let i = 0; i < buttonsEl.length; i++) {
-  buttonsEl[i].addEventListener("click", () => {
-    const buttonValue = buttonsEl[i].textContent;
-    if (buttonValue === "C") {
-      clearResult();
-    } else if (buttonValue === "=") {
-      calculateResult();
-    } else {
-      appendValue(buttonValue);
-    }
-  });
-}
-
-function clearResult() {
-  inputFieldEl.value = "";
-}
-
-function calculateResult() {
-  inputFieldEl.value = eval(inputFieldEl.value);
-}
-
-function appendValue(buttonValue) {
-  inputFieldEl.value += buttonValue;
-  //   inputFieldEl.value = inputFieldEl.value + buttonValue;
-}
+               })
+            })
     </script>
 </body>
 </html>

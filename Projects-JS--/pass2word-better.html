@@ -149,103 +149,89 @@ body {
         const symbols = "!@#$%^&*()_+=";
 
 
-        function getLowercase(){
-            return lowerLetters[Math.floor(Math.random()*lowerLetters.length)]
+      function upperLettersA(){
+        return upperLetters[Math.floor(Math.random()*upperLetters.length)]
+      }
+      function lowerLettersA(){
+        return lowerLetters[Math.floor(Math.random()*lowerLetters.length)]
+      }
+      function numbersA(){
+        return numbers[Math.floor(Math.random()*numbers.length)]
+      }
+      function symbolsA(){
+        return symbols[Math.floor(Math.random()*symbols.length)]
+      }
+
+      function newPassword(){
+        let password='';
+        inputValue = input.value;
+        if(inputUpper.checked){
+            password+=upperLettersA()
         }
-        function getUppercase(){
-            return upperLetters[Math.floor(Math.random()*upperLetters.length)]
+        if(inputLower.checked){
+            password+=lowerLettersA()
         }
-        function getNumber(){
-            return numbers[Math.floor(Math.random()*numbers.length)]
+        if(inputNumber.checked){
+            password+=numbersA()
         }
-
-        function getSymbol(){
-            return symbols[Math.floor(Math.random()*symbols.length)]
-        }
-
-        function generatePassword(){
-            // inputValue = input.value;
-            // let password='';
-            // for (let index = 0; index < inputValue; index++) {
-            //     const x = othe();
-            //     password+=x;
-                
-            // }
-
-            // span.innerHTML= password;
-            inputValue = input.value;
-            let password='';
-
-            if(inputUpper.checked){
-              password+=getUppercase();
-            }
-            if(inputLower.checked){
-                password+=getLowercase();
-            }
-            if(inputNumber.checked){
-                password+=getNumber();
-            }
-            if(inputSymbol.checked){
-                password+=getSymbol();
-            }
-
-            for(let i=password.length; i<inputValue;i++){
-                const x= othe();
-                password+=x;
-            }
-
-            span.innerHTML=password;
-
+        if(inputSymbol.checked){
+            password+=symbolsA()
         }
 
-        function othe() {
-            let xs =[];
-            if(inputUpper.checked){
-                xs.push(getUppercase())
-            }
-            if(inputLower.checked){
-                xs.push(getLowercase())
-            }
-            if(inputNumber.checked){
-                xs.push(getNumber())
-            }
-            if(inputSymbol.checked){
-                xs.push(getSymbol())
-            }
-
-           // if(xs.length===0){return 'try again mate'}
-            if(xs.length===0){
-         
-                // alert('add value')
-               return ''
-            }
-            return xs[Math.floor(Math.random()*xs.length)];
+        for (let index = password.length; index < inputValue; index++) {
+          const x = otherr();
+          password += x;
         }
-
-generate.addEventListener('click',generatePassword)
-
-button.addEventListener('click',()=>{
-    input.select();
-    input.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(input.value)
-    button.innerText='Copied'
-    setTimeout(()=>{
-        button.innerText='Copy'
-    },3000)
+       span.innerHTML = password;
+            
+      }
 
 
-// const textarea = document.createElement("textarea");
-//     const password = span.innerText;
-//     if(!password){
-//         return ;
-//     }
-//     textarea.value=password;
-//     document.body.appendChild(textarea);
-//     textarea.select();
-//     document.execCommand('copy');
-//     textarea.remove();
-//     alert('copied')
-})
+      function otherr(){
+        const xs = [];
+        if(inputUpper.checked){
+            xs.push(upperLettersA())
+        }
+        if(inputLower.checked){
+            xs.push(lowerLettersA())
+        }
+        if(inputNumber.checked){
+            xs.push(numbersA())
+        }
+        if(inputSymbol.checked){
+            xs.push(symbolsA())
+        }
+        if(xs.length===0){return ''};
+        return xs[Math.floor(Math.random()*xs.length)]
+
+      }
+
+      generate.addEventListener('click',()=>{
+        newPassword();
+      })
+
+      button.addEventListener('click',()=>{
+        const textarea = document.createElement("textarea");
+    const password = span.innerText;
+    if(!password){
+        return ;
+    }
+    textarea.value=password;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    textarea.remove();
+    button.innerHTML=span.innerHTML +' copied'
+    //alert('copied')
+    
+    //     input.select();
+    // input.setSelectionRange(0, 99999);
+    //     navigator.clipboard.writeText(input.value);
+    //    button.innerHTML='click to copy';
+    //     setTimeout(() => {
+    //         button.innerHTML=span.innerHTML +' copied';
+    //     }, 2000);
+      })
                </script>
 </body>
 </html>

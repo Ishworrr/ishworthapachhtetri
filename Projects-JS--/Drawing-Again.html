@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing App</title>
+</head>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+canvas{
+    border: 2px solid red;
+    border-radius: 5px;
+ 
+}
+
+.container{
+    background-color: rgb(35, 147, 245);
+    width:804px;
+    padding:10px 20px;
+    border-radius: 5px;
+    font-size: 24px;
+    display: flex;
+    border: 2px solid rebeccapurple;
+}
+.container>*{
+    background-color: #f5f5f5;
+    border: none;
+    font-size: 2rem;
+    padding: .25rem;
+    width:50px;
+    margin: 2px;
+    align-items: center;
+    text-align: center;
+    height: 50px;
+    border-radius: 30%;
+    /* display: inline-flex; */
+    justify-content: center;
+}
+/* .reset{
+    width:100px;
+} */
+.container>*:last-child{
+    margin: auto;
+    width: 100px;
+    font-size: 1.9rem;
+}
+
+    </style>
+<body>
+<canvas width="800px" height="600px"></canvas>
+<div class="container">
+    <button class="increase" id="increase">+</button>
+   <span class="span">30</span>
+    <button class="decrease" id="decrease">-</button>
+    <input type="color" name="color" id="color">
+    <button class="reset" id="reset">Reset</button>
+</div>
+
+    <script>
+    const increase = document.getElementById('increase');
+    const decrease = document.getElementById('decrease');
+    const span = document.querySelector('.span');
+    const reset = document.getElementById('reset');
+    const colorEl = document.getElementById('color');
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+   canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let size=30;
+    let color='red'
+    isPressed=false;
+    let x ;
+    let y;
+
+    canvas.addEventListener('mousedown',(e)=>{
+        isPressed=true;
+        x = event.offsetX;
+        y = event.offsetY;
+        console.log(x,y);
+    })
+
+    canvas.addEventListener('mousemove',(e)=>{
+if(isPressed){
+    const x2 = e.offsetX;
+    const y2 = e.offsetY;
+    f1(x,y,x2,y2);
+    x=x2;
+y=y2;
+}
+
+    })
+//     function f2(x,y){
+        // ctx.beginPath();
+        // ctx.arc(x,y,size,0,Math.PI*2)
+        // ctx.fill();
+        // ctx.fillStyle=color;
+
+//     }
+    function f1(x,y,x2,y2){
+        ctx.beginPath();
+        ctx.moveTo(x,y);
+        ctx.lineTo(x2,y2);
+        ctx.stroke();
+        ctx.strokeStyle=color;
+       ctx.lineWidth=size
+        
+
+    }
+
+    increase.addEventListener('click',()=>{
+       size+=5;
+       if(size>80){
+        size=50
+       }
+       sizeScreen()
+
+    })
+
+    decrease.addEventListener('click',()=>{
+        size-=5;
+       if(size<1){
+        size=1
+       }
+       sizeScreen()
+    })
+    function sizeScreen(){
+        span.innerHTML = size;
+    }
+
+    reset.addEventListener('click',(e)=>{
+       ctx.clearRect(0,0,canvas.width,canvas.height)
+    })
+    colorEl.addEventListener('change',(e)=>{
+        //ctx.strokeStyle = color.value;
+       color= e.target.value;
+    })
+
+
+          
+        </script>
+</body>
+</html>

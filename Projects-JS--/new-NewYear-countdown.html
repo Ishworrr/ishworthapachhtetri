@@ -61,20 +61,20 @@
 
         }
 
-        .rest #day::before{
+        .rest .day::before{
             content:'Days';
         }
-        .rest #hour::before{
+        .rest .hour::before{
             content:'Hours';
         }
-        .rest #minute::before{
+        .rest .minute::before{
             content:'Minutes';
         }
 
-        .rest #second::before{
+        .rest .second::before{
             content:'Seconds';
         }
-        .rest #msecond::before{
+        .rest .msecond::before{
             content:'MilliSeconds';
         }
       
@@ -89,61 +89,70 @@
              2025
             </div>
                     <div class="rest">
-                        <div id="day">00</div>
-                        <div id="hour">00</div>
-                        <div id="minute">00</div>
-                        <div id="second">00</div>
-                        <div id="msecond">00</div>
+                        <div class="day">00</div>
+                        <div class="hour">00</div>
+
+                        <div class="minute">00</div>
+                        <div class="second">00</div>
+                        <div class="msecond">00</div>
 
                  
                     </div>
      </div>
 
      <script>
-        const restEl = document.querySelector('.rest');
-        const dayEl = document.getElementById('day');
-        const hourEl = document.getElementById('hour');
-
-        const minuteEl = document.getElementById('minute');
-        const secondEl = document.getElementById('second');
-        const msecondEl = document.getElementById('msecond');
-
-        const newDate = new Date("Jan 1, 2025, 00:00:00").getTime();
-        updateCountDown();
-        function  updateCountDown(){
-            const now = new Date().getTime();
-            console.log(now);
-            const gap= newDate - now;
-            const msecond = 1;
-            const second=msecond*1000;
-            const minute = second*60;
-            const hour = minute*60;
-            const day = hour*24;
-            // const day = 1*1000*60*60*24;
-            // const hour = 1*1000*60*60;
-            // const minute = 1*1000*60;
-            // const second = 1*1000;
-            // const msecond = 1;
-
-            const d = Math.floor(gap/day);
-            const h =Math.floor((gap%day)/hour);
-            const m =Math.floor((gap%hour)/minute);
-            const s =Math.floor((gap%minute)/second);
-            const ms =Math.floor((gap%second)/msecond);
+       const rest = document.querySelector('.rest');
+       const day = document.querySelector('.day');
+       const hour = document.querySelector('.hour');
+       const minute = document.querySelector('.minute');
+       const second = document.querySelector('.second');
+       const msecond = document.querySelector('.msecond');
 
 
-            dayEl.innerText=d;
-            hourEl.innerText=h;
-            minuteEl.innerText=m;
-            secondEl.innerText=s;
-            msecondEl.innerText=ms;
+      function f1(){
+        const date = new Date().getTime();
+       const newYearTime = new Date('Jan 1, 2025, 00:00:00').getTime();
+       const diff = newYearTime-date;
 
-            setTimeout(updateCountDown, 1);
+        const ms = 1;
+       const s = ms*1000;
+       const m = s*60;
+       const h = m*60;
+       const d = h*24;
 
-          
+       const dayValue = Math.floor(diff/d);
+       const hourValue = Math.floor((diff%d)/h);
+       const minuteValue = Math.floor((diff%h)/m);
+       const secondValue= Math.floor((diff%m)/s);
+       const msecondValue = Math.floor((diff%s)/ms);
+       
 
-        }
+       day.innerHTML=dayValue;
+       hour.innerHTML=hourValue;
+       minute.innerHTML=minuteValue;
+       second.innerHTML=secondValue;
+       msecond.innerHTML=msecondValue;
+       if(dayValue<12){
+        day.innerHTML='0'+dayValue;
+       }
+       if(hourValue<12){
+        hour.innerHTML='0'+hourValue;
+       }
+       if(minuteValue<12){
+        minute.innerHTML='0'+minuteValue;
+       }
+       if(secondValue<12){
+        second.innerHTML='0'+secondValue;
+       }
+       if(msecondValue<12){
+        msecond.innerHTML='0'+msecondValue;
+       }
+      }
+       
 
+       setInterval(()=>{
+        f1()
+       },10)
         </Script>
 </body>
 </html>

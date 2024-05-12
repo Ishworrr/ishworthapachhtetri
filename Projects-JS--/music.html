@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music player</title>
+</head>
+<style>
+    
+    *{
+        box-sizing: border-box;
+
+    }
+
+    body{
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+        }
+
+        .title {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  
+        .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .player {
+    margin-bottom: 50px;
+  }
+.button{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border: none;
+    margin-right: 10px;
+    background-position: center;
+    background-size: 60%;
+}
+.button.active {
+    background-color: #0074d9;
+    color: #fff;
+  }
+  .play{
+    background: url('../intermediate-final projects/music player/play.png');
+    /* width:100px;
+    height:100px; */
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+  }
+
+  .pause{
+    background: url('../intermediate-final projects/music player/pause.png');
+    /* width:100px;
+    height:100px; */
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .progress{
+    height:5px;
+    background-color: #f5f5f5;
+    position: relative;
+  }
+  .progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #0074d9;
+    width: 0%;
+  }
+  .lists{
+    list-style-type:disc;
+    text-align: center;
+}
+.li{
+    /* margin-top: 10px;
+    font-size: 20px;
+    padding: 10px 20px;
+    background-color: #fff;
+    text-align: start;
+    width:100%; */
+
+    margin-bottom:10px;
+}
+    a{
+        text-decoration: none;
+        color: #000;
+        display: block;
+        padding: 10px;
+    background-color: #fff;
+    color: #333;
+    text-align: start;
+    }
+    .li a:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .li a.active-song {
+    background-color: #0074d9;
+    color: #fff;
+  }
+
+
+
+</style>
+<body>
+    <div class="container">
+        <h1 class="title">Music Player</h1>
+        <div class="player">
+            <audio class="audio" id="audio" src="" controls></audio>
+            <div class="buttons">
+                <button class="button play"></button>
+                <button class="button pause"></button>
+            </div>
+            <div class="progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+        <ul class="lists">
+            <li class="li">
+            <a href="#" data-src="../intermediate-final-projects/music player/songs/song1.m4a">Song 1</a>
+        </li>
+        <li class="li">
+            <a href="#" data-src="../intermediate-final-projects/music player/songs/song2.m4a">Song 2</a>
+        </li>
+        <li class="li">
+            <a href="#" data-src="../intermediate-final-projects/music player/songs/song3.m4a">Song 3</a>
+        </li>
+        </ul>
+    </div>
+
+    <script>
+        const play = document.querySelector('.play')
+        const pause = document.querySelector('.pause')
+        const audio = document.querySelector('.audio')
+        const bar = document.querySelector('.progress-bar')
+        const lis = document.querySelectorAll('.li');
+
+        const playlist =[
+            {title:'Song 1', src:'../intermediate-final-projects/music player/songs/song1.m4a'},
+            {title:'Song 2', src:'../intermediate-final-projects/music player/songs/song2.m4a'},
+            {title:'Song 3', src:'../intermediate-final-projects/music player/songs/song3.m4a'},
+
+
+        ]
+
+        const lunks = document.querySelectorAll('.li a')
+
+        lunks.forEach((link)=>{
+            link.addEventListener('click',(e)=>{
+                // const src = link.querySelector('a').dataset.src
+                // audio.src = src   
+                    e.preventDefault();
+                    const source = link.getAttribute("data-src");
+                    audio.setAttribute('src',source)
+                    //audio.src = source;
+                    // audio.play();
+                    aa()
+
+            // Remove active class from all links
+            lunks.forEach((link) => {
+                link.classList.remove("active-song");
+
+            });
+
+       // Add active class to clicked link
+       this.classList.add("active-song");
+
+            })
+        })
+ 
+
+       function aa(){ 
+
+        if(audio.paused){
+            audio.play();
+            play.classList.remove("active");
+      pause.classList.add("active");
+        }else{
+            audio.pause();
+            pause.classList.remove("active");
+      play.classList.add("active");
+        }
+        audio.addEventListener('timeupdate', () => {
+            bar.style.width = `${audio.currentTime / audio.duration * 100}%`
+           
+        })
+
+        bar.addEventListener('click',(e)=>{
+            const progressWidth = this.offsetWidth;
+      const clickedWidth = e.offsetX;
+      const duration = audio.duration;
+    const percent = (clickedWidth/progressWidth)*100;
+    audio.currentTime= (duration/100)*percent
+      //audio.currentTime = (clickedWidth / progressWidth) * duration;
+      bar.style.width = `${percent}%`;
+
+        })
+}
+playFirstSong()
+function playFirstSong() {
+    const firstSong = playlist[0].src;
+   audio.setAttribute("src", firstSong);
+    aa();
+  }
+        function playIt(){
+            play.addEventListener('click', () => {
+           // audio.src = audio.dataset.src
+            audio.play();
+            play.classList.remove("active");
+     pause.classList.add("active");
+        })
+        pause.addEventListener('click', () => {
+            audio.pause()
+            play.classList.add("active");
+     pause.classList.remove("active");
+        })
+
+        audio.addEventListener('play', () => {
+            play.classList.remove("active");
+     pause.classList.add("active");
+        })
+
+        audio.addEventListener('pause', () => {
+            play.classList.add("active");
+     pause.classList.remove("active");
+        })
+        }
+        playFirstSong();
+    </script>
+    
+</body>
+</html>

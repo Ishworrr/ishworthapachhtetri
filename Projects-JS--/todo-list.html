@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo </title>
+</head>
+<style>
+    body{
+        background-color: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        box-sizing: border-box;
+    }
+
+    h1{
+        text-align: center;
+    }
+    .top{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width:630px;
+       
+    }
+    input{
+        width:80%;
+        margin-right:20px ;
+        padding: 10px 20px;
+        font-size: 20px;
+        border: none;
+        border-radius: 10px;
+    }
+    .add{
+        padding: 10px 30px;
+        background-color: rgb(35, 45, 153);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .add:hover{
+        transform: scale(1.2);
+    }
+    .bb{
+        display: flex;
+    }
+    .list{
+        margin: 0;
+        margin-top: 20px;
+        /* border:1px solid red; */
+        /* border-bottom: 1px solid black; */
+        width: 600px;
+        /* border-top: 1px solid black; */
+        /* width: 560px; */
+        display: flex;
+        align-items: center;
+        justify-content:center;
+        list-style-type: none;
+        margin-left: 0;
+        padding-bottom: 5px;
+
+    }
+    .li{
+        width:400px;
+        margin: 0;
+        padding: 0;
+        /* border: 1px solid blue; */
+        font-size: 20px;
+        margin-right:10px ;
+
+        text-align:left;
+        padding: 10px 20px;
+        padding-left:10px ;
+    }
+    .button{
+        width:200px;
+    }
+    .edit{
+        padding: 10px 20px;
+        background-color: lightgreen;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;
+        margin-right:8.2px ;
+        cursor: pointer;
+    }
+ .checked{
+        text-decoration: line-through;
+        color: lightgray;
+    }
+    .edit:hover{
+        transform: scale(1.2);
+    }
+    .delete:hover{
+        transform: scale(1.2);
+    }
+    .delete{
+        padding: 10px 20px;
+        background-color: lightcoral;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;
+    }
+
+</style>
+<body>
+    <div class="container">
+    <h1>Todo List</h1>
+    <div class="top">
+    <input type="text" name="input" id="input" class="input">
+    <button id="add" class="add">Add</button>
+</div>
+    <!-- <ul id="list" class="list">
+        <li class="li">asdvsavs</li>
+
+    <div class="button">
+
+        <button class="edit">Edit </button>
+        <button class="delete">Delete </button>
+
+    </div>
+
+</li>
+
+    </ul> -->
+</div>
+    <script>
+          
+            const input= document.querySelector('.input')
+            const container= document.querySelector('.container')
+            const add= document.querySelector('.add')
+            
+        
+            let inputValue= input.value;
+
+            // const neew= JSON.parse(localStorage.getItem('pussh'));
+            // if(neew){
+            //     neew.forEach(text => {
+            //         f1(text)
+            //     })
+            // }
+
+            // input.addEventListener('submit',(e)=>{
+            //     e.preventDefault();
+            //     f1();
+            // })
+        
+            add.addEventListener('click',()=>{
+             
+                // const ul= document.createElement('ul')
+                // const inputValue = input.value.trim();
+                const inputValue = input.value.trim();
+
+             if(inputValue){
+                f1(inputValue)
+                input.value='';
+                storage()
+       }
+              
+            })
+        function f1(text=''){
+            // const inputValue= input.value;
+            // let item='';
+            const list= document.createElement('ul')
+            list.classList.add('list')
+            if (text && text.checked) {
+    list.classList.add("checked");
+  }
+
+            list.innerHTML=`
+            <div class="bb">
+                <li class="li">${text}</li>
+        
+        <div class="button">
+        
+            <button class="edit">Edit</button>
+            <button class="delete">Delete</button>
+        </div>
+    </div>
+
+        
+                `;
+                container.appendChild(list);
+                // item += list
+               const bb = document.querySelector('.bb')
+                const li= document.querySelector('.li')
+                const editEl= list.querySelector('.edit')
+            const deleteEl= list.querySelector('.delete')
+
+            editEl.addEventListener('click', () => toggleChecked(list));
+        
+                // editEl.addEventListener('click',()=>{
+                //    li.classList.toggle('checked')
+                //    storage();
+        
+                // })
+                deleteEl.addEventListener('click',()=>{
+                    list.remove();
+                     storage();
+                })
+
+                storage()
+
+        }
+
+        function toggleChecked(element) {
+            element.classList.toggle('checked');
+            storage();
+        }
+
+        function storage(){
+            const lists= container.querySelectorAll('.li')
+            const pussh=[]
+            lists.forEach((list)=>{
+                pussh.push({
+                    name:list.textContent,
+                    checked: liEl.classList.contains("checked"),
+
+                })
+
+            })
+            localStorage.setItem('pussh',JSON.stringify(pussh))
+        //         const items = Array.from(container.querySelectorAll('.li')).map(li => li.textContent);
+        // localStorage.setItem('pussh', JSON.stringify(items));
+        }
+
+//
+
+        //     const items = Array.from(container.querySelectorAll('.li')).map(li => li.textContent);
+        // localStorage.setItem('pussh', JSON.stringify(items));
+
+        //
+        window.addEventListener('DOMContentLoaded', () => {
+            const storedItems = JSON.parse(localStorage.getItem('pussh'));
+            if (storedItems) {
+                storedItems.forEach(item => f1(item));
+            }
+        });
+
+     
+        
+        
+        </script>
+    
+</body>
+
+
+</html>

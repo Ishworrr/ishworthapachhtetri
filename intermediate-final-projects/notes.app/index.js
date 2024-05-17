@@ -1,10 +1,7 @@
 const btnEl = document.getElementById("btn");
 const appEl = document.getElementById("app");
 
-getNotes().forEach((note) => {
-  const noteEl = createNoteEl(note.id, note.content);
-  appEl.insertBefore(noteEl, btnEl);
-});
+
 
 function createNoteEl(id, content) {
   const element = document.createElement("textarea");
@@ -47,9 +44,7 @@ function addNote() {
   };
   const noteEl = createNoteEl(noteObj.id, noteObj.content);
   appEl.insertBefore(noteEl, btnEl);
-
-  notes.push(noteObj);
-
+ notes.push(noteObj);
   saveNote(notes);
 }
 
@@ -59,6 +54,10 @@ function saveNote(notes) {
 
 function getNotes() {
   return JSON.parse(localStorage.getItem("note-app") || "[]");
+  // getNotes().forEach((note) => {
+  //   const noteEl = createNoteEl(note.id, note.content);
+  //   appEl.insertBefore(noteEl, btnEl);
+  // });
 }
 
 btnEl.addEventListener("click", addNote);

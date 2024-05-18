@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Month app</title>
+    <style>
+          *{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+        .container{
+            width: 100%;
+    height: 100vh;
+    background-color: salmon;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+        }
+        .calendar{
+            background-color: black;
+    color: lightgray;
+    width: 450px;
+    height: 520px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, .4);
+}
+        .months{
+            width: 100%;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: lightseagreen;
+            text-align: center;
+            border-radius: 10px;
+
+        }
+        .months h1{
+    font-size: 30px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+.months p{
+    font-size: 16px;
+}
+
+.days{
+    width: 100%;
+    height: 50px;
+    display: flex;
+}
+.days div{
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.date{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2px;
+}
+
+.date div{
+    font-size: 14px;
+    margin: 3px;
+    width: 57.5px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.date div:hover:not(.empty){
+    border: 2px solid gray;
+    cursor: pointer;
+}
+
+.today{
+    background-color: lightseagreen;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="calendar">
+        <div class="months">
+            <h1>aa</h1>
+            <p>aa</p>
+        </div>
+        <div class="days">
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+            <div>Sun</div>
+        </div>
+        <div class="date"></div>
+
+        </div>       
+    </div>
+    <script>
+        const h1 = document.querySelector(".months h1");
+        const p = document.querySelector(".months p");
+        const dateys = document.querySelector(".date");
+
+        // const monthInx = new Date().getMonth();
+        // const lastDay = new Date(new Date().getFullYear(), monthInx + 1, 0).getDate();
+        // const firstDay = new Date(new Date().getFullYear(), monthInx, 1).getDay() - 1;
+
+
+        const newMonth = new Date().getMonth();
+        const newLastDate = new Date(new Date().getFullYear(),newMonth+1,0).getDate();
+        const newFirstDay = new Date(new Date().getFullYear(),newMonth,1).getDay() - 1;
+
+        const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+        ];
+        h1.innerText = months[newMonth];
+        p.innerText = new Date().toDateString();
+
+        let days = "";
+
+        for (let i = newFirstDay; i > 0; i--) {
+        days += `<div class="empty"></div>`;
+        }
+        for (let i = 1; i <= newLastDate; i++) {
+        if (i === new Date().getDate()) {
+            days += `<div class="today">${i}</div>`;
+        } else {
+            days += `<div>${i}</div>`;
+        }
+        }
+
+        dateys.innerHTML = days;
+    </script>
+    
+</body>
+</html>

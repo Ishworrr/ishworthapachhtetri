@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+        body {
+  background-color: #f0f0f0;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  align-items: center;
+}
+
+ #timer {
+  font-size: 7rem;
+  font-weight: 700;
+  text-shadow: 2px 2px #f8a5c2;
+  color: #f92672;
+  width: 600px;
+  text-align: center;
+  margin: 40px auto;
+}
+
+#buttons {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  background-color: #f92672;
+  color: white;
+  border: none;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1.5rem 4rem;
+  margin: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s;
+}
+
+button:hover {
+  background-color: #f44583;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+button[disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+@media (max-width: 800px) {
+  #timer {
+    font-size: 4rem;
+    width: 350px;
+  }
+
+  button {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+  }
+} 
+
+    </style>
+</head>
+<body>
+
+    <div id="timer">00:00:00</div>
+    <div id="buttons">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+    </div>
+    <script>
+        const timer = document.getElementById("timer");
+        const start = document.getElementById("start");
+        const stopEl = document.getElementById("stop");
+        const reset = document.getElementById("reset");
+
+        let elapsed =0
+        let starting=0;
+        let Timeout;
+       // const today = new Date();
+       f1()
+       function f1(){
+         starting = Date.now()-elapsed;
+        console.log(starting);
+
+         Timeout = setInterval(() => {
+            elapsed = Date.now() - starting;
+            console.log(elapsed);
+            timer.innerHTML= formatTime(elapsed)
+        }, 10);
+        start.disabled = true;
+  stopEl.disabled = false;
+        }
+
+        function formatTime(elapsed) {
+            const s=1;
+            const m=60*s;
+            const h=60*m;
+            const d=24*h;
+            const hours = Math.floor(elapsed/ h );
+            const minutes = Math.floor((elapsed % h)/m);
+            const seconds = Math.floor((elapsed % m)/s);
+
+            return(
+                (hours>9?hours:'0'+hours)+":" +(minutes>9?minutes:'0'+minutes)+":" + (seconds>9?seconds:'0'+seconds)+":" + (seconds>9?seconds:'0'+seconds)
+            )
+
+        }
+        function stopTimer(){
+            clearInterval(Timeout)
+
+            stopEl.disabled=true;
+            start.disabled=false;
+        }
+        function resetTimer(){
+            clearInterval(Timeout)
+            elapsedTime = 0;
+  timer.textContent = "00:00:00";
+            
+            stopEl.disabled=false;
+            start.disabled=false;
+        }
+        start.addEventListener("click", f1);
+stopEl.addEventListener("click", stopTimer);
+reset.addEventListener("click", resetTimer);
+        
+
+    </script>
+</body>
+</html>

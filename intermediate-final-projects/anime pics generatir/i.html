@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Pics Generator</title>
+   <style>
+    body{
+    margin: 0;
+    background: linear-gradient(to right, lightblue, yellow);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.container{
+    background: aliceblue;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    text-align: center;
+    padding: 10px;
+    width: 450px;
+    margin: 5px;
+}
+
+.btn{
+    background-color: green;
+    color: aliceblue;
+    padding: 10px 30px;
+    font-size: 16px;
+    margin-bottom: 30px;
+    border-radius: 6px;
+    cursor: pointer;
+
+}
+
+.btn:disabled{
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+.anime-img{
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    border: 3px solid green;
+}
+
+.anime-name{
+    margin: 20px;
+    background-color: green;
+    color: aliceblue;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.anime-container{
+    display: none;
+}
+   </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Anime Pics Generator</h1>
+        <button class="btn" id="btn">Get Anime</button>
+        <div class="anime-container">
+            <img class="anime-img" src="https://c.files.bbci.co.uk/F382/production/_123883326_852a3a31-69d7-4849-81c7-8087bf630251.jpg">
+            <h3 class="anime-name">Anime Name</h3>
+        </div>
+    </div>
+    <script>
+        const btnEl = document.getElementById("btn");
+const animeContainerEl = document.querySelector(".anime-container");
+const animeImgEl = document.querySelector(".anime-img");
+const amineNameEl = document.querySelector(".anime-name");
+
+btnEl.addEventListener("click", async function () {
+  try {
+    btnEl.disabled = true;
+    btnEl.innerText = "Loading...";
+    amineNameEl.innerText = "Updating...";
+    animeImgEl.src = "spinner.svg";
+   // const response = await fetch("https://api.catboys.com/img");
+   //const response = await fetch("https://api.nekosapi.com/v3/images/random");
+   const response = await fetch("https://i.waifu.pics/")
+   const data = await response.json();
+    btnEl.disabled = false;
+    btnEl.innerText = "Get Anime";
+    animeContainerEl.style.display = "block";
+    animeImgEl.src = data.url;
+    amineNameEl.innerText = data.artist;
+  } catch (error) {
+    console.log(error);
+    btnEl.disabled = false;
+    btnEl.innerText = "Get Anime";
+    amineNameEl.innerText = "An error happened, please try again";
+  }
+});
+    </script>
+</body>
+</html>

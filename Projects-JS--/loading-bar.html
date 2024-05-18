@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+            color:orange;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            font-family: cursive;
+        }
+        .container{
+            text-align: center;
+            width: 400px;
+            position: relative;
+        }
+        .counter{
+            font-size: 40px;
+        }
+        .back {
+  position: absolute;
+  height: 8px;
+  background-color: lightgray;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+}
+.front {
+  position: absolute;
+  height: 8px;
+  background-color: orange;
+  width: 0%;
+  border-radius: 5px;
+  border: none;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Loading</h1>
+    <div class="counter">0%</div>
+    <hr class="back">
+    <hr class="front">
+</div>
+<script>
+    const counter = document.querySelector('.nmcounter');
+    const back = document.querySelector('.back');
+    const front = document.querySelector('.front');
+
+    let idd='';
+
+    aaaa()
+function aaaa(){
+    counter.innerText=idd+'%'
+    back.style.width=idd+'%'
+    idd++;
+  if (idd < 101) {
+    setTimeout(aaaa, 20);
+  }
+}
+</script>
+</body>
+
+</html>

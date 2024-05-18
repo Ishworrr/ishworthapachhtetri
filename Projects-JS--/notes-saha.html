@@ -91,11 +91,15 @@
         //const textarea = document.querySelector('textarea');
         const btn = document.querySelector('.btn');
         const notes = document.querySelector('.notes');
-
-        getNotes().forEach((note) => {
-            const noteEl = createNoteEl(note.id, note.content);
-            notes.insertBefore(noteEl, btn);
+     
+ const qq = JSON.parse(localStorage.getItem("note-app") || "[]");
+ if(qq){
+  qq.forEach((note) => {
+           createNoteEl(note.id, note.content);
+           // notes.insertBefore(noteEl, btn);
         });
+ }
+      
 
       function createNoteEl(id, content){
         const textarea = document.createElement('textarea');
@@ -147,14 +151,14 @@
             jer.push(objj);
             saveNotes(jer);
 }
-
+z
 
         function saveNote(jer) {
   localStorage.setItem("note-app", JSON.stringify(jer));
 }
-function getNotes() {
-  return JSON.parse(localStorage.getItem("note-app") || "[]");
-}
+// function getNotes() {
+//   return JSON.parse(localStorage.getItem("note-app") || "[]");
+// }
   
 btn.addEventListener('click',addNote);
 

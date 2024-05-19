@@ -122,7 +122,9 @@
 
         const newMonth = new Date().getMonth();
         const newLastDate = new Date(new Date().getFullYear(),newMonth+1,0).getDate();
+        console.log(newLastDate)
         const newFirstDay = new Date(new Date().getFullYear(),newMonth,1).getDay() - 1;
+        console.log(newFirstDay)
 
         const months = [
         "January",

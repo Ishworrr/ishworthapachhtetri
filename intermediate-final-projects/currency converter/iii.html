@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency COnvertter</title>
+    <style>
+        body{
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container{
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+        }
+        h1{
+            text-align: center;
+            font-size: 35px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #b33d3d;
+        }
+
+        .currency{
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .container select{
+            padding: 10px;
+        }
+        
+        /* .options{
+        
+            justify-content: space-between;
+            margin-bottom: 20px;
+
+        } */
+        .currency input{
+            border: 0;
+            font-size: 25px;
+            background: transparent;
+            text-align: right;
+            color: rgb(62, 137, 203);
+        }
+        .rate{
+    font-size: 16px;
+    font-weight: 600;
+}
+p{
+    text-align: center;
+}
+
+select:focus,
+input:focus{
+    outline: 0;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Currency COnvetter</h1>
+        <div class="currency">
+            <select name="list" id="options" class="options">
+                <option value="AUD">AUD</option>
+                <option value="CAD">CAD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="INR">INR</option>
+                <option value="JPY">JPY</option>
+                <option value="NPR">NPR</option>
+                <option value="USD" selected>USD</option>
+            </select>
+            <input type="number" name="convert" id="convert" class="convert" value="1" min="0">
+        </div>
+
+        <div class="currency">
+            <select name="list" id="options2" class="options2">
+                <option value="AUD">AUD</option>
+                <option value="CAD">CAD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="INR">INR</option>
+                <option value="JPY">JPY</option>
+                <option value="NPR" selected>NPR</option>
+                <option value="USD">USD</option>
+            </select>
+            <input type="number" id="convert2" class="convert2" disabled>
+        </div>
+
+        <p class="rate" id="rate"></p>
+    </div>
+<script>
+    const options = document.querySelector('.options');
+    const options2 = document.querySelector('.options2');
+    const convert = document.querySelector('.convert');
+    const convert2 = document.querySelector('.convert2');
+    const rate = document.querySelector('.rate');
+
+
+    updateRate()
+    function updateRate(){
+        fetch(`https://v6.exchangerate-api.com/v6/3927fcaa1bea9f5515e02e24/latest/${options.value}`).then((res)=>res.json()).then((data)=>{
+
+            const rates = data.conversion_rates[options2.value];
+            console.log(rates);
+            rate.textContent= `1 ${options.value} = ${rates + '' + options2.value}`;
+            convert2.value = (convert.value * rates).toFixed(2);
+        })
+
+    }
+    options.addEventListener("change", updateRate);
+
+options2.addEventListener("change", updateRate);
+
+convert.addEventListener("input", updateRate);
+
+</script>
+    
+</body>
+</html>

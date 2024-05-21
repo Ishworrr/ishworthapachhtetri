@@ -121,23 +121,127 @@
 
 
 // lesson4
-import React from  'react'
-import ReactDOM from 'react-dom/client'
- const navbar =(
-        <nav>
-            <h1>Lets see</h1>
-            <ul>
-            <li>Menu</li>
-                <li>About</li>
-                <li>Contact</li>
-            </ul>
-        </nav>
-    )
-    ReactDOM.render(navbar,document.getElementById('root'))
+    // import React from  'react'
+    // import ReactDOM from 'react-dom/client'
+    // const navbar =(
+    //         <nav>
+    //             <h1>Lets see</h1>
+    //             <ul>
+    //             <li>Menu</li>
+    //                 <li>About</li>
+    //                 <li>Contact</li>
+    //             </ul>
+    //         </nav>
+    //     )
+    //     ReactDOM.render(navbar,document.getElementById('root'))
 
-    ///// react18
-    ReactDOM.createRoot(document.getElementById('root')).render(navbar)
+    //     ///// react18
+    //     ReactDOM.createRoot(document.getElementById('root')).render(navbar)
+        
+    // ///or
+    //     const root = ReactDOM.createRoot(document.getElementById('root'));
+    //     root.render(navbar);
+
+
+    // lesson5
+        //     import React from "react"
+        // import ReactDOM from "react-dom"
+        //     const page = (
+        //         <div>
+        //             <h1>My awesome website in React</h1>
+        //             <h3>Reasons I love React</h3>
+        //             <ol>
+        //                 <li>It's composable</li>
+        //                 <li>It's declarative</li>
+        //                 <li>It's a hireable skill</li>
+        //                 <li>It's actively maintained by skilled people</li>
+        //             </ol>
+        //         </div>
+        //     )
+        
+        //     ReactDOM.render(page, document.getElementById("root"))
+    //    document.getElementById("root").append(JSON.stringify(page))
+
+
+    //lesson6
+        // import React from "react"
+        // import ReactDOM from "react-dom"
+        
+        // const page = (
+        //     <div>
+        //         <img src="./react-logo.png" width="40px" alt="React Logo" />
+        //         <h1>Fun facts about React</h1>
+        //         <ul>
+        //             <li>Was first released in 2013</li>
+        //             <li>Was originally created by Jordan Walke</li>
+        //             <li>Has well over 100K stars on GitHub</li>
+        //             <li>Is maintained by Facebook</li>
+        //             <li>Powers thousands of enterprise apps, including mobile apps</li>
+        //         </ul>
+        //     </div>
+        // )
+
+        // console.log(page)
+        
+        // ReactDOM.render(page, document.getElementById("root"))
+
+
+    //lesson7
+
+    import React from "react"
+    import ReactDOM from "react-dom"
+
+
+///or  ( <ul className="nav-item">)
+    //     const ul = document.createElement("ul")
+// ul.className = ""
+    function Header() {
+        return (
+            <header>
+                <nav className="nav">
+                    {/* <img src="./react-logo.png" width="40px" /> */}
+                    <img src="./react-logo.png" className="nav-logo" />
+
+                    <ul className="nav-item">
+                    <li>Pricing</li>
+                    <li>About</li>
+                    <li>Contact</li>
+                    </ul>
+                </nav>
+            </header>
+        )
+    }
+
+    function MainContent() {
+        <div>
+          
+                 <h1>Reasons I'm excited to learn React</h1>
+            <ol>
+                <li>It's a popular library, so I'll be 
+                able to fit in with the cool kids!</li>
+                <li>I'm more likely to get a job as a developer
+                if I know React</li>
+            </ol>
+          
+                </div>
+    }
     
-///or
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(navbar);
+    function Footer(){
+        <footer>
+                <small>© 2021 Ziroll development. All rights reserved.</small>
+            </footer>
+    } 
+
+    function Page(){
+        return(
+            <div>
+            <Header />
+              <MainContent />
+            <Footer />
+                </div>
+        )
+    }
+
+    
+
+    ReactDOM.render(<Page />,document.getElementById('root'))

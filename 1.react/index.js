@@ -188,60 +188,92 @@
 
     //lesson7
 
-    import React from "react"
-    import ReactDOM from "react-dom"
+            //     import React from "react"
+            //     import ReactDOM from "react-dom"
 
 
-///or  ( <ul className="nav-item">)
-    //     const ul = document.createElement("ul")
-// ul.className = ""
-    function Header() {
-        return (
-            <header>
-                <nav className="nav">
-                    {/* <img src="./react-logo.png" width="40px" /> */}
-                    <img src="./react-logo.png" className="nav-logo" />
+            //          ///or  ( <ul className="nav-item">)
+            //          //     const ul = document.createElement("ul")
+            //          // ul.className = ""
+            //     function Header() {
+            //         return (
+            //             <header>
+            //                 <nav className="nav">
+            //                     {/* <img src="./react-logo.png" width="40px" /> */}
+            //                     <img src="./react-logo.png" className="nav-logo" />
 
-                    <ul className="nav-item">
-                    <li>Pricing</li>
-                    <li>About</li>
-                    <li>Contact</li>
-                    </ul>
-                </nav>
-            </header>
-        )
-    }
+            //                     <ul className="nav-item">
+            //                     <li>Pricing</li>
+            //                     <li>About</li>
+            //                     <li>Contact</li>
+            //                     </ul>
+            //                 </nav>
+            //             </header>
+            //         )
+            //     }
 
-    function MainContent() {
-        <div>
-          
-                 <h1>Reasons I'm excited to learn React</h1>
-            <ol>
-                <li>It's a popular library, so I'll be 
-                able to fit in with the cool kids!</li>
-                <li>I'm more likely to get a job as a developer
-                if I know React</li>
-            </ol>
-          
-                </div>
-    }
-    
-    function Footer(){
-        <footer>
-                <small>© 2021 Ziroll development. All rights reserved.</small>
-            </footer>
-    } 
+            //     function MainContent() {
+            //         <div>
+                    
+            //                  <h1>Reasons I'm excited to learn React</h1>
+            //             <ol>
+            //                 <li>It's a popular library, so I'll be 
+            //                 able to fit in with the cool kids!</li>
+            //                 <li>I'm more likely to get a job as a developer
+            //                 if I know React</li>
+            //             </ol>
+                    
+            //                 </div>
+            //     }
+                
+            //     function Footer(){
+            //         <footer>
+            //                 <small>© 2021 Ziroll development. All rights reserved.</small>
+            //             </footer>
+            //     } 
 
-    function Page(){
-        return(
-            <div>
-            <Header />
-              <MainContent />
-            <Footer />
-                </div>
-        )
-    }
+            //     function Page(){
+            //         return(
+            //             <div>
+            //             <Header />
+            //               <MainContent />
+            //             <Footer />
+            //                 </div>
+            //         )
+            //     }
 
-    
+                
 
-    ReactDOM.render(<Page />,document.getElementById('root'))
+            //     ReactDOM.render(<Page />,document.getElementById('root'))
+
+
+
+        //lesson8
+                // import React from "react"
+                // import ReactDOM from "react-dom"
+                // import Header from "./Header"
+                // import Footer from "./Footer"
+                // import MainContent from "./MainContent"
+
+                // function App() {
+                //     return (
+                //         <div>
+                //             <Header />
+                //             <MainContent />
+                //             <Footer />
+                //         </div>
+                //     )
+                // }
+
+                // ReactDOM.render(<App />, document.getElementById("root"))
+
+
+//lesson9
+        ///vite
+
+//lesson10
+
+import React from 'react'
+import ReactDOM from 'react-dom';
+import App from './App'
+ReactDOM.render(<App />,document.getElementById('root'))

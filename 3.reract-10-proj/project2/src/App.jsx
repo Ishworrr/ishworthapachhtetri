@@ -11,9 +11,12 @@ function App() {
   return (
 <div>
 <Navigation />
+<div className='mainn'>
 <ContactHeader />
 <ContactForm />
-<Button />
+</div>
+{/* <Button /> */}
+
 </div>
   
 

@@ -1,4 +1,5 @@
 import { extendTheme, withDefaultColorScheme } from "@chakra-ui/react";
+import { color } from "framer-motion";
 
 export const theme = extendTheme(
   {
@@ -119,6 +120,7 @@ export const theme = extendTheme(
       FormLabel: {
         baseStyle: {
           fontSize: "sm",
+          // color:'red',
         },
       },
       Input: {
@@ -129,6 +131,7 @@ export const theme = extendTheme(
               borderRadius: "8px",
               fontSize: "sm",
               pb: "0",
+              // color:'red',
               _focus: {
                 boxShadow: "0 0 0 1px #5F00D9",
               },
@@ -142,6 +145,8 @@ export const theme = extendTheme(
             h: "38px",
             borderRadius: "8px",
             fontSize: "sm",
+            fontWeight: "medium",
+            color: "red",
 
             _focus: {
               boxShadow: "0 0 0 1px #5F00D9",

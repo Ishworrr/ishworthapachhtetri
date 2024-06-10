@@ -1,4 +1,4 @@
-import { Box, Container, Flex, useDisclosure } from "@chakra-ui/react";
+import { Box, Container, Flex, calc, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import Sidenav from "./Sidenav";
 import TopNav from "./TopNav";
@@ -23,7 +23,13 @@ const DashboardLayout = ({ title, children }) => {
         <Box flexGrow={1}>
           <TopNav title={title} onOpen={onOpen} />
 
-          <Container maxW={"70rem"} px="20">
+          <Container
+            overflowX={"hidden"}
+            overflowY={"hidden"}
+            maxW={"70rem"}
+            //  h={"calc(100vh-88px"}
+            px="20"
+          >
             {children}
           </Container>
         </Box>

@@ -2,10 +2,16 @@ import React from "react";
 import { CustomCard } from "../../chakra/CustomCard";
 import {
   Button,
+  Flex,
   HStack,
   Icon,
   Image,
   Stack,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
   Tag,
   Text,
 } from "@chakra-ui/react";
@@ -16,8 +22,17 @@ import { FaCircleMinus } from "react-icons/fa6";
 import { PiHandWithdraw } from "react-icons/pi";
 import { BsArrowUpRight } from "react-icons/bs";
 const PriceSection = () => {
+  const timeStamps = [
+    "7:15 PM",
+    "7:55 PM",
+    "8:15 PM",
+    "9:15 PM",
+    "8:55 PM",
+    "9:55 PM",
+    "10:15 PM",
+  ];
   return (
-    <CustomCard>
+    <CustomCard h={"full"}>
       <HStack justifyContent={"space-between"} align={"start"}>
         <Stack>
           <HStack color="black.80">
@@ -56,7 +71,39 @@ const PriceSection = () => {
           <Button leftIcon={<Icon as={FaCircleMinus} />}>Sell</Button>
         </HStack>
       </HStack>
-      <Image w="100%" src="../../../public/Graph.svg" />
+      <Tabs variant="soft-rounded">
+        <Flex justifyContent="flex-end">
+          <TabList bg={"black.5"} p="3px">
+            {["1H", "1D", "1W", "1M"].map((tab) => (
+              <Tab
+                // _selected={{ color: "white", bg: "blue.500" }}
+                _selected={{ bg: "white" }}
+                key={tab}
+                fontSize={"sm"}
+                p="6px"
+                borderRadius={"4px"}
+              >
+                {tab}
+              </Tab>
+            ))}
+          </TabList>
+        </Flex>
+        <TabPanels>
+          <TabPanel>
+            <Image w="100%" src="../../../public/Graph.svg" mt={"48px"} />
+            <HStack justify={"space-between"}>
+              {timeStamps.map((timestamp) => (
+                <Text key={timestamp} fontSize="sm" color="black.80">
+                  {timestamp}
+                </Text>
+              ))}
+            </HStack>
+          </TabPanel>
+          <TabPanel>
+            <p>two!</p>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
     </CustomCard>
   );
 };

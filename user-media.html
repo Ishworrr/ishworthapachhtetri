@@ -1,112 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>MediaCapture and Streams API</title>
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="main.css">
-</head>
-<body>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
     <header>
-        <h1>MediaCapture, MediaRecorder and Streams API</h1>
+      <h1>MediaCapture, MediaRecorder and Streams API</h1>
     </header>
     <main>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit molestiae itaque facere totam saepe tempore esse temporibus, quae reprehenderit aliquid iusto ea laborum, iure eligendi odio exercitationem sapiente illum quos.</p>
-        
-        <p><button id="btnStart">START RECORDING</button><br/>
-        <button id="btnStop">STOP RECORDING</button></p>
-        
-        <video controls></video>
-        
-        <video id="vid2" controls></video>
-        
-        <!-- could save to canvas and do image manipulation and saving too -->
-    </main>    
-    <script>
-        
-        let constraintObj = { 
-            audio: false, 
-            video: { 
-                facingMode: "user", 
-                width: { min: 640, ideal: 1280, max: 1920 },
-                height: { min: 480, ideal: 720, max: 1080 } 
-            } 
-        }; 
-        // width: 1280, height: 720  -- preference only
-        // facingMode: {exact: "user"}
-        // facingMode: "environment"
-        
-        //handle older browsers that might implement getUserMedia in some way
-        if (navigator.mediaDevices === undefined) {
-            navigator.mediaDevices = {};
-            navigator.mediaDevices.getUserMedia = function(constraintObj) {
-                let getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-                if (!getUserMedia) {
-                    return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
-                }
-                return new Promise(function(resolve, reject) {
-                    getUserMedia.call(navigator, constraintObj, resolve, reject);
-                });
-            }
-        }else{
-            navigator.mediaDevices.enumerateDevices()
-            .then(devices => {
-                devices.forEach(device=>{
-                    console.log(device.kind.toUpperCase(), device.label);
-                    //, device.deviceId
-                })
-            })
-            .catch(err=>{
-                console.log(err.name, err.message);
-            })
-        }
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit
+        molestiae itaque facere totam saepe tempore esse temporibus, quae
+        reprehenderit aliquid iusto ea laborum, iure eligendi odio
+        exercitationem sapiente illum quos.
+      </p>
 
-        navigator.mediaDevices.getUserMedia(constraintObj)
-        .then(function(mediaStreamObj) {
-            //connect the media stream to the first video element
-            let video = document.querySelector('video');
-            if ("srcObject" in video) {
-                video.srcObject = mediaStreamObj;
-            } else {
-                //old version
-                video.src = window.URL.createObjectURL(mediaStreamObj);
-            }
-            
-            video.onloadedmetadata = function(ev) {
-                //show in the video element what is being captured by the webcam
-                video.play();
-            };
-            
-            //add listeners for saving video/audio
-            let start = document.getElementById('btnStart');
-            let stop = document.getElementById('btnStop');
-            let vidSave = document.getElementById('vid2');
-            let mediaRecorder = new MediaRecorder(mediaStreamObj);
-            let chunks = [];
-            
-            start.addEventListener('click', (ev)=>{
-                mediaRecorder.start();
-                console.log(mediaRecorder.state);
-            })
-            stop.addEventListener('click', (ev)=>{
-                mediaRecorder.stop();
-                console.log(mediaRecorder.state);
+      <p>
+        <button id="btnStart">START RECORDING</button><br />
+        <button id="btnStop">STOP RECORDING</button>
+      </p>
+
+      <video controls></video>
+
+      <video id="vid2" controls></video>
+
+      <!-- could save to canvas and do image manipulation and saving too -->
+    </main>
+    <script>
+      let constraintObj = {
+        audio: false,
+        video: {
+          facingMode: "user",
+          width: { min: 640, ideal: 1280, max: 1920 },
+          height: { min: 480, ideal: 720, max: 1080 },
+        },
+      };
+      // width: 1280, height: 720  -- preference only
+      // facingMode: {exact: "user"}
+      // facingMode: "environment"
+
+      //handle older browsers that might implement getUserMedia in some way
+      if (navigator.mediaDevices === undefined) {
+        navigator.mediaDevices = {};
+        navigator.mediaDevices.getUserMedia = function (constraintObj) {
+          let getUserMedia =
+            navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+          if (!getUserMedia) {
+            return Promise.reject(
+              new Error("getUserMedia is not implemented in this browser")
+            );
+          }
+          return new Promise(function (resolve, reject) {
+            getUserMedia.call(navigator, constraintObj, resolve, reject);
+          });
+        };
+      } else {
+        navigator.mediaDevices
+          .enumerateDevices()
+          .then((devices) => {
+            devices.forEach((device) => {
+              console.log(device.kind.toUpperCase(), device.label);
+              //, device.deviceId
             });
-            mediaRecorder.ondataavailable = function(ev) {
-                chunks.push(ev.data);
-            }
-            mediaRecorder.onstop = (ev)=>{
-                let blob = new Blob(chunks, { 'type' : 'video/mp4;' });
-                chunks = [];
-                let videoURL = window.URL.createObjectURL(blob);
-                vidSave.src = videoURL;
-            }
+          })
+          .catch((err) => {
+            console.log(err.name, err.message);
+          });
+      }
+
+      navigator.mediaDevices
+        .getUserMedia(constraintObj)
+        .then(function (mediaStreamObj) {
+          //connect the media stream to the first video element
+          let video = document.querySelector("video");
+          if ("srcObject" in video) {
+            video.srcObject = mediaStreamObj;
+          } else {
+            //old version
+            video.src = window.URL.createObjectURL(mediaStreamObj);
+          }
+
+          video.onloadedmetadata = function (ev) {
+            //show in the video element what is being captured by the webcam
+            video.play();
+          };
+
+          //add listeners for saving video/audio
+          let start = document.getElementById("btnStart");
+          let stop = document.getElementById("btnStop");
+          let vidSave = document.getElementById("vid2");
+          let mediaRecorder = new MediaRecorder(mediaStreamObj);
+          let chunks = [];
+
+          start.addEventListener("click", (ev) => {
+            mediaRecorder.start();
+            console.log(mediaRecorder.state);
+          });
+          stop.addEventListener("click", (ev) => {
+            mediaRecorder.stop();
+            console.log(mediaRecorder.state);
+          });
+          mediaRecorder.ondataavailable = function (ev) {
+            chunks.push(ev.data);
+          };
+          mediaRecorder.onstop = (ev) => {
+            let blob = new Blob(chunks, { type: "video/mp4;" });
+            chunks = [];
+            let videoURL = window.URL.createObjectURL(blob);
+            vidSave.src = videoURL;
+          };
         })
-        .catch(function(err) { 
-            console.log(err.name, err.message); 
+        .catch(function (err) {
+          console.log(err.name, err.message);
         });
-        
-        /*********************************
+
+      /*********************************
         getUserMedia returns a Promise
         resolve - returns a MediaStream Object
         reject returns one of the following errors
@@ -118,5 +129,399 @@
         TypeError - audio: false, video: false
         *********************************/
     </script>
-</body>
+  </body>
 </html>
+
+/////
+
+<template>
+  <div class="response-player">
+    <EmbedLoader v-if="!loaded" />
+    <div v-else>
+      <div class="response">
+        <ResponseVideo
+          :height="frameHeight"
+          :width="frameWidth"
+          v-if="currentResponse.video_url"
+          :src="currentResponse.video_url"
+          :poster="currentResponse.thumbnail_url"
+        />
+        <div
+          v-if="currentResponse.response_type == 'checkbox'"
+          class="checkbox"
+          :style="`height: ${frameHeight}px; width: ${frameWidth}px;`"
+        >
+          <h3>{{ responses[current].text_prompt }}</h3>
+          <div class="checkbox-question">
+            <p>{{ current_checkbox_response }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="queue">
+        <div class="queue-options">
+          <!-- <button :class="{ 'main-button': !show_transcript }" @click="show_transcript = false">
+                        Show Questions
+                    </button> -->
+          <!-- <button :class="{ 'main-button': show_transcript }" @click="show_transcript = true">
+                        Show Transcript
+                    </button> -->
+          <button
+            :disabled="!prompts[current].video_url"
+            class="clear-button question-button"
+            @click="viewResponse = !viewResponse"
+          >
+            <span v-if="!prompts[current].video_url">No Video Question</span>
+            <span v-if="viewResponse && prompts[current].video_url"
+              >View Question</span
+            >
+            <span v-if="!viewResponse && prompts[current].video_url"
+              >View Response</span
+            >
+          </button>
+        </div>
+        <div>
+          <div v-if="!show_transcript" class="queue-buttons">
+            <div v-for="(q, index) in responses" :key="index">
+              <button
+                @click="goToResponse(index), toggle(index)"
+                :class="{ selected: current == index }"
+              >
+                Q{{ index + 1 }}. {{ q.text_prompt }}
+                <IconChevronDown id="icon" class="chevronIcon" />
+              </button>
+
+              <div class="panel">
+                <p
+                  v-if="currentResponse.transcript && currentResponse.transcript != undefined"
+                >
+                  A: {{ currentResponse.transcript }}
+                </p>
+                <p v-else-if="!viewResponse">View response to see transcript</p>
+                <p v-else>There is no transcript for this response</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    props: ["receivable_id"],
+    async fetch() {
+      let responses;
+      let video_title;
+      let hide_video;
+      let bundle_id;
+      let invitation;
+      let prompts;
+
+      let use_id;
+      if (this.receivable_id) {
+        use_id = this.receivable_id;
+      } else {
+        use_id = this.$route.params.id;
+      }
+      await this.$axios
+        .get(`/receivable/${use_id}`)
+        .then(async (res) => {
+          await this.$axios
+            .get("/invitation/" + res.data.receivable.invitation_id)
+            .then((invi) => {
+              invitation = invi.data.invitation;
+              prompts = invi.data.prompts;
+            });
+
+          hide_video = res.data.receivable.hide_video;
+          bundle_id = res.data.receivable.bundle_id;
+
+          video_title = `${res.data.receivable.first_name} ${res.data.receivable.last_name}`;
+          await this.$axios.get(`bundle/${bundle_id}`).then((res) => {
+            responses = res.data.responses;
+            responses.forEach(async (el) => {
+              if (el.response_type == "checkbox") {
+                await this.$axios
+                  .get(`/prompt-options/${el.prompt_id}`)
+                  .then((res) => {
+                    el.options = res.data;
+                  });
+              } else {
+                el.options = [];
+              }
+            });
+          });
+        })
+        .finally(() => {
+          this.video_title = video_title;
+          this.hide_video = hide_video;
+          this.bundle_id = bundle_id;
+          this.responses = responses;
+          this.prompts = prompts;
+          this.invitation = invitation;
+          this.loaded = true;
+
+          this.container = document.querySelector(".response-player");
+
+          this.outputsize();
+
+          new ResizeObserver(this.outputsize).observe(this.container);
+        });
+    },
+    watch: {
+      receivable_id: async function () {
+        let responses;
+        let video_title;
+        let hide_video;
+        let bundle_id;
+        let invitation;
+        let prompts;
+
+        let use_id;
+        if (this.receivable_id) {
+          use_id = this.receivable_id;
+        } else {
+          use_id = this.$route.params.id;
+        }
+        await this.$axios
+          .get(`/receivable/${use_id}`)
+          .then(async (res) => {
+            await this.$axios
+              .get("/invitation/" + res.data.receivable.invitation_id)
+              .then((invi) => {
+                invitation = invi.data.invitation;
+                prompts = invi.data.prompts;
+              });
+
+            hide_video = res.data.receivable.hide_video;
+            bundle_id = res.data.receivable.bundle_id;
+
+            video_title = `${res.data.receivable.first_name} ${res.data.receivable.last_name}`;
+            await this.$axios.get(`bundle/${bundle_id}`).then((res) => {
+              responses = res.data.responses;
+              responses.forEach(async (el) => {
+                if (el.response_type == "checkbox") {
+                  await this.$axios
+                    .get(`/prompt-options/${el.prompt_id}`)
+                    .then((res) => {
+                      el.options = res.data;
+                    });
+                } else {
+                  el.options = [];
+                }
+              });
+            });
+          })
+          .finally(() => {
+            this.video_title = video_title;
+            this.hide_video = hide_video;
+            this.bundle_id = bundle_id;
+            this.responses = responses;
+            this.prompts = prompts;
+            this.invitation = invitation;
+            this.loaded = true;
+
+            this.container = document.querySelector(".response-player");
+
+            this.outputsize();
+
+            new ResizeObserver(this.outputsize).observe(this.container);
+          });
+      },
+    },
+    data() {
+      return {
+        container: null,
+        current: 0,
+        video_title: null,
+        hide_video: null,
+        bundle_id: null,
+        responses: null,
+        prompts: null,
+        invitation: null,
+        loaded: false,
+        show_transcript: false,
+        frameHeight: 338,
+        frameWidth: 600,
+        viewResponse: true,
+        active: false,
+        activeStates: [],
+      };
+    },
+    mounted() {},
+    computed: {
+      currentResponse() {
+        if (this.loaded) {
+          if (this.viewResponse) {
+            return this.responses[this.current];
+          }
+          return this.prompts[this.current];
+        }
+      },
+    },
+    methods: {
+      outputsize() {
+        this.windowResize(this.container.offsetWidth);
+      },
+      windowResize(width) {
+        //console.log(width)
+        if (width < 600) {
+          this.frameWidth = width - 16;
+          this.frameHeight = width / (16 / 9);
+          this.isMobile = true;
+        } else {
+          this.isMobile = false;
+          this.frameWidth = 600;
+          this.frameHeight = 338;
+        }
+      },
+      goToResponse(index) {
+        this.viewResponse = true;
+        this.current = index;
+        if (this.currentResponse.response_type == "checkbox") {
+          this.chosenResponse(this.currentResponse.chosen_option);
+        }
+      },
+      chosenResponse(option) {
+        if (option == null) {
+          return;
+        }
+        if (this.currentResponse.options) {
+          for (let i = 0; i < this.currentResponse.options.length; i++) {
+            if (this.currentResponse.options[i].id == option) {
+              this.current_checkbox_response =
+                this.currentResponse.options[i].text;
+            }
+          }
+        } else {
+          setTimeout(() => {
+            this.chosenResponse(option);
+          }, 300);
+        }
+      },
+      toggle(index) {
+        var chevronIcon = document.getElementsByClassName("chevronIcon");
+        var nthIcon = chevronIcon[index];
+
+        // Toggle the active state for the current index
+        this.$set(this.activeStates, index, !this.activeStates[index]);
+
+        console.log(this.activeStates);
+
+        var chevronIcons = this.$el.querySelectorAll(".chevronIcon");
+
+        chevronIcons.forEach((chevronIcon, i) => {
+          if (i !== index) {
+            chevronIcon.style.removeProperty("transform");
+            // Set the active state to false for other indices
+            this.$set(this.activeStates, i, false);
+          }
+        });
+
+        if (this.activeStates[index]) {
+          nthIcon.style.transform = "rotate(180deg)";
+        } else nthIcon.style.removeProperty("transform");
+
+        var panels = this.$el.querySelectorAll(".panel");
+
+        panels.forEach((panel, i) => {
+          if (i !== index) {
+            panel.style.maxHeight = null;
+          }
+        });
+
+        var panel = panels[index];
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight * 2 + "px";
+        }
+      },
+    },
+  };
+</script>
+
+<style scoped>
+  .response-player {
+    max-width: 600px;
+  }
+
+  .checkbox {
+    border: 2px solid #d9d9d9;
+    padding: 24px;
+    border-radius: 16px;
+  }
+
+  .queue-buttons,
+  .vpl-transcript {
+    /* overflow: scroll; */
+    border: 1px solid #e4e4e4;
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .selected {
+  }
+
+  .queue-buttons button {
+    font-family: Montserrat;
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 1px solid #c2c2c2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .queue-buttons button:hover {
+    background-color: #f4f4f4;
+  }
+
+  .queue-options {
+    margin: 8px 0;
+  }
+
+  .queue-options button {
+    margin: 0;
+  }
+
+  @media screen and (max-width: 580px) {
+    .question-button {
+      margin-top: 8px !important;
+      width: 100%;
+    }
+  }
+
+  .vpl-transcript {
+    padding: 8px;
+    height: 300%;
+  }
+
+  .vpl-transcript p {
+    margin: 4px 0;
+    text-align: left;
+    box-sizing: border-box;
+  }
+
+  .vpl-transcript h3 {
+    margin: 0;
+    text-align: left;
+  }
+
+  .panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+
+  .chevronIcon {
+    transition: 0.2s ease;
+  }
+</style>

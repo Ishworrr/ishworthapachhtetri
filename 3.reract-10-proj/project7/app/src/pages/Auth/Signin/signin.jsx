@@ -12,28 +12,51 @@ import {
   Input,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import { object, string, ref } from "yup";
-import { useState } from "react";
 import Card from "../../../components/Card";
+import { useMutation } from "react-query";
+import { signinUser } from "../../../api/query/userQuery";
 
 const SignInValidationSchema = object({
-  name: string().required("Name is required"),
-  surname: string().required(" Required Surname, as in passport"),
   email: string().email("Invalid email").required("Email is required"),
   password: string()
     .min(6, "Password must be at leat 6 characters with symbols")
     .required("Password is required"),
   // confirmPassword: string().required("Confirm password is required"),
-  repeatpassword: string()
-    .oneOf([ref("password"), null], "Password must match")
-    .required("Repeat and Confirm Password"),
 });
 
 const SignIn = () => {
+  const toast = useToast();
+  const { login } = useAuth();
+  const { mutate, isLoading } = useMutation({
+    mutationKey: ["signin"],
+    mutationFn: signinUser,
+    onSuccess: (data) => {
+      const { token } = data;
+
+      if (token) {
+        login(token);
+      }
+    },
+    onError: (error) => {
+      toast({
+        title: "Signin Error",
+        description: error.message,
+        status: "error",
+        // duration:5000,
+      });
+    },
+  });
+
+  // if (isError) {
+  //   return <Box>{error.message}</Box>;
+  // }
+
   return (
     <Container bg={"white"}>
       <Center minHeight={"100vh"}>
@@ -47,11 +70,16 @@ const SignIn = () => {
           </Text>
           <Formik
             initialValues={{
-              email: "",
-              password: "",
+              email: "a@aaa",
+              password: "123456",
             }}
             onSubmit={(values) => {
               console.log(values);
+              // mutate({
+              //   email: "email.values",
+              //   password: "password.values",
+              // });
+              mutate(values);
             }}
             validationSchema={SignInValidationSchema}
           >
@@ -105,7 +133,7 @@ const SignIn = () => {
                   </HStack>
 
                   <Box>
-                    <Button w={"full"} type="submit">
+                    <Button isLoading={isLoading} w={"full"} type="submit">
                       Log In
                     </Button>
                     <Link to={"/signup"}>

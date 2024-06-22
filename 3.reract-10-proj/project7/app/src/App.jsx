@@ -11,58 +11,108 @@ import ForgotPassword from "./pages/Auth/Forgot PAssword/ForgotPassword";
 import ForgotPaswordSentVerification from "./pages/Auth/ForgotPaswordSentVerification/ForgotPaswordSentVerification";
 import ResetPasswordDone from "./pages/Auth/ResetPasswordDone/ResetPasswordDone";
 import ResetPassword from "./pages/Auth/Reset PAssword/Reset PAssword";
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Dashboard />,
-  },
-  {
-    path: "/transactions",
-    element: <TransactionPage />,
-  },
-  {
-    path: "/support",
-    element: <Support />,
-  },
-  {
-    path: "/signup",
-    element: <SignUp />,
-  },
-  {
-    path: "/signin",
-    element: <SignIn />,
-  },
-  {
-    path: "/register-email-and-verify",
-    element: <RegisterEmailVerify />,
-  },
-  {
-    path: "/register-success",
-    element: <RegisterSuccess />,
-  },
-  {
-    path: "/forgot-password",
-    element: <ForgotPassword />,
-  },
-  {
-    path: "/forgot-password-verification",
-    element: <ForgotPaswordSentVerification />,
-  },
-  {
-    path: "/reset-password",
-    element: <ResetPassword />,
-  },
-  {
-    path: "/reset-password-done",
-    element: <ResetPasswordDone />,
-  },
-]);
+//import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+//import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <ProtectedRoute>
+          <Dashboard />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/transactions",
+      element: (
+        <ProtectedRoute>
+          <TransactionPage />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/support",
+      element: (
+        <ProtectedRoute>
+          <Support />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/signup",
+      element: (
+        <AlreadySigninRoute>
+          <SignUp />
+        </AlreadySigninRoute>
+      ),
+    },
+    {
+      path: "/signin",
+      element: (
+        <AlreadySigninRoute>
+          <SignIn />
+        </AlreadySigninRoute>
+      ),
+    },
+    {
+      path: "/register-email-and-verify/:email",
+      element: (
+        <AlreadySigninRoute>
+          <RegisterEmailVerify />
+        </AlreadySigninRoute>
+      ),
+    },
+    {
+      path: "/email-verify/:token",
+      element: (
+        <AlreadySigninRoute>
+          <RegisterSuccess />
+        </AlreadySigninRoute>
+      ),
+    },
+    {
+      path: "/forgot-password",
+      element: (
+        <AlreadySigninRoute>
+          <ForgotPassword />
+        </AlreadySigninRoute>
+      ),
+    },
+    {
+      path: "/forgot-success/:email",
+      element: (
+        <AlreadySigninRoute>
+          <ForgotPaswordSentVerification />
+        </AlreadySigninRoute>
+      ),
+    },
+    {
+      path: "/forgot-password-verify/token",
+      element: (
+        <AlreadySigninRoute>
+          <ResetPassword />
+        </AlreadySigninRoute>
+      ),
+    },
+    {
+      path: "/reset-password-done",
+      element: (
+        <AlreadySigninRoute>
+          <ResetPasswordDone />
+        </AlreadySigninRoute>
+      ),
+    },
+  ]);
+  const queryClient = new QueryClient();
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
-    </>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 

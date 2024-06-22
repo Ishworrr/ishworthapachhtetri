@@ -8,15 +8,19 @@ import {
   FormLabel,
   Icon,
   Input,
+  Spinner,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import Card from "../../../components/Card";
 import { object, string, ref } from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
+import { verifyForgotToken } from "../../../api/query/userQuery";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useMutation, useQuery } from "react-query";
 
 const ResetValidationSchema = object({
   password: string()
@@ -28,6 +32,35 @@ const ResetValidationSchema = object({
     .required("Repeat and Confirm Password"),
 });
 const ResetPassword = () => {
+  const toast = useToast();
+  const { token } = useParams();
+  const naviagte = useNavigate();
+
+  const { mutate, isLoading } = useMutation({
+    mutationKey: ["verify-forgot-token"],
+    mutataionFn: verifyForgotToken,
+    enabled: !!token,
+
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      naviagte("/signup");
+    },
+    onSettled: () => {
+      naviagte("/reset-password-done");
+    },
+  });
+  if (isLoading)
+    return (
+      <Center h="100vh">
+        <Spinner />{" "}
+      </Center>
+    );
   return (
     <Container>
       <Center minH={"100vh"}>
@@ -49,7 +82,7 @@ const ResetPassword = () => {
               repeatpassword: "",
             }}
             onSubmit={(values) => {
-              console.log(values);
+              mutate({ token, password: values.password });
             }}
             validationSchema={ResetValidationSchema}
           >

@@ -3,14 +3,55 @@ import {
   Center,
   Container,
   Icon,
+  Spinner,
   Text,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import { MdEmail } from "react-icons/md";
 import Card from "../../../components/Card";
+import { useLocation, useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import { sendVerificationMail } from "../../../api/query/userQuery";
 
 const RegisterEmailVerify = () => {
+  const toast = useToast();
+  const { email } = useParams();
+
+  console.log(location);
+  if (email === "") {
+    return <Center h="100vh">Invalid</Center>;
+  }
+  const { mutate, isSuccess, isLoading } = useQuery({
+    mutationKey: ["send-verification-mail"],
+    mutationFn: sendVerificationMail,
+    onSettled: (data) => {
+      // navigate("/register-email-and-verify", {
+      //   state: { email },
+      // });
+      console.log(data);
+    },
+    onError: (error) => {
+      toast({
+        title: "SignUp Error",
+        description: error.message,
+        status: "error",
+        // duration:5000,
+      });
+    },
+    enabled: !!email,
+  });
+
+  useEffect(() => {
+    mutate({ email });
+  }, [email]);
+
+  if (isLoading) {
+    <Center h={"100vh"}>
+      <Spinner />
+    </Center>;
+  }
   return (
     <Container>
       <Center minH={"100vh"}>
@@ -32,13 +73,19 @@ const RegisterEmailVerify = () => {
               Email Verification
             </Text>
             <Text textAlign={"center"} textStyle={"p2"} color={"p.black"}>
-              We have sent you an email verification to{" "}
-              <b>jenny.wilson@gmail.com</b>. If you didn’t receive it, click the
-              button below. Please check your email for a verification link. If
-              you haven't received
+              We have sent you an email verification to <b>{email}</b>. If you
+              didn’t receive it, click the button below. Please check your email
+              for a verification link. If you haven't received
             </Text>
 
-            <Button width={"full"} variant={"outline"}>
+            <Button
+              onClick={() => {
+                mutate({ email });
+              }}
+              width={"full"}
+              variant={"outline"}
+              isLoading={isLoading}
+            >
               Resend Verification Email
             </Button>
           </VStack>

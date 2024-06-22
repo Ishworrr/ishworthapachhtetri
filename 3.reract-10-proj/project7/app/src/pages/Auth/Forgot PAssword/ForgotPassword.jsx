@@ -10,18 +10,47 @@ import {
   Input,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import Card from "../../../components/Card";
 import { object, string, ref } from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useMutation, useQuery } from "react-query";
+import { sendForgotMail } from "../../../api/query/userQuery";
 
-const ForgotValidationSchema = object({
-  email: string().email("Invalid email").required("Email is required"),
-});
 const ForgotPassword = () => {
+  const ForgotValidationSchema = object({
+    email: string().email("Invalid email").required("Email is required"),
+  });
+
+  const [email, setEmail] = useState();
+
+  const toast = useToast();
+  const navigate = useNavigate();
+  const { mutate, isLoading } = useMutation({
+    mutationKey: ["forgot-email"],
+    mutationFn: sendForgotMail,
+    onSettled: (data) => {
+      // navigate("/register-email-and-verify", {
+      //   state: { email },
+      // });
+      console.log(data);
+      if (email) {
+        navigate(`/forgot-success/${email}`);
+      }
+    },
+    onError: (error) => {
+      toast({
+        title: "Forgot Error",
+        description: error.message,
+        status: "error",
+        // duration:5000,
+      });
+    },
+  });
   return (
     <Container>
       <Center minH={"100vh"}>
@@ -40,10 +69,11 @@ const ForgotPassword = () => {
           <Formik
             initialValues={{
               email: "",
-              password: "",
             }}
             onSubmit={(values) => {
               console.log(values);
+              setEmail((prev) => (prev = values.email));
+              mutate({ email: values.email });
             }}
             validationSchema={ForgotValidationSchema}
           >
@@ -68,7 +98,12 @@ const ForgotPassword = () => {
                   <Box>
                     {/* <Button w={"full"} type="submit"></Button> */}
                     <Link to={"/ResetPassword"}>
-                      <Button mt={3} w={"full"} variant={"outline"}>
+                      <Button
+                        isLoading={isLoading}
+                        mt={3}
+                        w={"full"}
+                        variant={"outline"}
+                      >
                         Reset password
                       </Button>
                     </Link>

@@ -9,8 +9,11 @@ import {
 import React from "react";
 import { BsPatchCheckFill } from "react-icons/bs";
 import Card from "../../../components/Card";
+import { useParams } from "react-router-dom";
 
 const ForgotPaswordSentVerification = () => {
+  const params = useParams();
+  const { email } = useParams();
   return (
     <Container>
       <Center minH={"100vh"}>
@@ -27,9 +30,8 @@ const ForgotPaswordSentVerification = () => {
               Successfully Sent
             </Text>
             <Text textAlign={"center"} textStyle={"p2"} color={"p.black"}>
-              We have sent you an email verification to{" "}
-              <b>jenny.wilson@gmail.com</b>. Please follow the instructions from
-              the email.
+              We have sent you an email verification to <b>{email}</b>. Please
+              follow the instructions from the email.
             </Text>
           </VStack>
         </Card>

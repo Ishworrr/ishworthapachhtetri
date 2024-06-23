@@ -4,16 +4,18 @@ import {
   Center,
   Container,
   Icon,
+  Spinner,
   Text,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 
 import Card from "../../../components/Card";
 import { BsPatchCheckFill } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useMutation, useQuery } from "react-query";
-
+import { useQuery } from "react-query";
+import { verfiyEmailAddressSignup } from "../../../api/query/userQuery";
 const RegisterSuccess = () => {
   const toast = useToast();
   const { token } = useParams();
@@ -21,7 +23,7 @@ const RegisterSuccess = () => {
 
   const { isSuccess, isLoading } = useQuery({
     queryKey: ["verify-email-token"],
-    queryFn: verifyEmailAddressSignup(token),
+    queryFn: () => verfiyEmailAddressSignup({ token }),
     enabled: !!token,
 
     onError: (error) => {

@@ -85,7 +85,7 @@ const SignUp = () => {
 
               mutate({
                 firstName: values.name,
-                secondName: values.surname,
+                lastName: values.surname,
                 email: values.email,
                 password: values.password,
               });

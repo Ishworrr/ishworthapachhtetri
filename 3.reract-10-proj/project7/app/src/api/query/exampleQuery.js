@@ -5,6 +5,6 @@ export const fetchExample = async () => {
     const { data } = Axios.get("/");
     return data;
   } catch (error) {
-    throw Error(error.response.data.message);
+    throw Error(error.response.data.message, "bitch");
   }
 };

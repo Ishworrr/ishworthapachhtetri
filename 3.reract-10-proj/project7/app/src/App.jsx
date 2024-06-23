@@ -15,7 +15,8 @@ import ResetPassword from "./pages/Auth/Reset PAssword/Reset PAssword";
 //import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import AlreadySigninRoute from "./components/Auth/AlreadySigninRoute";
 function App() {
   const router = createBrowserRouter([
     {

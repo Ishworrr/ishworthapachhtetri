@@ -8,11 +8,11 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { MdEmail } from "react-icons/md";
 import Card from "../../../components/Card";
 import { useLocation, useParams } from "react-router-dom";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { sendVerificationMail } from "../../../api/query/userQuery";
 
 const RegisterEmailVerify = () => {
@@ -23,7 +23,7 @@ const RegisterEmailVerify = () => {
   if (email === "") {
     return <Center h="100vh">Invalid</Center>;
   }
-  const { mutate, isSuccess, isLoading } = useQuery({
+  const { mutate, isSuccess, isLoading } = useMutation({
     mutationKey: ["send-verification-mail"],
     mutationFn: sendVerificationMail,
     onSettled: (data) => {

@@ -21,6 +21,7 @@ import { object, string, ref } from "yup";
 import Card from "../../../components/Card";
 import { useMutation } from "react-query";
 import { signinUser } from "../../../api/query/userQuery";
+import useAuth from "../../../hooks/useAuth";
 
 const SignInValidationSchema = object({
   email: string().email("Invalid email").required("Email is required"),
@@ -45,7 +46,7 @@ const SignIn = () => {
     },
     onError: (error) => {
       toast({
-        title: "Signin Error",
+        title: "Signin Error, bitch",
         description: error.message,
         status: "error",
         // duration:5000,
@@ -70,7 +71,7 @@ const SignIn = () => {
           </Text>
           <Formik
             initialValues={{
-              email: "a@aaa",
+              email: "inew101010@gmail.com",
               password: "123456",
             }}
             onSubmit={(values) => {

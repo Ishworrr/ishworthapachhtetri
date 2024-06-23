@@ -37,17 +37,6 @@ export const sendVerificationMail = async ({ email }) => {
   }
 };
 
-export const verifyEmailAddressSignU = async ({ token }) => {
-  try {
-    const { data } = await Axios.post(`${USER_URL}/verify-user-mail`, {
-      token,
-    });
-    return data;
-  } catch (error) {
-    throw Error(error.response.data.message);
-  }
-};
-
 export const sendForgotMail = async ({ email }) => {
   try {
     const { data } = await Axios.post(`${USER_URL}/forgot-password`, {

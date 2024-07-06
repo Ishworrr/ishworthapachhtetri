@@ -17,7 +17,7 @@ import { sendVerificationMail } from "../../../api/query/userQuery";
 const RegisterEmailVerify = () => {
   const toast = useToast();
   const { email } = useParams();
-  const emil = location.state?.emial;
+  // const email = location.state?.email;
 
   console.log(location);
   if (email === "") {

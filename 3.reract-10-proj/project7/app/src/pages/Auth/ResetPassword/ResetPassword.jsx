@@ -20,9 +20,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import { verifyForgotToken } from "../../../api/query/userQuery";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 
-const ResetValidationSchema = object({
+const resetValidationSchema = object({
   password: string()
     .min(6, "Password must be at leat 6 characters with symbols")
     .required("Password is required"),
@@ -46,13 +46,13 @@ const ResetPassword = () => {
         title: "Error",
         description: error.message,
         status: "error",
-        duration: 5000,
-        isClosable: true,
+        // duration: 5000,
+        // isClosable: true,
       });
       naviagte("/signup");
     },
     onSettled: () => {
-      naviagte("/reset-password-done");
+      naviagte("/reset-success");
     },
   });
   if (isLoading)
@@ -84,7 +84,7 @@ const ResetPassword = () => {
             onSubmit={(values) => {
               mutate({ token, password: values.password });
             }}
-            validationSchema={ResetValidationSchema}
+            validationSchema={resetValidationSchema}
           >
             {() => (
               <Form>
@@ -120,14 +120,17 @@ const ResetPassword = () => {
                     )}
                   </Field>
 
-                  <Box>
-                    {/* <Button w={"full"} type="submit"></Button> */}
+                  <Button w={"full"} type="submit">
+                    Reset Password
+                  </Button>
+
+                  {/* <Box>
                     <Link to={"/ResetPassword"}>
                       <Button mt={3} w={"full"}>
                         Reset password
                       </Button>
                     </Link>
-                  </Box>
+                  </Box> */}
 
                   {/* <Text
                                                 textStyle={"p3"}

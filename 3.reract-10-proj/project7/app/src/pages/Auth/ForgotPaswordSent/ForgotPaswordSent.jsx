@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Center,
   Container,
@@ -10,9 +9,11 @@ import {
 import React from "react";
 import { BsPatchCheckFill } from "react-icons/bs";
 import Card from "../../../components/Card";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const ResetPasswordDone = () => {
+const ForgotPaswordSent = () => {
+  const params = useParams();
+  const { email } = useParams();
   return (
     <Container>
       <Center minH={"100vh"}>
@@ -26,19 +27,12 @@ const ResetPasswordDone = () => {
           <VStack spacing={6}>
             <Icon as={BsPatchCheckFill} boxSize={16} color={"p.purple"} />
             <Text fontSize={"24px"} fontWeight={"medium"} color={"#171717"}>
-              Password Reset Done
+              Successfully Sent
             </Text>
             <Text textAlign={"center"} textStyle={"p2"} color={"p.black"}>
-              Now you can access you account.
+              We have sent you an email verification to <b>{email}</b>. Please
+              follow the instructions from the email.
             </Text>
-
-            <Box w={"full"}>
-              <Link to={"/signin"}>
-                <Button mt={3} w={"full"}>
-                  Sign In
-                </Button>
-              </Link>
-            </Box>
           </VStack>
         </Card>
       </Center>
@@ -48,4 +42,4 @@ const ResetPasswordDone = () => {
   );
 };
 
-export default ResetPasswordDone;
+export default ForgotPaswordSent;

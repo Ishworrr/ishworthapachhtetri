@@ -8,9 +8,9 @@ import SignIn from "./pages/Auth/Signin/signin";
 import RegisterEmailVerify from "./pages/Auth/RegisterEmailVerify/registerEmailVerify";
 import RegisterSuccess from "./pages/Auth/RegisterSuccess/RegisterSuccess";
 import ForgotPassword from "./pages/Auth/Forgot PAssword/ForgotPassword";
-import ForgotPaswordSentVerification from "./pages/Auth/ForgotPaswordSentVerification/ForgotPaswordSentVerification";
-import ResetPasswordDone from "./pages/Auth/ResetPasswordDone/ResetPasswordDone";
-import ResetPassword from "./pages/Auth/Reset PAssword/Reset PAssword";
+import ForgotPaswordSent from "./pages/Auth/ForgotPaswordSent/ForgotPaswordSent";
+import ResetPasswordSuccess from "./pages/Auth/ResetPasswordSuccess/ResetPasswordSuccess";
+import ResetPassword from "./pages/Auth/ResetPassword/ResetPassword";
 //import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 //import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -87,12 +87,12 @@ function App() {
       path: "/forgot-success/:email",
       element: (
         <AlreadySigninRoute>
-          <ForgotPaswordSentVerification />
+          <ForgotPaswordSent />
         </AlreadySigninRoute>
       ),
     },
     {
-      path: "/forgot-password-verify/token",
+      path: "/forgot-password-verify/:token",
       element: (
         <AlreadySigninRoute>
           <ResetPassword />
@@ -100,10 +100,10 @@ function App() {
       ),
     },
     {
-      path: "/reset-password-done",
+      path: "/reset-success",
       element: (
         <AlreadySigninRoute>
-          <ResetPasswordDone />
+          <ResetPasswordSuccess />
         </AlreadySigninRoute>
       ),
     },

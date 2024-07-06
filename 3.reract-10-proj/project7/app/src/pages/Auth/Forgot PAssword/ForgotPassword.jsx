@@ -95,19 +95,17 @@ const ForgotPassword = () => {
                     )}
                   </Field>
 
-                  <Box>
-                    {/* <Button w={"full"} type="submit"></Button> */}
-                    <Link to={"/ResetPassword"}>
-                      <Button
-                        isLoading={isLoading}
-                        mt={3}
-                        w={"full"}
-                        variant={"outline"}
-                      >
-                        Reset password
-                      </Button>
-                    </Link>
-                  </Box>
+                  {/* <Button w={"full"} type="submit"></Button> */}
+
+                  <Button
+                    isLoading={isLoading}
+                    mt={3}
+                    w={"full"}
+                    type="submit"
+                    variant={"outline"}
+                  >
+                    Reset password
+                  </Button>
 
                   {/* <Text
                                                 textStyle={"p3"}

@@ -3,7 +3,6 @@ import {
   Center,
   Container,
   Icon,
-  Spinner,
   Text,
   VStack,
   useToast,
@@ -11,17 +10,18 @@ import {
 import React, { useEffect } from "react";
 import { MdEmail } from "react-icons/md";
 import Card from "../../../components/Card";
-import { useLocation, useParams } from "react-router-dom";
-import { useMutation, useQuery } from "react-query";
+import { useParams } from "react-router-dom";
+import { useMutation } from "react-query";
 import { sendVerificationMail } from "../../../api/query/userQuery";
 
 const RegisterEmailVerify = () => {
   const toast = useToast();
   const { email } = useParams();
+  const emil = location.state?.emial;
 
   console.log(location);
   if (email === "") {
-    return <Center h="100vh">Invalid</Center>;
+    return <Center h="100vh">Invalid Email, Bitch</Center>;
   }
   const { mutate, isSuccess, isLoading } = useMutation({
     mutationKey: ["send-verification-mail"],
@@ -37,7 +37,6 @@ const RegisterEmailVerify = () => {
         title: "SignUp Error",
         description: error.message,
         status: "error",
-        // duration:5000,
       });
     },
     enabled: !!email,
@@ -47,11 +46,6 @@ const RegisterEmailVerify = () => {
     mutate({ email });
   }, [email]);
 
-  if (isLoading) {
-    <Center h={"100vh"}>
-      <Spinner />
-    </Center>;
-  }
   return (
     <Container>
       <Center minH={"100vh"}>
@@ -79,11 +73,11 @@ const RegisterEmailVerify = () => {
             </Text>
 
             <Button
+              width={"full"}
+              variant={"outline"}
               onClick={() => {
                 mutate({ email });
               }}
-              width={"full"}
-              variant={"outline"}
               isLoading={isLoading}
             >
               Resend Verification Email

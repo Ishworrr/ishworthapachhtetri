@@ -1,23 +1,23 @@
 import {
-  Box,
-  Button,
   Center,
-  Checkbox,
   Container,
-  Flex,
   FormControl,
-  FormErrorMessage,
   FormLabel,
-  HStack,
-  Input,
   Stack,
   Text,
+  Input,
+  Flex,
+  Checkbox,
+  Button,
+  FormErrorMessage,
+  HStack,
+  Box,
   useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
-import { object, string, ref } from "yup";
+import { object, string } from "yup";
 import Card from "../../../components/Card";
 import { useMutation } from "react-query";
 import { signinUser } from "../../../api/query/userQuery";
@@ -75,12 +75,13 @@ const SignIn = () => {
               password: "123456",
             }}
             onSubmit={(values) => {
-              console.log(values);
+              // console.log(values);
               // mutate({
               //   email: "email.values",
               //   password: "password.values",
               // });
               mutate(values);
+              console.log(values);
             }}
             validationSchema={SignInValidationSchema}
           >

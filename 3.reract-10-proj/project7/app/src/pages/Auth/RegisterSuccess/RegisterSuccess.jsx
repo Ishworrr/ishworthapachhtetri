@@ -22,6 +22,7 @@ const RegisterSuccess = () => {
   const naviagte = useNavigate();
 
   const { isSuccess, isLoading } = useQuery({
+    //query for trigger directly
     queryKey: ["verify-email-token"],
     queryFn: () => verfiyEmailAddressSignup({ token }),
     enabled: !!token,

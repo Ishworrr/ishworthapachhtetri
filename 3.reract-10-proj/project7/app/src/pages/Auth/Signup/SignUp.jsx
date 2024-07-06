@@ -46,7 +46,7 @@ const SignUp = () => {
       console.log(data);
       // console.log(email);
       if (email) {
-        navigate(`/register-email-and-verify/${email}`);
+        navigate(`/register-email-verify/${email}`);
       }
     },
     onError: (error) => {

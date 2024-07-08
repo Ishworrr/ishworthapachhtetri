@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --primaryBackground: #212222;
+  --secondaryBackground: #2f3030;
+  --primaryColor: #e0a80d;
+  --greyDark: #7d8792;
+  --headingColor: #2d2e2e;
+  --white: #fff;
+  --black: #000;
+  --sliver: #bac8d3;
+}
+body {
+  background-color: var(--headingColor);
+  color: var(--white);
+  font-family: "Poppins", sans-serif;
+}
+a {
+  color: var(--greyDark);
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+a:hover {
+  color: var(--primaryColor);
+}
+
+p {
+  color: var(--silver);
+  font-size: 15px;
+  line-height: 30;
+  margin: 20px 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+}
+
+.flexsb {
+  display: flex;
+  justify-content: space-between;
+}
+.container {
+  max-width: 80%;
+  margin: auto;
+}
+button {
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 17px;
+  background-color: var(--primaryColor);
+  color: var(--white);
+  padding: 15px 50px;
+  border-radius: 50px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.fontSize {
+  font-size: 20px;
+}
+.primaryBtn {
+  background: none;
+  border: 2px solid var(--primaryColor);
+}
+/*---------header-------------*/
+header {
+  background-color: var(--headingColor);
+  height: 10vh;
+  line-height: 10vh;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+header a {
+  margin-left: 40px;
+}
+.toggle {
+  cursor: pointer;
+  color: var(--white);
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  header .nav {
+    display: none;
+  }
+  header a {
+    width: 100%;
+    display: block;
+    color: var(--white);
+  }
+  .toggle {
+    display: block;
+    font-size: 25px;
+    background: none;
+  }
+  .hideMenu {
+    display: block;
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    width: 100%;
+    background-color: var(--headingColor);
+  }
+}
+/*---------header-------------*/
+section {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+}
+.flex {
+  display: flex;
+}

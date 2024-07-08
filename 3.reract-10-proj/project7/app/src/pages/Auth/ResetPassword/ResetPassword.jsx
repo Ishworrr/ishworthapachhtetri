@@ -1,12 +1,10 @@
 import {
-  Box,
   Button,
   Center,
   Container,
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Icon,
   Input,
   Spinner,
   Stack,
@@ -16,10 +14,10 @@ import {
 import React from "react";
 import Card from "../../../components/Card";
 import { object, string, ref } from "yup";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import { verifyForgotToken } from "../../../api/query/userQuery";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+// import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useMutation } from "react-query";
 
 const resetValidationSchema = object({
@@ -38,7 +36,7 @@ const ResetPassword = () => {
 
   const { mutate, isLoading } = useMutation({
     mutationKey: ["verify-forgot-token"],
-    mutataionFn: verifyForgotToken,
+    mutationFn: verifyForgotToken,
     enabled: !!token,
 
     onError: (error) => {
@@ -65,9 +63,9 @@ const ResetPassword = () => {
     <Container>
       <Center minH={"100vh"}>
         <Card>
-          <Link to={"/forgot-password"}>
+          {/* <Link to={"/forgot-password"}>
             <Icon as={AiOutlineArrowLeft} boxSize={6} />
-          </Link>
+          </Link> */}
           <Text mt={4} fontWeight={"medium"} textStyle={"h1"}>
             Reset Password
           </Text>

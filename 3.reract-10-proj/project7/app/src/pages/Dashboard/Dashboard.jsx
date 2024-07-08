@@ -4,13 +4,10 @@ import PortfolioSection from "./components/PortfolioSection";
 import PriceSection from "./components/PriceSection";
 import Transactions from "./components/Transactions";
 import InfoCard from "./components/InfoCard";
-import { useContext, useEffect } from "react";
+
 import { fetchExample } from "../../api/query/exampleQuery";
-import { AuthContext } from "../../provider/AuthProvider";
 
 const Dashboard = ({}) => {
-  const { name } = useContext(AuthContext);
-  console.log(name);
   const exampleQuery = useQuery({
     queryKey: ["example"],
     queryFn: fetchExample,

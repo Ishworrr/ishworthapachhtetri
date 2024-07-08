@@ -7,7 +7,7 @@ import SignUp from "./pages/Auth/Signup/SignUp";
 import SignIn from "./pages/Auth/Signin/signin";
 import RegisterEmailVerify from "./pages/Auth/RegisterEmailVerify/registerEmailVerify";
 import RegisterSuccess from "./pages/Auth/RegisterSuccess/RegisterSuccess";
-import ForgotPassword from "./pages/Auth/Forgot PAssword/ForgotPassword";
+import ForgotPassword from "./pages/Auth/ForgotPassword/ForgotPassword";
 import ForgotPaswordSent from "./pages/Auth/ForgotPaswordSent/ForgotPaswordSent";
 import ResetPasswordSuccess from "./pages/Auth/ResetPasswordSuccess/ResetPasswordSuccess";
 import ResetPassword from "./pages/Auth/ResetPassword/ResetPassword";

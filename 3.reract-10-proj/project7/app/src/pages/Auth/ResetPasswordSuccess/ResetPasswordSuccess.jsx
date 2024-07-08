@@ -21,7 +21,7 @@ const ResetPasswordSuccess = () => {
             base: "4",
             md: "10",
           }}
-          showCrad={true}
+          showcard={true}
         >
           <VStack spacing={6}>
             <Icon as={BsPatchCheckFill} boxSize={16} color={"p.purple"} />

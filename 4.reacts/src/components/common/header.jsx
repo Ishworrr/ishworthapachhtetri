@@ -12,14 +12,12 @@ export const Header = () => {
           <div className="logo">
             <img src={logo} alt="" />
           </div>
-          <div className="nav">
-            <Link to="">
-              {navlink.map((links, i) => {
-                <Link to={links.url} key={i}>
-                  {links.text}
-                </Link>;
-              })}
-            </Link>
+          <div className={responsive ? "hideMenu" : "nav"}>
+            {navlink.map((links, i) => {
+              <Link to={links.url} key={i}>
+                {links.text}
+              </Link>;
+            })}
           </div>
           <button
             className="toggle"

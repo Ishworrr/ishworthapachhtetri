@@ -5,6 +5,9 @@ import { curve, heroBackground, robot } from "../assets";
 import { BackgroundCircles, BottomLine, Gradient } from "./design/Hero";
 import { heroIcons } from "../constants";
 import { ScrollParallax } from "react-just-parallax";
+import Generating from "./Generating";
+import CompanyLogos from "./CompanyLogos";
+import Notification from "./Notification";
 const Hero = () => {
   const parallaxRef = useRef(null);
   return (
@@ -21,10 +24,9 @@ const Hero = () => {
         text-center mb-[4rem] md:mb-20 lg:mb:[6rem]"
         >
           <h1 className="h1 mb-6">
-            Explore the Possibilities
+            Explore the Possibilities of&nbsp;AI&nbsp; Chatting With&nbsp;
             <span className="inline-block relative">
-              {" "}
-              Brainwave
+              Brainwave{" "}
               <img
                 src={curve}
                 className="absolute top-full left-0 w-full xl:mt-2"
@@ -57,6 +59,10 @@ const Hero = () => {
                   alt="AI"
                 />
                 <ScrollParallax isAbsolutelyPositioned>
+                  <Generating className="absolute left-4 right-4 bottom-5 md:left-1/2 md:right-auto  md:bottom-8  md:w-[31rem]  md:translate-x-1/2" />
+                </ScrollParallax>
+
+                <ScrollParallax isAbsolutelyPositioned>
                   <ul
                     className="hidden absolute -left-[5.5rem] bottom-[7.5rem] px-1 py-1 bg-n-9/40
                   backdrop-blur border border-n-1/10 rounded-2xl xl:flex"
@@ -68,8 +74,16 @@ const Hero = () => {
                     ))}
                   </ul>
                 </ScrollParallax>
+                <ScrollParallax isAbsolutelyPositioned>
+                  <Notification
+                    className="hidden absolute -right-[5.5rem] bottom-[11rem] w-[18rem] xl:flex"
+                    title="Codde generation"
+                  />
+                </ScrollParallax>
               </div>
             </div>
+
+            <Gradient />
           </div>
           <div className="absolute -top-[54%] left-1/2 w-[234%] -translate-x-1/2 lg:-top-[104%] md:w-[138%] md:-top-[46%]">
             <img
@@ -80,8 +94,12 @@ const Hero = () => {
               alt="hero"
             />
           </div>
+
+          <BackgroundCircles />
         </div>
+        <CompanyLogos />
       </div>
+      <BottomLine />
     </Section>
   );
 };
